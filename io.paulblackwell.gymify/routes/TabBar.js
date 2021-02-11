@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../screens/HomeScreen';
 import WorkoutListScreen from '../screens/WorkoutListScreen';
+import ProgressScreen from '../screens/ProgressScreen'
 
 
 const Tab = createBottomTabNavigator();
@@ -13,6 +14,7 @@ export default function TabBar() {
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Workouts" component={WorkoutListScreen} />
+        <Tab.Screen name="Progress" component={ProgressScreen} />
       </Tab.Navigator>
     );
   }

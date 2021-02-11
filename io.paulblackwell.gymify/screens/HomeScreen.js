@@ -8,15 +8,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.main}>
         <Text >Home Screen</Text>
-        <Button
-            title="Next Screen"
-            onPress={() => {
-              navigation.navigate('WorkoutList')
-            }}
-            color="#ff5c5c"
-          />
       </View>
-
     </View>
   );
 }
