@@ -1,10 +1,11 @@
 import React from 'react';
-
-import Navigator from './routes/homeStack';
-
+import { NavigationContainer } from '@react-navigation/native';
+import TabBar from './routes/TabBar';
 
 export default function App() {
   return (
-    <Navigator />
+    <NavigationContainer>
+      <TabBar />
+    </NavigationContainer>
   );
 }

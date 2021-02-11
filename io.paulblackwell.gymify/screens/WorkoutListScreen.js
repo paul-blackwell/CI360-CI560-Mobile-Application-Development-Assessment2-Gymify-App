@@ -2,21 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 
-export default function Home({ navigation }) {
+export default function WorkoutListScreen({ navigation }) {
   
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text >Home Screen</Text>
-        <Button
-            title="Next Screen"
-            onPress={() => {
-              navigation.navigate('WorkoutList')
-            }}
-            color="#ff5c5c"
-          />
+        <Text >WorkoutList Screen</Text>
       </View>
-
     </View>
   );
 }
