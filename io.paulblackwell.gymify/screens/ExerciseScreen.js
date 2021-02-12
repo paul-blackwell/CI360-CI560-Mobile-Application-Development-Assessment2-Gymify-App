@@ -2,17 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 
-export default function WorkoutListScreen({ navigation }) {
-
+export default function ExerciseScreen({ navigation }) {
+  
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text >WorkoutList Screen</Text>
-        <Button
-          title="Go to Workout"
-          onPress={() => navigation.navigate('WorkoutScreen')}
-        />
-
+        <Text >Exercise Screen</Text>
       </View>
     </View>
   );
