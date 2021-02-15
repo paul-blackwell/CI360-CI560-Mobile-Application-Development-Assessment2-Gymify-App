@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({ navigation }) {
 
 
   // Get workouts context with will be an array with all of the workouts
@@ -17,7 +17,10 @@ export default function HomeScreen({navigation}) {
         title="Go to workout"
         onPress={() => {
           // Go to WorkoutList screen and pass the workout id to that screen
-          navigation.navigate('WorkoutStack', {workoutListId: item.id})
+          navigation.navigate('WorkoutStack', {
+            screen: 'WorkoutListScreen',
+            params: { workoutListId: item.id }
+          });
         }}
       />
     </View>
