@@ -1,19 +1,29 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import {WorkoutsContext} from '../context/workouts.context';
 
 export default function HomeScreen() {
 
   
+  // Get workouts context with will be an array with all of the workouts
   const { workouts } = useContext(WorkoutsContext);
-  console.log(workouts)
+
+
+  // Just for testing this will need to move to its own component
+  const renderItem = ({ item }) => (
+    <View>
+      <Text>{item.title}</Text>
+    </View>
+  );
   
   
   return (
     <View style={styles.container}>
-      <View style={styles.main}>
-        <Text >Home Screen</Text>
-      </View>
+      <FlatList
+        data={workouts}
+        renderItem={renderItem}
+        keyExtractor={item => item.id.toString()}
+      />
     </View>
   );
 }
@@ -21,6 +31,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    margin: 8
   },
   main: {
     flex: 1,
