@@ -16,7 +16,6 @@ export default function WorkoutListScreen({ route, navigation }) {
           title="Go to Workout"
           onPress={() => navigation.navigate('WorkoutScreen')}
         />
-
       </View>
     </View>
   );
