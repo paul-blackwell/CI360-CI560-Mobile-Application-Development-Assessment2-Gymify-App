@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import {WorkoutsContext} from '../context/workouts.context';
 
+export default function HomeScreen() {
 
-export default function HomeScreen({ navigation }) {
+  
+  const { workouts } = useContext(WorkoutsContext);
+  console.log(workouts)
+  
   
   return (
     <View style={styles.container}>

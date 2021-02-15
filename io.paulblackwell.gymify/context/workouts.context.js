@@ -1,13 +1,15 @@
 import React, {useReducer, createContext } from 'react';
 import workoutsReducer from '../reducers/workouts.reducer';
+import defaultWorkouts from '../data/defaultWorkouts';
+
 
 export const WorkoutsContext = createContext();
 
 export const WorkoutsProvider = (props) => {
-    const [workout, dispatch] = useReducer(cartReducer, []);
+    const [workouts, dispatch] = useReducer(workoutsReducer, defaultWorkouts);
     
     return (
-        <WorkoutsContext.Provider value={{workout, dispatch}}>
+        <WorkoutsContext.Provider value={{workouts, dispatch}}>
             {props.children}
         </WorkoutsContext.Provider>
     );
