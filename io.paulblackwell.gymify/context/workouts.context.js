@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from 'react';
+import React, { useReducer, createContext, useEffect } from 'react';
 import workoutsReducer from '../reducers/workouts.reducer';
 import defaultWorkouts from '../data/defaultWorkouts';
 import { storeData, retrieveData } from '../requests/accessLocalStorage';
@@ -7,14 +7,30 @@ import { storeData, retrieveData } from '../requests/accessLocalStorage';
 
 
 
-storeData('workouts', JSON.stringify(defaultWorkouts));
-
-
 export const WorkoutsContext = createContext();
 
-retrieveData();
+const test = retrieveData('workouts');
+
+
+// if(test === null){
+//     console.log('knowing is saved')
+// } else {
+//     console.log(test)
+// }
+
+
 
 export const WorkoutsProvider = (props) => {
+
+    useEffect(() => {
+        const storage = async () => {
+            const test = retrieveData('workouts');
+            console.log(test)
+        }
+        storage()
+    }, []);
+
+
     const [workouts, dispatch] = useReducer(workoutsReducer, defaultWorkouts);
 
     return (

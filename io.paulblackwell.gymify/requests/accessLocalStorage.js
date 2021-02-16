@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import defaultWorkouts from '../data/defaultWorkouts';
+
 
 /**
  * This function will save data to local storage
@@ -26,12 +26,9 @@ export const retrieveData = async (key) => {
     try {
         const value = await AsyncStorage.getItem(key);
         if (value !== null) {
-            return JSON.parse(value);
-        } else {
-            // Save default workouts locally 
-            storeData('workouts', defaultWorkouts);
-            // The function will call itself (again), now the default workouts have been saved.
-            retrieveData();
+            return value;
+        } else if (value === null){
+            return 'nothing';
         }
     } catch (error) {
         console.log(error);
