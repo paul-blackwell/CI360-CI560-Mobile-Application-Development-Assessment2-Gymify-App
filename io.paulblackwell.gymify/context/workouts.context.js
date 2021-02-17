@@ -4,22 +4,20 @@ import defaultWorkouts from '../data/defaultWorkouts';
 import { storeData, retrieveData } from '../requests/accessLocalStorage';
 
 
-
-
-
 export const WorkoutsContext = createContext();
 
 
 export const WorkoutsProvider = (props) => {
 
-    useEffect(() => {
-        const storage = async () => {
-            let items = await retrieveData('workouts');
-            console.log(items)
-        }
-        storage()
-    }, []);
-
+    // useEffect(() => {
+    //     const storage = async () => {
+    //         let items = await retrieveData('workouts');
+    //         console.log(items)
+    //     }
+    //     storage()
+    // }, []);
+    
+    console.log(retrieveData('workouts'))
 
     const [workouts, dispatch] = useReducer(workoutsReducer, defaultWorkouts);
 
