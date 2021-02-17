@@ -7,28 +7,28 @@ import AsyncStorage from '@react-native-community/async-storage';
  * @param {string} key - This key will be used as a keyExtractor so the data can be retrieved later.
  * @param {object} data -This will be the data that needs to be saved but will be converted into a string.
  */
-export const storeData = async (key, data) => {
-    
-    const [state, setState] = setState('');
+export const storeData = (key, data) => {
 
-    try {
-        await AsyncStorage.setItem(key, JSON.stringify(data));
-    } catch (error) {
-        console.log(error);
+    //const [state, setState] = setState('');
+
+    const request = async (keyExtractor, object) => {
+        try {
+            await AsyncStorage.setItem(keyExtractor, JSON.stringify(object));
+        } catch (error) {
+            console.log(error);
+        }
     }
-
-    // useEffect(() => {
-       
-    // }, [input])
+    useEffect(() => {
+       request(key, data);
+    }, [])
 };
 
 
 /**
  * This function will get any saved data from local storage based on a key.
- * However, if no data is returned, it will save the default workouts to local 
- * storage and return that data.
- * @param {string} key - This is the key the data is stored under.
- * @return {object} - The data stored 
+ * However, if no data is returned, it will return an empty string.
+ * @param {string} key - This is the key the data is stored under in AsyncStorage.
+ * @return {state} - The data stored 
  */
 
 export const retrieveData = (key) => {
