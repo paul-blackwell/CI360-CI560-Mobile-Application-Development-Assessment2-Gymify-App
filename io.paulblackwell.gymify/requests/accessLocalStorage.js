@@ -20,13 +20,13 @@ export const storeData = (key, data) => {
     }
     useEffect(() => {
        request(key, data);
-    }, [])
+    }, []);
 };
 
 
 /**
  * This function will get any saved data from local storage based on a key.
- * However, if no data is returned, it will return an empty string.
+ * However, if no data is returned, it will return a string.
  * @param {string} key - This is the key the data is stored under in AsyncStorage.
  * @return {state} - The data stored 
  */
@@ -40,7 +40,7 @@ export const retrieveData = (key) => {
             if (value !== null) {
                 setState(value)
             } else if (value === null){
-                setState('');
+                setState('No data under this key');
             }
         } catch (error) {
             console.log(error);
@@ -52,4 +52,30 @@ export const retrieveData = (key) => {
      }, [state]);
 
      return state;
+}
+
+
+/**
+ * This function will only be used in development/testing as we
+ * don't want to delete data but instead update/override in using the 
+ * storeData function. We need this function to clear up any mistakes with 
+ * data in AsyncStorage, that may be made during development.
+ * @param {string} key - This is the key the data is stored under in AsyncStorage.
+ */
+
+export const deleteData = (key) => {
+    const removeItem = async (keyExtractor) => {
+        try {
+            await AsyncStorage.removeItem(keyExtractor);
+            // Uncomment to show all keys in AsyncStorage
+            // const keys = await AsyncStorage.getAllKeys();
+            // console.log(keys)
+        } catch (error) {
+            console.error('Error clearing app data.');
+        }
+    }
+
+    useEffect(() => {
+        removeItem(key);
+     }, []);
 }
