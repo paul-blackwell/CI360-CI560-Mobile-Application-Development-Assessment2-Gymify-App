@@ -15,7 +15,7 @@ const getRandomItems = (array, number = 1) => {
      * Check number is not greater than array length, if it is, 
      * set number to the length of the array. We need to do this 
      * because we don't want this function to get more than one of each item
-     * later on
+     * later on. As we don't want our while loop to go on forever.
      */
     if (array.length < number) {
         number = array.length
@@ -30,8 +30,8 @@ const getRandomItems = (array, number = 1) => {
         const randomItem = array[Math.floor(Math.random() * array.length)];
 
         /**
-         * We need to check randomItem is not already in the array, but 
-         * before this we must check if randomItem is an object or a string
+         * We need to check randomItem is not already in the items array before 
+         * adding it, but before this we must check if randomItem is an object or a string
          * as we will need to handle it differently
          */
         if (typeof randomItem === 'string') {
