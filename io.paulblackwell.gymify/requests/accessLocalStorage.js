@@ -86,18 +86,28 @@ export const initializeNewWorkoutPlan = () => {
     const [state, setState] = useState('');
 
     /**
-    * Check if workoutPlan already exists, if it
-    * does set the state to the object retrieveData returns 
+    * Check if workoutPlan already exists, if it does set the 
+    * state to the the workoutPlan.
+    *  Note: I tried to use the retrieveData function to do this but couldn't 
+    * get it to work withing this initializeNewWorkoutPlan function.
     */
-        const existingWorkoutPlan = retrieveData('workoutPlan');
-        if (existingWorkoutPlan !== 'No data under this key') {
-            //setState(existingWorkoutPlan);
-            console.log(existingWorkoutPlan)
+    const request = async () => {
+        try {
+            const value = await AsyncStorage.getItem('workoutPlan');
+            if (value !== 'No data under this key') {
+                setState(value)
+            } 
+        } catch (error) {
+            console.log(error);
         }
+    }
+
+    
 
     useEffect(() => {
-        setState(existingWorkoutPlan)
+        request();
     }, [state]);
+
 
     return state;
 }

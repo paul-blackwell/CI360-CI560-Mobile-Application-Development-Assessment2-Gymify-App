@@ -12,7 +12,7 @@ export const WorkoutsProvider = (props) => {
 
     // storeData('workoutPlan', {data: 'some data'});
     // console.log(retrieveData('workoutPlan'));
-   initializeNewWorkoutPlan()
+   console.log(initializeNewWorkoutPlan())
    
     const [workouts, dispatch] = useReducer(workoutsReducer, defaultWorkouts);
 
