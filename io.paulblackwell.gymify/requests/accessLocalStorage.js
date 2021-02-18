@@ -19,7 +19,7 @@ export const storeData = (key, data) => {
         }
     }
     useEffect(() => {
-       request(key, data);
+        request(key, data);
     }, []);
 };
 
@@ -39,7 +39,7 @@ export const retrieveData = (key) => {
             const value = await AsyncStorage.getItem(keyExtractor);
             if (value !== null) {
                 setState(value)
-            } else if (value === null){
+            } else if (value === null) {
                 setState('No data under this key');
             }
         } catch (error) {
@@ -49,9 +49,9 @@ export const retrieveData = (key) => {
 
     useEffect(() => {
         request(key);
-     }, [state]);
+    }, [state]);
 
-     return state;
+    return state;
 }
 
 
@@ -68,8 +68,8 @@ export const deleteData = (key) => {
         try {
             await AsyncStorage.removeItem(keyExtractor);
             // Uncomment to show all keys in AsyncStorage
-            // const keys = await AsyncStorage.getAllKeys();
-            // console.log(keys)
+            const keys = await AsyncStorage.getAllKeys();
+            console.log(keys)
         } catch (error) {
             console.error('Error clearing app data.');
         }
@@ -77,5 +77,22 @@ export const deleteData = (key) => {
 
     useEffect(() => {
         removeItem(key);
-     }, []);
+    }, []);
+}
+
+
+
+export const initializeNewWorkoutPlan = () => {
+    const [state, setState] = useState('');
+
+    /**
+     * Check if workoutPlan already exists, if it
+     * does set the state to the object retrieveData returns 
+     */
+    const existingWorkoutPlan = retrieveData('workoutPlan');
+    if(existingWorkoutPlan !== 'No data under this key'){
+        setState(existingWorkoutPlan);
+    }
+
+    return state;
 }
