@@ -86,13 +86,18 @@ export const initializeNewWorkoutPlan = () => {
     const [state, setState] = useState('');
 
     /**
-     * Check if workoutPlan already exists, if it
-     * does set the state to the object retrieveData returns 
-     */
-    const existingWorkoutPlan = retrieveData('workoutPlan');
-    if(existingWorkoutPlan !== 'No data under this key'){
-        setState(existingWorkoutPlan);
-    }
+    * Check if workoutPlan already exists, if it
+    * does set the state to the object retrieveData returns 
+    */
+        const existingWorkoutPlan = retrieveData('workoutPlan');
+        if (existingWorkoutPlan !== 'No data under this key') {
+            //setState(existingWorkoutPlan);
+            console.log(existingWorkoutPlan)
+        }
+
+    useEffect(() => {
+        setState(existingWorkoutPlan)
+    }, [state]);
 
     return state;
 }

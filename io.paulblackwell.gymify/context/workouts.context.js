@@ -10,8 +10,9 @@ export const WorkoutsContext = createContext();
 
 export const WorkoutsProvider = (props) => {
 
-    
-    console.log(initializeNewWorkoutPlan())
+    // storeData('workoutPlan', {data: 'some data'});
+    // console.log(retrieveData('workoutPlan'));
+   initializeNewWorkoutPlan()
    
     const [workouts, dispatch] = useReducer(workoutsReducer, defaultWorkouts);
 
