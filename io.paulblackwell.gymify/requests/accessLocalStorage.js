@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import {defaultWarmUps, defaultExercises} from '../data/data'
+import uuid from '../utils/uuid';
 
 /**
  * This function will save data to local storage
@@ -33,7 +34,7 @@ export const storeData = (key, data) => {
 
 export const retrieveData = (key) => {
     const [state, setState] = useState('');
-
+    
     const request = async (keyExtractor) => {
         try {
             const value = await AsyncStorage.getItem(keyExtractor);
@@ -88,25 +89,42 @@ export const initializeNewWorkoutPlan = () => {
     /**
     * Check if workoutPlan already exists, if it does set the 
     * state to the the workoutPlan.
-    *  Note: I tried to use the retrieveData function to do this but couldn't 
-    * get it to work withing this initializeNewWorkoutPlan function.
+    * 
+    * Note: I tried to use the retrieveData function to do this but couldn't 
+    * get it to work withing this initializeNewWorkoutPlan function. This is because 
+    * you can't run hooks outside a react function. In this case a function within a 
+    * function that is then called inside a react function (the workout.context).
     */
     const request = async () => {
         try {
             const value = await AsyncStorage.getItem('workoutPlan');
-            if (value !== 'No data under this key') {
+            if (value !== null) {
                 setState(value)
-            } 
+            } else {
+                //setState('No data bro');
+
+                // Make array 
+                const workoutPlan = []
+                const workout = { warmup: [], workouts: []}
+                const week = {id: uuid(), date: 'Week1', workouts: []}
+
+            }
         } catch (error) {
             console.log(error);
         }
     }
 
-    
-
     useEffect(() => {
         request();
     }, [state]);
+
+    // const request = async () => {
+    //     setState(retrieveData('workoutPlan'))
+    // }
+
+    // useEffect(() => {
+    //     request();
+    // }, [state]);
 
 
     return state;
