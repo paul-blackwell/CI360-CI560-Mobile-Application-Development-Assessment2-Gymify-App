@@ -69,8 +69,8 @@ export const deleteData = (key) => {
         try {
             await AsyncStorage.removeItem(keyExtractor);
             // Uncomment to show all keys in AsyncStorage
-            const keys = await AsyncStorage.getAllKeys();
-            console.log(keys)
+            // const keys = await AsyncStorage.getAllKeys();
+            // console.log(keys)
         } catch (error) {
             console.error('Error clearing app data.');
         }
