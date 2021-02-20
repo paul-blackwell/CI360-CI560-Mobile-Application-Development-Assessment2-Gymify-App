@@ -8,7 +8,7 @@ import uuid from '../utils/uuid';
  * @param {string} key - This key will be used as a keyExtractor so the data can be retrieved later.
  * @param {object} data -This will be the data that needs to be saved but will be converted into a string.
  */
-export const storeData = (key, data) => {
+export const storeLocalData = (key, data) => {
 
     //const [state, setState] = setState('');
 
@@ -32,7 +32,7 @@ export const storeData = (key, data) => {
  * @return {state} - The data stored 
  */
 
-export const retrieveData = (key) => {
+export const retrieveLocalData = (key) => {
     const [state, setState] = useState('');
     
     const request = async (keyExtractor) => {
@@ -64,7 +64,7 @@ export const retrieveData = (key) => {
  * @param {string} key - This is the key the data is stored under in AsyncStorage.
  */
 
-export const deleteData = (key) => {
+export const deleteLocalData = (key) => {
     const removeItem = async (keyExtractor) => {
         try {
             await AsyncStorage.removeItem(keyExtractor);
