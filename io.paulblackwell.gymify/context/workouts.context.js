@@ -1,8 +1,8 @@
-import React, { useReducer, createContext, useEffect } from 'react';
+import React, { useReducer, createContext, useEffect, useState } from 'react';
 import workoutsReducer from '../reducers/workouts.reducer';
-import defaultWorkouts from '../data/defaultWorkouts';
 import { storeLocalData, retrieveLocalData, deleteLocalData, initializeNewWorkoutPlan } from '../requests/accessLocalStorage';
 import { retrieveExternalData } from '../requests/accessExternalAPI';
+
 
 
 
@@ -10,13 +10,26 @@ export const WorkoutsContext = createContext();
 
 
 export const WorkoutsProvider = (props) => {
+    const [workoutPlanState, setWorkoutPlanState] = useState(retrieveExternalData('https://cryptic-garden-88403.herokuapp.com/workout-plans'));
 
-    console.log(retrieveExternalData('https://jsonplaceholder.typicode.com/todos/1'));
 
-    const [workouts, dispatch] = useReducer(workoutsReducer, defaultWorkouts);
+    // Get default workout plan from API
+    //const defaultWorkoutPlan = retrieveExternalData('https://cryptic-garden-88403.herokuapp.com/workout-plans');
+
+    // useEffect(() => {
+    //     fetch('https://cryptic-garden-88403.herokuapp.com/workout-plans')
+    //         .then((response) => response.json())
+    //         .then((json) => setWorkoutPlanState(json))
+    //         .catch((error) => console.error(error));
+    // }, [workoutPlanState]);
+
+    console.log(workoutPlanState)
+
+
+    const [workoutPlan, dispatch] = useReducer(workoutsReducer, workoutPlanState);
 
     return (
-        <WorkoutsContext.Provider value={{ workouts, dispatch }}>
+        <WorkoutsContext.Provider value={{ workoutPlan, dispatch }}>
             {props.children}
         </WorkoutsContext.Provider>
     );

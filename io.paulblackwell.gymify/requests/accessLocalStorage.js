@@ -10,8 +10,6 @@ import uuid from '../utils/uuid';
  */
 export const storeLocalData = (key, data) => {
 
-    //const [state, setState] = setState('');
-
     const request = async (keyExtractor, object) => {
         try {
             await AsyncStorage.setItem(keyExtractor, JSON.stringify(object));
@@ -20,7 +18,7 @@ export const storeLocalData = (key, data) => {
         }
     }
     useEffect(() => {
-        request(key, data);
+        request(key, data);  
     }, []);
 };
 
