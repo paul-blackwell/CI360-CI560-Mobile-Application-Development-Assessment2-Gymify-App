@@ -30,28 +30,59 @@ export const storeLocalData = (key, data) => {
  * @return {state} - The data stored 
  */
 
-export const retrieveLocalData = (key) => {
-    const [state, setState] = useState('');
+// export const retrieveLocalData = (key) => {
+//     const [state, setState] = useState('');
     
-    const request = async (keyExtractor) => {
+//     const request = async (keyExtractor) => {
+//         try {
+//             const value = await AsyncStorage.getItem(keyExtractor);
+//             if (value !== null) {
+//                 setState(value)
+//             } else if (value === null) {
+//                 setState('No data under this key');
+//             }
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+
+//     useEffect(() => {
+//         request(key);
+//     }, [state]);
+
+//     return state;
+// }
+
+
+export const retrieveLocalData = async (key, setState) => {
+
         try {
-            const value = await AsyncStorage.getItem(keyExtractor);
+            const value = await AsyncStorage.getItem(key);
             if (value !== null) {
-                setState(value)
+                setState(value);
             } else if (value === null) {
                 setState('No data under this key');
             }
         } catch (error) {
             console.log(error);
         }
-    }
-
-    useEffect(() => {
-        request(key);
-    }, [state]);
-
-    return state;
 }
+
+
+
+export const fetchLocalData = async (key, setState) => {
+    try {
+        const value = await AsyncStorage.getItem(key);
+        if (value !== null) {
+            setState(value);
+        } else if (value === null) {
+            setState('No data under this key');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 
 /**
