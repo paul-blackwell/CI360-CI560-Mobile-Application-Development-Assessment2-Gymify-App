@@ -1,14 +1,23 @@
 
-
-
 const reducer = (state, action) => {
     switch (action.type) {
-        case "ADD":
-            return [];
-        case "REMOVE":
-            return [];
+        case 'FETCH_SUCCESS':
+            return {
+                loading: false,
+                post: action.payload,
+                error: ''
+            }
+
+        case 'FETCH_ERROR':
+            return {
+                loading: false,
+                post: {},
+                error: 'Something when wrong'
+            }
         default:
             return state;
     }
-};
+}
+
+
 export default reducer;
