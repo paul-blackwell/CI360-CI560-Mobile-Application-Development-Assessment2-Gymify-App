@@ -59,7 +59,7 @@ export const retrieveLocalData = async (key, setState) => {
         try {
             const value = await AsyncStorage.getItem(key);
             if (value !== null) {
-                setState(value);
+                
             } else if (value === null) {
                 setState('No data under this key');
             }
@@ -69,8 +69,20 @@ export const retrieveLocalData = async (key, setState) => {
 }
 
 
+export const pushToLocalStorage = async (key, data, setState) => {
 
-export const fetchLocalData = async (key, setState) => {
+    try {
+        await AsyncStorage.setItem(key, JSON.stringify(data));
+        setState(data)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+
+export const fetchFromLocalStorage = async (key, setState) => {
     try {
         const value = await AsyncStorage.getItem(key);
         if (value !== null) {

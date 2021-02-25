@@ -7,6 +7,7 @@ export default function HomeScreen({ navigation }) {
 
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
+  //console.log(workoutPlan)
 
 
   // Just for testing this will need to move to its own component
