@@ -42,6 +42,8 @@ export const WorkoutsProvider = (props) => {
                 .then(response => {
                     // Pass response data to dispatch in reducer
                     dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
+
+                    // Save data locally 
                     pushToLocalStorage('workoutPlan', response.data, setLocalData)
                 })
                 .catch(error => {
