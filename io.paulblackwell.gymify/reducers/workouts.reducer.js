@@ -14,6 +14,14 @@ const reducer = (state, action) => {
                 post: {},
                 error: 'Something went wrong'
             }
+        case 'FETCH_LOCAL_STORAGE_SUCCESS':
+            return {
+                loading: false,
+                post: action.payload,
+                error: ''
+            }
+         case 'STATE':
+                return state
         default:
             return state;
     }
