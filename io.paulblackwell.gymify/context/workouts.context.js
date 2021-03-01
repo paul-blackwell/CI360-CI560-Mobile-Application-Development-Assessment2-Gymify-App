@@ -27,16 +27,19 @@ export const WorkoutsProvider = (props) => {
 
 
 
+    
+     // Just for testing
+    //deleteLocalData('workoutPlan')
+
 
     useEffect(() => {
 
-        
+
         /**
          * This will update the localData state if the workoutPlan 
          * exists or doesn't 
          */
         fetchFromLocalStorage('workoutPlan', setLocalData);
-
 
         /**
          * If workout plan / default workout plan is
@@ -49,7 +52,6 @@ export const WorkoutsProvider = (props) => {
                 .then(response => {
                     // Pass response data to dispatch in reducer
                     dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
-
                     // Save data locally 
                     pushToLocalStorage('workoutPlan', response.data, setLocalData);
                 })
@@ -57,15 +59,10 @@ export const WorkoutsProvider = (props) => {
                     dispatch({ type: 'FETCH_API_ERROR' })
                 });
         } else  {
-            // post
-            console.log(dispatch({type: 'STATE'}))
-            //console.log(workoutPlan.loading)
-            // Set context to what is saved in local storage 
-            //dispatch({type: 'FETCH_LOCAL_STORAGE_SUCCESS', payload:})
+            dispatch({type: 'FETCH_LOCAL_STORAGE_SUCCESS', payload: localData})
         }
 
     }, [localData]);
-
 
     // console.log(localData)
     //console.log(dispatch({type: 'STATE'}))

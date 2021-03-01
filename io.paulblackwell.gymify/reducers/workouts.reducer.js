@@ -20,8 +20,6 @@ const reducer = (state, action) => {
                 post: action.payload,
                 error: ''
             }
-         case 'STATE':
-                return state
         default:
             return state;
     }
