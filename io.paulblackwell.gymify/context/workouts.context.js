@@ -29,7 +29,7 @@ export const WorkoutsProvider = (props) => {
 
     
      // Just for testing
-    //deleteLocalData('workoutPlan')
+    deleteLocalData('workoutPlan')
 
 
     useEffect(() => {

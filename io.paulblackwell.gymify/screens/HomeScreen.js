@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
+import Loader from '../components/Loader';
 
 export default function HomeScreen({ navigation }) {
 
@@ -32,6 +33,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Loader loading={workoutPlan.loading} />
       {/* <FlatList
         data={workoutPlan}
         renderItem={renderItem}
