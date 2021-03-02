@@ -2,43 +2,44 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 import Loader from '../components/Loader';
+import WeeklyWorkoutItem from '../components/WeeklyWorkoutItem';
 
 export default function HomeScreen({ navigation }) {
 
 
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
-  if (!workoutPlan.loading) {
-    console.log(workoutPlan.post)
+  if (!workoutPlan.loading ) {
+    // workoutPlan.post.forEach(week => {
+    //   console.log(week)
+    // });
+    // for (let object of workoutPlan.post) {
+    //   console.log(object);
+    // }
+    // workoutPlan.post.map((workout) => {
+    //   console.log(workout);
+    // });
+    // console.log(Array.isArray(workoutPlan.post))
+    //console.log(workoutPlan.post)
+    //console.log(Array.isArray(workoutPlan.post))
   }
 
 
-  // Just for testing this will need to move to its own component
-  const renderItem = ({ item }) => (
-    <View>
-      <Text>{item.title}</Text>
-      <Button
-        title="Go to workout"
-        onPress={() => {
-          // Go to WorkoutList screen and pass the workout id to that screen
-          navigation.navigate('WorkoutStack', {
-            screen: 'WorkoutListScreen',
-            params: { workoutListId: item.id }
-          });
-        }}
-      />
-    </View>
-  );
+  const renderItem = ({ item }) => {
+    <WeeklyWorkoutItem item={item} navigation={navigation} />
+  }
 
 
   return (
     <View style={styles.container}>
-      <Loader loading={workoutPlan.loading} />
-      {/* <FlatList
-        data={workoutPlan}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-      /> */}
+      {/* {!workoutPlan.loading ?
+        <FlatList
+          data={workoutPlan.post}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        /> :
+        <Loader loading={workoutPlan.loading} />
+      } */}
     </View>
   );
 }

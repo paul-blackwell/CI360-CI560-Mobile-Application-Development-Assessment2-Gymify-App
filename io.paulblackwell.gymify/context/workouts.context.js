@@ -29,7 +29,7 @@ export const WorkoutsProvider = (props) => {
 
     
      // Just for testing
-    deleteLocalData('workoutPlan')
+    //deleteLocalData('workoutPlan')
 
 
     useEffect(() => {
@@ -62,7 +62,7 @@ export const WorkoutsProvider = (props) => {
             dispatch({type: 'FETCH_LOCAL_STORAGE_SUCCESS', payload: localData})
         }
 
-    }, [localData]);
+    }, []);
 
     
     return (
