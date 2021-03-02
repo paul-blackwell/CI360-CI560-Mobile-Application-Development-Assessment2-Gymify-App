@@ -86,7 +86,7 @@ export const fetchFromLocalStorage = async (key, setState) => {
     try {
         const value = await AsyncStorage.getItem(key);
         if (value !== null) {
-            setState(JSON.parse(value));
+            setState(JSON.parse(value))
         } else if (value === null) {
             setState('No data under this key');
         }

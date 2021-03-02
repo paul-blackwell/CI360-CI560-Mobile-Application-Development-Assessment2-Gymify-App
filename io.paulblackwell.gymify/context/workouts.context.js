@@ -23,13 +23,48 @@ export const WorkoutsProvider = (props) => {
 
 
     const [workoutPlan, dispatch] = useReducer(reducer, initialState);
-    const [localData, setLocalData] = useState('');
+    const [localData, setLocalData] = useState('No data');
 
 
 
-    
-     // Just for testing
+
+    // Just for testing
     //deleteLocalData('workoutPlan')
+
+
+    // useEffect(() => {
+
+
+    //     /**
+    //      * This will update the localData state if the workoutPlan 
+    //      * exists or doesn't 
+    //      */
+    //     //fetchFromLocalStorage('workoutPlan', setLocalData);
+
+    //     /**
+    //      * If workout plan / default workout plan is
+    //      * not already saved to local storage, Get default workout plan from an API
+    //      * and save the data from the API tO local storage
+    //      */
+    //     if (localData === 'No data under this key') {
+    //         axios
+    //             .get('https://cryptic-garden-88403.herokuapp.com/workout-plans')
+    //             .then(response => {
+    //                 // Pass response data to dispatch in reducer
+    //                 dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
+    //                 // Save data locally 
+    //                 pushToLocalStorage('workoutPlan', response.data, setLocalData);
+    //             })
+    //             .catch(error => {
+    //                 dispatch({ type: 'FETCH_API_ERROR' })
+    //             });
+    //     } else  {
+    //         dispatch({type: 'FETCH_LOCAL_STORAGE_SUCCESS', payload: localData})
+    //         //console.log(Array.isArray(localData))
+    //         console.log(localData)
+    //     }
+
+    // }, []);
 
 
     useEffect(() => {
@@ -39,32 +74,48 @@ export const WorkoutsProvider = (props) => {
          * This will update the localData state if the workoutPlan 
          * exists or doesn't 
          */
-        fetchFromLocalStorage('workoutPlan', setLocalData);
+        //fetchFromLocalStorage('workoutPlan', setLocalData);
 
         /**
          * If workout plan / default workout plan is
          * not already saved to local storage, Get default workout plan from an API
          * and save the data from the API tO local storage
          */
-        if (localData === 'No data under this key') {
-            axios
-                .get('https://cryptic-garden-88403.herokuapp.com/workout-plans')
-                .then(response => {
-                    // Pass response data to dispatch in reducer
-                    dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
-                    // Save data locally 
-                    pushToLocalStorage('workoutPlan', response.data, setLocalData);
-                })
-                .catch(error => {
-                    dispatch({ type: 'FETCH_API_ERROR' })
-                });
-        } else  {
-            dispatch({type: 'FETCH_LOCAL_STORAGE_SUCCESS', payload: localData})
+
+        //  const saveResponseData = async (key, data) => {
+        //     await AsyncStorage.setItem('workoutPlan', JSON.stringify(response.data))
+        //  }
+
+        const request = async () => {
+            const value = await AsyncStorage.getItem('workoutPlan');
+            if (value !== null) {
+                dispatch({ type: 'FETCH_LOCAL_STORAGE_SUCCESS', payload: JSON.parse(value) })
+            } else if (value === null) {
+                axios
+                    .get('https://cryptic-garden-88403.herokuapp.com/workout-plans')
+                    .then(response => {
+                        // Pass response data to dispatch in reducer
+                        dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
+                        // Save data locally 
+                        (async () => {
+                            await AsyncStorage.setItem('workoutPlan', JSON.stringify(response.data));
+                        })();
+                    })
+                    .catch(error => {
+                        dispatch({ type: 'FETCH_API_ERROR' })
+                    });
+            }
         }
+
+        request();
 
     }, []);
 
-    
+
+
+
+
+
     return (
         <WorkoutsContext.Provider value={{ workoutPlan, dispatch }}>
             {props.children}

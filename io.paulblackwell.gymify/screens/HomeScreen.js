@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
   const { workoutPlan } = useContext(WorkoutsContext);
   if (!workoutPlan.loading ) {
     // workoutPlan.post.forEach(week => {
-    //   console.log(week)
+    //   console.log(week.id)
     // });
     // for (let object of workoutPlan.post) {
     //   console.log(object);
@@ -21,7 +21,7 @@ export default function HomeScreen({ navigation }) {
     // });
     // console.log(Array.isArray(workoutPlan.post))
     //console.log(workoutPlan.post)
-    //console.log(Array.isArray(workoutPlan.post))
+    console.log(Array.isArray(workoutPlan.post))
   }
 
 
