@@ -32,60 +32,16 @@ export const WorkoutsProvider = (props) => {
     //deleteLocalData('workoutPlan')
 
 
-    // useEffect(() => {
-
-
-    //     /**
-    //      * This will update the localData state if the workoutPlan 
-    //      * exists or doesn't 
-    //      */
-    //     //fetchFromLocalStorage('workoutPlan', setLocalData);
-
-    //     /**
-    //      * If workout plan / default workout plan is
-    //      * not already saved to local storage, Get default workout plan from an API
-    //      * and save the data from the API tO local storage
-    //      */
-    //     if (localData === 'No data under this key') {
-    //         axios
-    //             .get('https://cryptic-garden-88403.herokuapp.com/workout-plans')
-    //             .then(response => {
-    //                 // Pass response data to dispatch in reducer
-    //                 dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
-    //                 // Save data locally 
-    //                 pushToLocalStorage('workoutPlan', response.data, setLocalData);
-    //             })
-    //             .catch(error => {
-    //                 dispatch({ type: 'FETCH_API_ERROR' })
-    //             });
-    //     } else  {
-    //         dispatch({type: 'FETCH_LOCAL_STORAGE_SUCCESS', payload: localData})
-    //         //console.log(Array.isArray(localData))
-    //         console.log(localData)
-    //     }
-
-    // }, []);
-
-
     useEffect(() => {
 
-
         /**
-         * This will update the localData state if the workoutPlan 
-         * exists or doesn't 
+         * This will get the workout plan from AsyncStorage (local data on the phone) 
+         * and set the context to the data returned from it however, if the workout plan 
+         * is not currently saved in local storage then an API request is made to get the
+         *  workout data from an external source. After this data is sourced externally it 
+         * is set to the context and then save the data to local storage so next time the user 
+         * opens the device the data will be saved locally.
          */
-        //fetchFromLocalStorage('workoutPlan', setLocalData);
-
-        /**
-         * If workout plan / default workout plan is
-         * not already saved to local storage, Get default workout plan from an API
-         * and save the data from the API tO local storage
-         */
-
-        //  const saveResponseData = async (key, data) => {
-        //     await AsyncStorage.setItem('workoutPlan', JSON.stringify(response.data))
-        //  }
-
         const request = async () => {
             const value = await AsyncStorage.getItem('workoutPlan');
             if (value !== null) {
