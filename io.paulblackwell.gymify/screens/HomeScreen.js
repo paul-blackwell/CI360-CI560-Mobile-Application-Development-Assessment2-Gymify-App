@@ -9,20 +9,6 @@ export default function HomeScreen({ navigation }) {
 
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
-  if (!workoutPlan.loading ) {
-    // workoutPlan.post.forEach(week => {
-    //   console.log(week.id)
-    // });
-    // for (let object of workoutPlan.post) {
-    //   console.log(object);
-    // }
-    // workoutPlan.post.map((workout) => {
-    //   console.log(workout);
-    // });
-    // console.log(Array.isArray(workoutPlan.post))
-    //console.log(workoutPlan.post)
-    console.log(Array.isArray(workoutPlan.post))
-  }
 
 
   const renderItem = ({ item }) => {
@@ -32,14 +18,14 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* {!workoutPlan.loading ?
+      {!workoutPlan.loading ?
         <FlatList
           data={workoutPlan.post}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         /> :
         <Loader loading={workoutPlan.loading} />
-      } */}
+      }
     </View>
   );
 }
