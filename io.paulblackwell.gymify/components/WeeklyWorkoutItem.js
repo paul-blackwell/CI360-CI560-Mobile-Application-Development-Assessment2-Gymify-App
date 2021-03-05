@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 
 
-export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
+export default WeeklyWorkoutItem = ({ title, id, workouts, navigation }) => (
     <View style={styles.item}>
         <Text>{title}</Text>
         <Button
@@ -11,8 +11,8 @@ export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
             onPress={() => {
                 // Go to WorkoutList screen and pass the workout id to that screen
                 navigation.navigate('WorkoutStack', {
-                    screen: 'WorkoutListScreen',
-                    params: { workoutListId: id }
+                    screen: 'WorkoutsScreen',
+                    params: { workouts: workouts }
                 });
             }}
         />

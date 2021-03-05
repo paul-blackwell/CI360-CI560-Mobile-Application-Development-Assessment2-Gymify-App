@@ -15,7 +15,7 @@ export default function HomeScreen({ navigation }) {
 
 
   const renderItem = ({ item, id }) => (
-    <WeeklyWorkoutItem title={item.name} id={item.id} navigation={navigation}/>
+    <WeeklyWorkoutItem title={item.name} id={item.id} workouts={item.workouts} navigation={navigation}/>
   );
 
 

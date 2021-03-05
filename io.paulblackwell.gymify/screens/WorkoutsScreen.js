@@ -2,21 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 
-export default function WorkoutListScreen({ route, navigation }) {
+export default function WorkoutsScreen({ route, navigation }) {
 
   // Get WorkoutList based on id passed in from home screen
-  const { workoutListId } = route.params;
+  const { workouts } = route.params;
 
   return (
     <View style={styles.container}>
-      <View style={styles.main}>
+      {/* <View style={styles.main}>
         <Text >WorkoutList Screen</Text>
         <Text>{workoutListId.toString()}</Text>
         <Button
           title="Go to Workout"
           onPress={() => navigation.navigate('WorkoutScreen')}
         />
-      </View>
+      </View> */}
+    <Text>I am the workouts screen</Text>
     </View>
   );
 }
