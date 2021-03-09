@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 
 
 export default function WorkoutsScreen({ route, navigation }) {
 
-  const [workoutsState, setWorkoutsState] = useState([]);
 
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
@@ -17,20 +16,17 @@ export default function WorkoutsScreen({ route, navigation }) {
    * time and have not previously been on the Home screen, get Workouts 
    * from the context (first week)
    */
-  let week;
+  let selectedWeek;
   if (route.params === undefined) {
-    week = workoutPlan.post[0];
+    selectedWeek = workoutPlan.post[0];
   } else {
     const { weekId } = route.params;
-    console.log(weekId)
-    // workoutPlan.post.forEach(week => {
-    //   if (week.id === weekId) {
-    //     console.log(week)
-    //   }
-    // });
+    workoutPlan.post.forEach(week => {
+      if (week.id === weekId) {
+        selectedWeek = week;
+      }
+    });
   }
-
-
 
 
   return (
@@ -44,6 +40,7 @@ export default function WorkoutsScreen({ route, navigation }) {
         />
       </View> */}
       <Text>I am the workouts screen</Text>
+      <Text>{selectedWeek.id}</Text>
     </View>
   );
 }
