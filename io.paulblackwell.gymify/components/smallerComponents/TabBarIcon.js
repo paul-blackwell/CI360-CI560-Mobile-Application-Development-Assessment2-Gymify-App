@@ -1,14 +1,12 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
 import { SvgXml } from "react-native-svg";
 
-const styles = StyleSheet.create({
-    icon: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-});
 
+/**
+ *  A the TabBar uses custom svg icons that expo icons doesn’t have, 
+ * these icons must be loaded in differently. This component will do this for us 
+ * and change their color based on the color prop.
+ */
 
 export default TabBarIcon = (props) => {
 
@@ -76,3 +74,4 @@ export default TabBarIcon = (props) => {
         <SvgImage />
     )
 }
+
