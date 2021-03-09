@@ -31,7 +31,7 @@ export default function TabBarStack() {
         options={{
           tabBarIcon: ({ focused, color, size }) => {
             return (
-             <TabBarIcon icon='home'/>
+             <TabBarIcon icon='home' color={color}/>
             )
           }
         }}
@@ -43,7 +43,7 @@ export default function TabBarStack() {
           tabBarLabel: 'Workouts',
           tabBarIcon: ({ focused, color, size }) => {
             return (
-             <TabBarIcon icon='workouts' />
+             <TabBarIcon icon='workouts' color={color} />
             )
           }
         }}
@@ -54,7 +54,7 @@ export default function TabBarStack() {
       options={{
         tabBarIcon: ({ focused, color, size }) => {
           return (
-           <TabBarIcon icon='activity' />
+           <TabBarIcon icon='activity' color={color} />
           )
         }
       }} 
