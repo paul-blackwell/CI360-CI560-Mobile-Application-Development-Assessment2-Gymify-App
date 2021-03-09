@@ -8,7 +8,7 @@ import NewExerciseScreen from '../screens/NewExerciseScreen';
 
 const Stack = createStackNavigator();
 
-export default function TabBar() {
+export default function WorkoutStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="WorkoutsScreen" component={WorkoutsScreen} />

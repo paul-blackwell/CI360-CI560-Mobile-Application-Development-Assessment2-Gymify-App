@@ -14,7 +14,7 @@ export default function TabBarStack() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Workouts" component={WorkoutStack} />
+      <Tab.Screen name="WorkoutStack" component={WorkoutStack} />
       <Tab.Screen name="Progress" component={ProgressScreen} />
     </Tab.Navigator>
   );

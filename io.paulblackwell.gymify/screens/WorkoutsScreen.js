@@ -23,11 +23,11 @@ export default function WorkoutsScreen({ route, navigation }) {
   } else {
     const { weekId } = route.params;
     console.log(weekId)
-    workoutPlan.post.forEach(week => {
-      if (week.id === weekId) {
-        console.log(week)
-      }
-    });
+    // workoutPlan.post.forEach(week => {
+    //   if (week.id === weekId) {
+    //     console.log(week)
+    //   }
+    // });
   }
 
 

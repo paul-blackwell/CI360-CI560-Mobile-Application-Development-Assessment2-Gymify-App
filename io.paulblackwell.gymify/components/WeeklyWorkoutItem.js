@@ -10,7 +10,7 @@ export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
         <Button
             title="Go to workout"
             onPress={() => {
-                // Go to WorkoutList screen and pass the workout id to that screen
+                //Go to WorkoutList screen and pass the workout id to that screen
                 navigation.navigate('WorkoutStack', {
                     screen: 'WorkoutsScreen',
                     params: { weekId: id }
