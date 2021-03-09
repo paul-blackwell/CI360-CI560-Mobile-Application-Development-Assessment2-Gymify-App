@@ -2,12 +2,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function ProgressScreen({ navigation }) {
+export default function ActivityScreen({ navigation }) {
   
     return (
       <View style={styles.container}>
         <View style={styles.main}>
-          <Text >Progress Screen</Text>
+          <Text >Activity Screen</Text>
         </View>
       </View>
     );
