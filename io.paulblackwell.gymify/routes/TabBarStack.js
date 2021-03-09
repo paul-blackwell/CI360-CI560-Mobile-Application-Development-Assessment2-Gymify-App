@@ -20,7 +20,10 @@ export default function TabBarStack() {
           activeTintColor: colors.purple[200],
           inactiveTintColor: colors.gray[300],
           style: {
+            paddingTop: 8,
             paddingBottom: 8,
+            justifyContent: 'center',
+            height: 64
           },
         }
       }
@@ -31,7 +34,7 @@ export default function TabBarStack() {
         options={{
           tabBarIcon: ({ focused, color, size }) => {
             return (
-             <TabBarIcon icon='home' color={color}/>
+              <TabBarIcon icon='home' color={color} />
             )
           }
         }}
@@ -43,21 +46,21 @@ export default function TabBarStack() {
           tabBarLabel: 'Workouts',
           tabBarIcon: ({ focused, color, size }) => {
             return (
-             <TabBarIcon icon='workouts' color={color} />
+              <TabBarIcon icon='workouts' color={color} />
             )
           }
         }}
       />
-      <Tab.Screen 
-      name="Activity" 
-      component={ActivityScreen}
-      options={{
-        tabBarIcon: ({ focused, color, size }) => {
-          return (
-           <TabBarIcon icon='activity' color={color} />
-          )
-        }
-      }} 
+      <Tab.Screen
+        name="Activity"
+        component={ActivityScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            return (
+              <TabBarIcon icon='activity' color={color} />
+            )
+          }
+        }}
       />
     </Tab.Navigator>
   );
