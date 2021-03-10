@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View, FlatList, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, SafeAreaView, StatusBar } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 import Loader from '../components/Loader';
 import WeeklyWorkoutItem from '../components/WeeklyWorkoutItem';
+import colors from '../styles/colors'
 
 export default function HomeScreen({ navigation }) {
 
@@ -10,8 +11,6 @@ export default function HomeScreen({ navigation }) {
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
 
-
-  
 
 
   const renderItem = ({ item }) => (
@@ -21,6 +20,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
       {!workoutPlan.loading ?
         <FlatList
           data={workoutPlan.post}
