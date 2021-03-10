@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar, SafeAreaView } from 'react-native';
 import colors from '../styles/colors'
 
 export default function WorkoutScreen({ navigation }) {
   
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
        <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
       <View style={styles.main}>
         <Text >Workout Screen</Text>
@@ -18,7 +18,7 @@ export default function WorkoutScreen({ navigation }) {
           onPress={() => navigation.navigate('NewExerciseScreen')}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
