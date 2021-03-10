@@ -29,7 +29,7 @@ export default function TabBarStack() {
       }
     >
       <Tab.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => {
@@ -52,7 +52,7 @@ export default function TabBarStack() {
         }}
       />
       <Tab.Screen
-        name="Activity"
+        name="ActivityScreen"
         component={ActivityScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => {

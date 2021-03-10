@@ -28,11 +28,14 @@ export default function HomeStack() {
             />
             <Stack.Screen name="WorkoutStack" component={WorkoutStack} /> */}
             <Stack.Screen
-                name="Tabs"
+                name="HomeStack"
                 component={TabBarStack}
-                options={{
-                    headerTitle: props => <Header {...props} />,
-                }}
+                // options={{
+                //     headerTitle: props => <Header {...props} />,
+                // }}
+                options={({ navigation, route }) => ({
+                    headerTitle: props => <Header navigation={navigation} />,
+                })}
             />
         </Stack.Navigator>
     );
