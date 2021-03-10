@@ -1,6 +1,4 @@
 
-
-
 /**
  * This function will be used to get random items from an array,
  * Will work on ether items that are objects (must have id's) or

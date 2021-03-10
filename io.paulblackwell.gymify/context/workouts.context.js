@@ -1,8 +1,7 @@
-import React, { useReducer, createContext, useEffect, useState } from 'react';
+import React, { useReducer, createContext, useEffect } from 'react';
 import reducer from '../reducers/workouts.reducer';
 import AsyncStorage from '@react-native-community/async-storage';
-import { fetchFromLocalStorage, pushToLocalStorage, retrieveLocalData, deleteLocalData, initializeNewWorkoutPlan } from '../requests/accessLocalStorage';
-import { retrieveExternalData } from '../requests/accessExternalAPI';
+// import { deleteLocalData } from '../requests/accessLocalStorage';
 import axios from 'axios';
 
 
@@ -15,22 +14,16 @@ const initialState = {
 }
 
 
-
 export const WorkoutsContext = createContext();
-
 
 export const WorkoutsProvider = (props) => {
 
 
     const [workoutPlan, dispatch] = useReducer(reducer, initialState);
-    const [localData, setLocalData] = useState('No data');
-
-
-
+ 
 
     // Just for testing
     //deleteLocalData('workoutPlan')
-
 
     useEffect(() => {
 
@@ -66,8 +59,6 @@ export const WorkoutsProvider = (props) => {
         request();
 
     }, []);
-
-
 
 
 

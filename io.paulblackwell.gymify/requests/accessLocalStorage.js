@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import {defaultWarmUps, defaultExercises} from '../data/data'
 import uuid from '../utils/uuid';
 
 /**
@@ -29,30 +28,6 @@ export const storeLocalData = (key, data) => {
  * @param {string} key - This is the key the data is stored under in AsyncStorage.
  * @return {state} - The data stored 
  */
-
-// export const retrieveLocalData = (key) => {
-//     const [state, setState] = useState('');
-    
-//     const request = async (keyExtractor) => {
-//         try {
-//             const value = await AsyncStorage.getItem(keyExtractor);
-//             if (value !== null) {
-//                 setState(value)
-//             } else if (value === null) {
-//                 setState('No data under this key');
-//             }
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-
-//     useEffect(() => {
-//         request(key);
-//     }, [state]);
-
-//     return state;
-// }
-
 
 export const retrieveLocalData = async (key, setState) => {
 
@@ -158,14 +133,6 @@ export const initializeNewWorkoutPlan = () => {
     useEffect(() => {
         request();
     }, [state]);
-
-    // const request = async () => {
-    //     setState(retrieveData('workoutPlan'))
-    // }
-
-    // useEffect(() => {
-    //     request();
-    // }, [state]);
 
 
     return state;

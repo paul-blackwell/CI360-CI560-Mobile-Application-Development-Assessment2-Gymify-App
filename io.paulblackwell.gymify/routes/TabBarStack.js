@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Text, } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import WorkoutStack from '../routes/WorkoutStack';

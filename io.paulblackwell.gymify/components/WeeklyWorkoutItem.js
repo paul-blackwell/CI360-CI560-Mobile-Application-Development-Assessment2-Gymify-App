@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-
-
 export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
     <View style={styles.item}>
         <Text>{title}</Text>
@@ -19,7 +17,6 @@ export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
         />
     </View>
 );
-
 
 
 const styles = StyleSheet.create({

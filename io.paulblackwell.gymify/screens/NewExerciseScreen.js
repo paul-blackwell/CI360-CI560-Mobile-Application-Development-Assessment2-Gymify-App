@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, StatusBar ,SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, StatusBar ,SafeAreaView} from 'react-native';
 import colors from '../styles/colors'
 
 export default function NewExerciseScreen({ navigation }) {

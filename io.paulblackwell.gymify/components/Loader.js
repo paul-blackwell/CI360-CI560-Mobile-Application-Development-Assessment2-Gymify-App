@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-
 /**
  * This component will render a loader if the loading prop
  * passed into it is true
@@ -18,7 +17,6 @@ export default Loader = (props) => {
         return(null)
     }
 }
-
 
 
 const styles = StyleSheet.create({

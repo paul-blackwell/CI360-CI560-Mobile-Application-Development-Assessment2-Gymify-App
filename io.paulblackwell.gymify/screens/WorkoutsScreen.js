@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, StatusBar, SafeAreaView } from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, Text, StatusBar, SafeAreaView } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 import colors from '../styles/colors'
 
