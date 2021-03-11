@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     },
     itemTitleText: {
         fontSize: 18,
-        color: colors.gray[300]
+        fontFamily: 'Inter_400Regular',
+        color: colors.gray[300],
     },
     itemIconContainer: {
         width: '50%',

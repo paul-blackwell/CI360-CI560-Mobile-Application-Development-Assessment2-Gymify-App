@@ -50,5 +50,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 24,
     fontWeight: "bold",
+    fontFamily: 'Inter_800ExtraBold'
   }
 });
