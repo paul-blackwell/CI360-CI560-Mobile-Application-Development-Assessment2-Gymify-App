@@ -1,7 +1,7 @@
 import React, { useReducer, createContext, useEffect } from 'react';
 import reducer from '../reducers/workouts.reducer';
 import AsyncStorage from '@react-native-community/async-storage';
-//import { deleteLocalData } from '../requests/accessLocalStorage';
+import { deleteLocalData } from '../requests/accessLocalStorage';
 import axios from 'axios';
 
 
@@ -25,6 +25,18 @@ export const WorkoutsProvider = (props) => {
     // Just for testing
     //deleteLocalData('workoutPlan')
 
+
+    // This will be used to save data from API locally
+    const pushToLocalStorage = async (data) => {
+        try {
+          await AsyncStorage.setItem('workoutPlan', JSON.stringify(data));
+        } catch (error) {
+          console.log(error);
+        }
+    }
+
+
+
     useEffect(() => {
 
         /**
@@ -47,9 +59,7 @@ export const WorkoutsProvider = (props) => {
                         // Pass response data to dispatch in reducer
                         dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
                             // Save data locally 
-                            // (async () => {
-                            //     await AsyncStorage.setItem('workoutPlan', JSON.stringify(response.data));
-                            // })();
+                            pushToLocalStorage(response.data)
                     })
                     .catch(error => {
                         dispatch({ type: 'FETCH_API_ERROR' })

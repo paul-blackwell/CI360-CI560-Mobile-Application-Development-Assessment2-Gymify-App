@@ -24,42 +24,42 @@ export default function HomeScreen({ navigation }) {
 
   /* ------------------------------------------------------------------------------------------- */
 
-  const [workoutPlanIsSavedLocally, setWorkoutPlanIsSavedLocally] = useState(null)
-  const fetchFromLocalStorage = async () => {
-    console.log('I was fired')
-    try {
-      const value = await AsyncStorage.getItem('workoutPlan');
-      if (value === null) {
-        console.log('value was null')
-        console.log(value)
-        setWorkoutPlanIsSavedLocally(false)
-      } else if (value !== null) {
-        console.log('Data has been saved')
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  // const [workoutPlanIsSavedLocally, setWorkoutPlanIsSavedLocally] = useState(null)
+  // const fetchFromLocalStorage = async () => {
+  //   console.log('I was fired')
+  //   try {
+  //     const value = await AsyncStorage.getItem('workoutPlan');
+  //     if (value === null) {
+  //       console.log('value was null')
+  //       console.log(value)
+  //       setWorkoutPlanIsSavedLocally(false)
+  //     } else if (value !== null) {
+  //       console.log('Data has been saved')
+  //     }
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 
-  const pushToLocalStorage = async () => {
-    try {
-      console.log('I was fired as well')
-      await AsyncStorage.setItem('workoutPlan', JSON.stringify(workoutPlan));
-      setWorkoutPlanIsSavedLocally(true)
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const pushToLocalStorage = async () => {
+  //   try {
+  //     console.log('I was fired as well')
+  //     await AsyncStorage.setItem('workoutPlan', JSON.stringify(workoutPlan));
+  //     setWorkoutPlanIsSavedLocally(true)
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  useEffect(() => {
-    if(workoutPlanIsSavedLocally === null) {
-      fetchFromLocalStorage();
-    } else if (workoutPlanIsSavedLocally === false) {
-      pushToLocalStorage();
-    }
-  }, [workoutPlanIsSavedLocally]);
+  // useEffect(() => {
+  //   if(workoutPlanIsSavedLocally === null) {
+  //     fetchFromLocalStorage();
+  //   } else if (workoutPlanIsSavedLocally === false) {
+  //     pushToLocalStorage();
+  //   }
+  // }, [workoutPlanIsSavedLocally]);
 
-  console.log(workoutPlan.post)
+  // console.log(workoutPlan.post)
 
   /* ------------------------------------------------------------------------------------------- */
   
