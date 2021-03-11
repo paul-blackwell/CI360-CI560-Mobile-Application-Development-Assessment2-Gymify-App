@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
+import colors from '../styles/colors'
+
 export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
     <View style={styles.item}>
         <Text>{title}</Text>
-        <Text>{id}</Text>
         <Button
             title="Go to workout"
             onPress={() => {
@@ -21,9 +22,13 @@ export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
 
 const styles = StyleSheet.create({
     item: {
-      backgroundColor: '#f9c2ff',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
+        // width: '100%',
+        backgroundColor: colors.white[100],
+        padding: 20,
+        marginVertical: 8,
+        // marginHorizontal: 16,
+        borderColor: colors.gray[200],
+        borderWidth: 1,
+        borderRadius: 4,
     },
-  });
+});
