@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_800ExtraBold, Inter_400Regular } from '@expo-google-fonts/inter';
+import { NavigationContainer } from '@react-navigation/native';
 import { WorkoutsProvider } from './context/workouts.context';
 import HomeStack from './routes/HomeStack';
 

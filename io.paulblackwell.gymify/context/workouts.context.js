@@ -1,7 +1,7 @@
 import React, { useReducer, createContext, useEffect } from 'react';
 import reducer from '../reducers/workouts.reducer';
 import AsyncStorage from '@react-native-community/async-storage';
-// import { deleteLocalData } from '../requests/accessLocalStorage';
+import { deleteLocalData } from '../requests/accessLocalStorage';
 import axios from 'axios';
 
 
@@ -20,10 +20,10 @@ export const WorkoutsProvider = (props) => {
 
 
     const [workoutPlan, dispatch] = useReducer(reducer, initialState);
- 
+
 
     // Just for testing
-    //deleteLocalData('workoutPlan')
+    deleteLocalData('workoutPlan')
 
     useEffect(() => {
 
@@ -36,6 +36,7 @@ export const WorkoutsProvider = (props) => {
          * opens the device the data will be saved locally.
          */
         const request = async () => {
+
             const value = await AsyncStorage.getItem('workoutPlan');
             if (value !== null) {
                 dispatch({ type: 'FETCH_LOCAL_STORAGE_SUCCESS', payload: JSON.parse(value) })
@@ -45,13 +46,14 @@ export const WorkoutsProvider = (props) => {
                     .then(response => {
                         // Pass response data to dispatch in reducer
                         dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
-                        // Save data locally 
-                        (async () => {
-                            await AsyncStorage.setItem('workoutPlan', JSON.stringify(response.data));
-                        })();
+                            // Save data locally 
+                            // (async () => {
+                            //     await AsyncStorage.setItem('workoutPlan', JSON.stringify(response.data));
+                            // })();
                     })
                     .catch(error => {
                         dispatch({ type: 'FETCH_API_ERROR' })
+                        console.log(error)
                     });
             }
         }

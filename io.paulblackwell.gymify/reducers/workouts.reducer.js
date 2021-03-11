@@ -7,12 +7,11 @@ const reducer = (state, action) => {
                 post: action.payload,
                 error: ''
             }
-
         case 'FETCH_API_ERROR':
             return {
                 loading: false,
                 post: {},
-                error: 'Something went wrong'
+                error: 'Something went wrong' 
             }
         case 'FETCH_LOCAL_STORAGE_SUCCESS':
             return {

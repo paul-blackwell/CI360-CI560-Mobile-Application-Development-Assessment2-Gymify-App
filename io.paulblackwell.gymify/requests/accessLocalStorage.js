@@ -17,7 +17,7 @@ export const storeLocalData = (key, data) => {
         }
     }
     useEffect(() => {
-        request(key, data);  
+        request(key, data);
     }, []);
 };
 
@@ -31,37 +31,10 @@ export const storeLocalData = (key, data) => {
 
 export const retrieveLocalData = async (key, setState) => {
 
-        try {
-            const value = await AsyncStorage.getItem(key);
-            if (value !== null) {
-                
-            } else if (value === null) {
-                setState('No data under this key');
-            }
-        } catch (error) {
-            console.log(error);
-        }
-}
-
-
-export const pushToLocalStorage = async (key, data, setState) => {
-
-    try {
-        await AsyncStorage.setItem(key, JSON.stringify(data));
-        setState(data)
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
-
-
-export const fetchFromLocalStorage = async (key, setState) => {
     try {
         const value = await AsyncStorage.getItem(key);
         if (value !== null) {
-            setState(JSON.parse(value))
+
         } else if (value === null) {
             setState('No data under this key');
         }
@@ -69,6 +42,56 @@ export const fetchFromLocalStorage = async (key, setState) => {
         console.log(error);
     }
 }
+
+
+// export const pushToLocalStorage = async (key, data, setState) => {
+
+//     try {
+//         await AsyncStorage.setItem(key, JSON.stringify(data));
+//         setState(data)
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+export const pushToLocalStorage = async (key, data) => {
+
+    try {
+        await AsyncStorage.setItem(key, JSON.stringify(data));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+// export const fetchFromLocalStorage = async (key, setState) => {
+//     try {
+//         const value = await AsyncStorage.getItem(key);
+//         if (value !== null) {
+//             setState(value)
+//             console.log('i WAS FIRED')
+//         } else if (value === null) {
+//             setState('No data under this key');
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+
+export const fetchFromLocalStorage = async (key) => {
+    try {
+        const value =  await AsyncStorage.getItem(key);
+        if (value !== null) {
+            // We have data!!
+            console.log(value);
+          }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 
 
@@ -121,8 +144,8 @@ export const initializeNewWorkoutPlan = () => {
 
                 // Make array 
                 const workoutPlan = []
-                const workout = { warmup: [], workouts: []}
-                const week = {id: uuid(), date: 'Week1', workouts: []}
+                const workout = { warmup: [], workouts: [] }
+                const week = { id: uuid(), date: 'Week1', workouts: [] }
 
             }
         } catch (error) {

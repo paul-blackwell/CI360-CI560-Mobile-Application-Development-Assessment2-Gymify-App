@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, StatusBar, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, StatusBar, SafeAreaView, FlatList, View } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
-import colors from '../styles/colors'
+
+import colors from '../styles/colors';
+import WorkoutItem from '../components/WorkoutItem';
 
 export default function WorkoutsScreen({ route, navigation }) {
 
@@ -29,19 +31,18 @@ export default function WorkoutsScreen({ route, navigation }) {
   }
 
 
+  const renderItem = ({ item }) => (
+    <WorkoutItem title={item.name} id={item.id} navigation={navigation} />
+  );
+
+
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      {/* <View style={styles.main}>
-        <Text >WorkoutList Screen</Text>
-        <Text>{workoutListId.toString()}</Text>
-        <Button
-          title="Go to Workout"
-          onPress={() => navigation.navigate('WorkoutScreen')}
-        />
-      </View> */}
-      <Text>I am the workouts screen</Text>
-      <Text>{selectedWeek.id}</Text>
+      <View style={styles.title}>
+        <Text style={styles.titleText}>{selectedWeek.title}</Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -49,11 +50,16 @@ export default function WorkoutsScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 16,
+    marginHorizontal: 16
   },
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    margin: 10,
-    alignItems: 'center'
+  title: {
+    alignItems: 'center',
+    marginBottom: 16
   },
+  titleText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    fontFamily: 'Inter_800ExtraBold'
+  }
 });
