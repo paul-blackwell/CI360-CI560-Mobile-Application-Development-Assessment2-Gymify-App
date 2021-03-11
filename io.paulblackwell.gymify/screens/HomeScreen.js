@@ -31,6 +31,7 @@ export default function HomeScreen({ navigation }) {
       const value = await AsyncStorage.getItem('workoutPlan');
       if (value === null) {
         console.log('value was null')
+        console.log(value)
         setWorkoutPlanIsSavedLocally(false)
       } else if (value !== null) {
         console.log('Data has been saved')
@@ -56,7 +57,9 @@ export default function HomeScreen({ navigation }) {
     } else if (workoutPlanIsSavedLocally === false) {
       pushToLocalStorage();
     }
-  }, [workoutPlanIsSavedLocally])
+  }, [workoutPlanIsSavedLocally]);
+
+  console.log(workoutPlan.post)
 
   /* ------------------------------------------------------------------------------------------- */
   

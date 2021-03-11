@@ -1,7 +1,7 @@
 import React, { useReducer, createContext, useEffect } from 'react';
 import reducer from '../reducers/workouts.reducer';
 import AsyncStorage from '@react-native-community/async-storage';
-import { deleteLocalData } from '../requests/accessLocalStorage';
+//import { deleteLocalData } from '../requests/accessLocalStorage';
 import axios from 'axios';
 
 
@@ -23,7 +23,7 @@ export const WorkoutsProvider = (props) => {
 
 
     // Just for testing
-    deleteLocalData('workoutPlan')
+    //deleteLocalData('workoutPlan')
 
     useEffect(() => {
 
