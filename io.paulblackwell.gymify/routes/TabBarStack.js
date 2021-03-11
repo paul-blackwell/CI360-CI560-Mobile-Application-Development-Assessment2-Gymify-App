@@ -31,6 +31,7 @@ export default function TabBarStack() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
+          tabBarLabel: 'Home',
           tabBarIcon: ({ focused, color, size }) => {
             return (
               <TabBarIcon icon='home' color={color} />
@@ -54,6 +55,7 @@ export default function TabBarStack() {
         name="ActivityScreen"
         component={ActivityScreen}
         options={{
+          tabBarLabel: 'Activity',
           tabBarIcon: ({ focused, color, size }) => {
             return (
               <TabBarIcon icon='activity' color={color} />
