@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, FlatList, SafeAreaView, StatusBar } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView, StatusBar, Text } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 
 import Loader from '../components/Loader';
@@ -15,13 +15,14 @@ export default function HomeScreen({ navigation }) {
 
 
   const renderItem = ({ item }) => (
-    <WeeklyWorkoutItem title={item.name} id={item.id}  navigation={navigation}/>
+    <WeeklyWorkoutItem title={item.name} id={item.id} navigation={navigation} />
   );
 
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+      <Text style={styles.title}>Home</Text>
       {!workoutPlan.loading ?
         <FlatList
           data={workoutPlan.post}
@@ -37,6 +38,12 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 16,
+    alignItems: 'center'
   },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16
+  }
 });
