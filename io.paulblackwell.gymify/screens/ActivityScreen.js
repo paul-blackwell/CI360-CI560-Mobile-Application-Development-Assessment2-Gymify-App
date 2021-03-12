@@ -4,25 +4,28 @@ import { StyleSheet, Text, View, StatusBar, SafeAreaView } from 'react-native';
 import colors from '../styles/colors'
 
 export default function ActivityScreen({ navigation }) {
-  
-    return (
-      <SafeAreaView style={styles.container}>
-         <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-        <View style={styles.main}>
-          <Text >Activity Screen</Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    main: {
-      flex: 1,
-      justifyContent: 'center',
-      margin: 10,
-      alignItems: 'center'
-    },
-  });
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+      <View style={styles.main}>
+        <Text >Activity Screen</Text>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    backgroundColor: colors.gray[100]
+  },
+  main: {
+    flex: 1,
+    justifyContent: 'center',
+    margin: 10,
+    alignItems: 'center'
+  },
+});

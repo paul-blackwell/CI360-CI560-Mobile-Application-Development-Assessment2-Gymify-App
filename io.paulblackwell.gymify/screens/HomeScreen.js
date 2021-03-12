@@ -41,8 +41,9 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 16,
-    marginHorizontal: 16
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    backgroundColor: colors.gray[100]
   },
   title: {
     alignItems: 'center',

@@ -25,6 +25,9 @@ export default function WorkoutScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    backgroundColor: colors.gray[100]
   },
   main: {
     flex: 1,

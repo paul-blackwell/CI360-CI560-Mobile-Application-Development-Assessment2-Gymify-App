@@ -17,6 +17,7 @@ export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
     }}>
         <View style={styles.itemTitle}>
             <Text style={styles.itemTitleText}>{title}</Text>
+            <Text style={styles.itemNumberOfExercisesText}>24 Exercises</Text>
         </View>
         <View style={styles.itemIconContainer}>
             <AntDesign name="arrowright" size={24} color={colors.gray[300]} />
@@ -43,6 +44,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Inter_400Regular',
         color: colors.gray[300],
+    },
+    itemNumberOfExercisesText: {
+        fontSize: 16,
+        color: colors.gray[200]
     },
     itemIconContainer: {
         width: '50%',

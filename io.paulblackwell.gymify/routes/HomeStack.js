@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabBarStack from '../routes/TabBarStack';
-import Header from  '../components/Header';
+import Header from '../components/Header';
 
 const Stack = createStackNavigator();
 

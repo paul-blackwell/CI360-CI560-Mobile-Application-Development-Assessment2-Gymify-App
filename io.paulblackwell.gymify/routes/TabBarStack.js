@@ -32,6 +32,9 @@ export default function TabBarStack() {
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
+          cardStyle: {
+            backgroundColor: '#000000',
+          },
           tabBarIcon: ({ focused, color, size }) => {
             return (
               <TabBarIcon icon='home' color={color} />
