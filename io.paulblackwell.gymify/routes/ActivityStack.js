@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Header from '../components/Header';
-import HomeScreen from '../screens/HomeScreen';
+import ActivityScreen from '../screens/ActivityScreen';
 
 const Stack = createStackNavigator();
 
@@ -9,8 +9,8 @@ export default function HomeStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="HomeScreen"
-                component={HomeScreen}
+                name="ActivityScreen"
+                component={ActivityScreen}
                 options={({ navigation, route }) => ({
                     headerTitle: props => <Header navigation={navigation} />,
                 })}

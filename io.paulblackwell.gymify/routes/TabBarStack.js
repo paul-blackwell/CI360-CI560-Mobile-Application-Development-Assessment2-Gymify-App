@@ -3,10 +3,13 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import WorkoutStack from '../routes/WorkoutStack';
-import HomeScreen from '../screens/HomeScreen';
-import ActivityScreen from '../screens/ActivityScreen';
+import HomeStack from '../routes/HomeStack'; 
+import ActivityStack from '../routes/ActivityStack';
+
+
 import colors from '../styles/colors'
 import TabBarIcon from '../components/smallerComponents/TabBarIcon';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -28,13 +31,9 @@ export default function TabBarStack() {
       }
     >
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="HomeStack"
+        component={HomeStack}
         options={{
-          tabBarLabel: 'Home',
-          cardStyle: {
-            backgroundColor: '#000000',
-          },
           tabBarIcon: ({ focused, color, size }) => {
             return (
               <TabBarIcon icon='home' color={color} />
@@ -55,8 +54,8 @@ export default function TabBarStack() {
         }}
       />
       <Tab.Screen
-        name="ActivityScreen"
-        component={ActivityScreen}
+        name="ActivityStack"
+        component={ActivityStack}
         options={{
           tabBarLabel: 'Activity',
           tabBarIcon: ({ focused, color, size }) => {

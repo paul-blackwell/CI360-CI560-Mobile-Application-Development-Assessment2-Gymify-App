@@ -4,6 +4,7 @@ import { useFonts, Inter_800ExtraBold, Inter_400Regular } from '@expo-google-fon
 import { NavigationContainer } from '@react-navigation/native';
 import { WorkoutsProvider } from './context/workouts.context';
 import HomeStack from './routes/HomeStack';
+import TabBarStack from './routes/TabBarStack'
 
 export default function App() {
 
@@ -19,10 +20,15 @@ export default function App() {
   }
 
   return (
+    // <WorkoutsProvider>
+    //   <NavigationContainer>
+    //     <HomeStack />
+    //   </NavigationContainer>
+    // </WorkoutsProvider>
     <WorkoutsProvider>
-      <NavigationContainer>
-        <HomeStack />
-      </NavigationContainer>
-    </WorkoutsProvider>
+    <NavigationContainer>
+      <TabBarStack />
+    </NavigationContainer>
+  </WorkoutsProvider>
   );
 }
