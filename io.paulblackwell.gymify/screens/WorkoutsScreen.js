@@ -32,9 +32,8 @@ export default function WorkoutsScreen({ route, navigation }) {
 
 
   const renderItem = ({ item }) => (
-    <WorkoutItem title={item.name} id={item.id} navigation={navigation} />
+    <WorkoutItem title={item.title} id={item.id} navigation={navigation} />
   );
-
 
 
   return (
@@ -42,6 +41,11 @@ export default function WorkoutsScreen({ route, navigation }) {
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
       <View style={styles.title}>
         <Text style={styles.titleText}>{selectedWeek.title}</Text>
+        <FlatList
+          data={selectedWeek.workouts}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
       </View>
     </SafeAreaView>
   );
