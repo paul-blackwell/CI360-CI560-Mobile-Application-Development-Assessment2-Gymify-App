@@ -18,10 +18,10 @@ export default WeeklyWorkoutItem = ({ title, id, warmups, navigation }) => {
             style={styles.item}
             onPress={() => {
                 //Go to WorkoutList screen and pass the workout id to that screen
-                //  navigation.navigate('WorkoutStack', {
-                //     screen: 'WorkoutsScreen',
-                //     params: { weekId: id }
-                // });
+                 navigation.navigate('WorkoutStack', {
+                    screen: 'WorkoutScreen',
+                    params: { weekId: id }
+                });
                 console.log('I was pressed')
             }}>
             <View style={styles.itemTitle}>
