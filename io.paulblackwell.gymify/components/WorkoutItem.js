@@ -4,26 +4,37 @@ import { AntDesign } from '@expo/vector-icons';
 import colors from '../styles/colors'
 
 
-export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
-    <TouchableOpacity 
-    style={styles.item} 
-    onPress={() => {
-         //Go to WorkoutList screen and pass the workout id to that screen
-        //  navigation.navigate('WorkoutStack', {
-        //     screen: 'WorkoutsScreen',
-        //     params: { weekId: id }
-        // });
-        console.log('I was pressed')
-    }}>
-        <View style={styles.itemTitle}>
-            <Text style={styles.itemTitleText}>{title}</Text>
-            <Text style={styles.itemNumberOfExercisesText}>24 Exercises</Text>
-        </View>
-        <View style={styles.itemIconContainer}>
-            <AntDesign name="arrowright" size={24} color={colors.gray[300]} />
-        </View>
-    </TouchableOpacity>
-);
+export default WeeklyWorkoutItem = ({ title, id, warmups, navigation }) => {
+
+    let singularOrPlural;
+    if(warmups.length === 1) {
+        singularOrPlural = 'Exercise';
+    } else if (warmups.length > 1) {
+        singularOrPlural = 'Exercises';
+    }
+
+    return (
+        <TouchableOpacity
+            style={styles.item}
+            onPress={() => {
+                //Go to WorkoutList screen and pass the workout id to that screen
+                //  navigation.navigate('WorkoutStack', {
+                //     screen: 'WorkoutsScreen',
+                //     params: { weekId: id }
+                // });
+                console.log('I was pressed')
+            }}>
+            <View style={styles.itemTitle}>
+                <Text style={styles.itemTitleText}>{title}</Text>
+                <Text style={styles.itemNumberOfExercisesText}>{`${warmups.length} ${singularOrPlural}`}</Text>
+            </View>
+            <View style={styles.itemIconContainer}>
+                <AntDesign name="arrowright" size={24} color={colors.gray[300]} />
+            </View>
+        </TouchableOpacity>
+    )
+
+};
 
 
 const styles = StyleSheet.create({

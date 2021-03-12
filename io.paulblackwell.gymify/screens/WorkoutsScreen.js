@@ -32,9 +32,10 @@ export default function WorkoutsScreen({ route, navigation }) {
 
 
   const renderItem = ({ item }) => (
-    <WorkoutItem title={item.title} id={item.id} navigation={navigation} />
+    <WorkoutItem warmups={item.warmups} title={item.title} id={item.id} navigation={navigation} />
   );
 
+  console.log(selectedWeek.workouts)
 
   return (
     <SafeAreaView style={styles.container}>
