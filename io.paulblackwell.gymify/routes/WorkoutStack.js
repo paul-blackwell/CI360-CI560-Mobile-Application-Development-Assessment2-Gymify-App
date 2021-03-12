@@ -18,7 +18,11 @@ export default function WorkoutStack() {
                     headerShown: false
                 }}
             />
-            <Stack.Screen name="WorkoutScreen" component={WorkoutScreen} />
+            <Stack.Screen 
+            name="WorkoutScreen" 
+            component={WorkoutScreen}
+            options={{ title: '' }}
+             />
             <Stack.Screen name="ExerciseScreen" component={ExerciseScreen} />
             <Stack.Screen name="NewExerciseScreen" component={NewExerciseScreen} />
         </Stack.Navigator>
