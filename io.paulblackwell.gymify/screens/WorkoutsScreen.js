@@ -41,11 +41,13 @@ export default function WorkoutsScreen({ route, navigation }) {
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
       <View style={styles.title}>
         <Text style={styles.titleText}>{selectedWeek.title}</Text>
-        <FlatList
-          data={selectedWeek.workouts}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
+        <View style={styles.workoutsListContainer}>
+          <FlatList
+            data={selectedWeek.workouts}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -66,5 +68,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     fontFamily: 'Inter_800ExtraBold'
+  },
+  workoutsListContainer: {
+    marginTop: 16
   }
 });
+
+
