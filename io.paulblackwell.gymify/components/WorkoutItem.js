@@ -4,12 +4,14 @@ import { AntDesign } from '@expo/vector-icons';
 import colors from '../styles/colors'
 
 
-export default WeeklyWorkoutItem = ({ title, id, warmups, navigation }) => {
+export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}) => {
 
     let singularOrPlural;
-    if(warmups.length === 1) {
+    const totalNumberExercises = warmups.length + exercises.length;
+
+    if(totalNumberExercises === 1) {
         singularOrPlural = 'Exercise';
-    } else if (warmups.length > 1) {
+    } else if (totalNumberExercises > 1) {
         singularOrPlural = 'Exercises';
     }
 
@@ -26,7 +28,7 @@ export default WeeklyWorkoutItem = ({ title, id, warmups, navigation }) => {
             }}>
             <View style={styles.itemTitle}>
                 <Text style={styles.itemTitleText}>{title}</Text>
-                <Text style={styles.itemNumberOfExercisesText}>{`${warmups.length} ${singularOrPlural}`}</Text>
+                <Text style={styles.itemNumberOfExercisesText}>{`${totalNumberExercises} ${singularOrPlural}`}</Text>
             </View>
             <View style={styles.itemIconContainer}>
                 <AntDesign name="arrowright" size={24} color={colors.gray[300]} />
