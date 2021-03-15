@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import colors from '../styles/colors'
+import {standardColors} from '../styles/colors';
 
+
+let colors = standardColors;
 
 export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}) => {
 
@@ -31,7 +33,7 @@ export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}
                 <Text style={styles.itemNumberOfExercisesText}>{`${totalNumberExercises} ${singularOrPlural}`}</Text>
             </View>
             <View style={styles.itemIconContainer}>
-                <AntDesign name="arrowright" size={24} color={colors.gray[300]} />
+                <AntDesign name="arrowright" size={24} color={colors.gray[400]} />
             </View>
         </TouchableOpacity>
     )
@@ -56,11 +58,11 @@ const styles = StyleSheet.create({
     itemTitleText: {
         fontSize: 18,
         fontFamily: 'Inter_400Regular',
-        color: colors.gray[300],
+        color: colors.gray[400],
     },
     itemNumberOfExercisesText: {
         fontSize: 16,
-        color: colors.gray[200]
+        color: colors.gray[300]
     },
     itemIconContainer: {
         width: '50%',

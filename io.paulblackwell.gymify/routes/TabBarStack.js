@@ -7,10 +7,10 @@ import HomeStack from '../routes/HomeStack';
 import ActivityStack from '../routes/ActivityStack';
 
 
-import colors from '../styles/colors'
+import {standardColors} from '../styles/colors';
 import TabBarIcon from '../components/smallerComponents/TabBarIcon';
 
-
+let colors = standardColors;
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +20,7 @@ export default function TabBarStack() {
       tabBarOptions={
         {
           activeTintColor: colors.purple[200],
-          inactiveTintColor: colors.gray[300],
+          inactiveTintColor: colors.gray[400],
           style: {
             paddingTop: 8,
             paddingBottom: 8,

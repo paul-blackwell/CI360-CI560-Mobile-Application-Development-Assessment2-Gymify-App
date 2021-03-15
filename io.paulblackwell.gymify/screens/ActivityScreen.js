@@ -1,7 +1,9 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView } from 'react-native';
-import colors from '../styles/colors'
+import {standardColors} from '../styles/colors';
+
+let colors = standardColors;
 
 export default function ActivityScreen({ navigation }) {
 

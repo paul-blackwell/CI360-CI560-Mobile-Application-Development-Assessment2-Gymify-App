@@ -1,11 +1,11 @@
-export default colors = {
+export const standardColors = {
     white: {
         '100': '#FFFFFF'
     },
     gray: {
-        '100': '#FAFAFA',
+        '100': '#F7F7F7',
         '200': '#C4C4C4',
-        '300': '#2B2C34',
+        '300': '#A8A8A8',
         '400': '#2B2C34'
     },
     purple: {
@@ -14,5 +14,9 @@ export default colors = {
     },
     red: {
         '100': '#E45858'
+    },
+    green: {
+        '100': '#A7F3D0',
+        '200': '#10B981'
     }
 };

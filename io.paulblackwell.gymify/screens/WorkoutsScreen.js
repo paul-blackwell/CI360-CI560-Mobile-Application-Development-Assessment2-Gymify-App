@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, StatusBar, SafeAreaView, FlatList, View } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 
-import colors from '../styles/colors';
+import {standardColors} from '../styles/colors';
 import WorkoutItem from '../components/WorkoutItem';
+
+let colors = standardColors;
 
 export default function WorkoutsScreen({ route, navigation }) {
 

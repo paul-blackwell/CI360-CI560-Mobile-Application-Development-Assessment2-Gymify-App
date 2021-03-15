@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, FlatList, SafeAreaView, StatusBar, Text, View } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import { WorkoutsContext } from '../context/workouts.context';
 
 
 import Loader from '../components/Loader';
 import WeeklyWorkoutItem from '../components/WeeklyWorkoutItem';
-import colors from '../styles/colors'
+import {standardColors} from '../styles/colors';
 
+
+let colors = standardColors;
 
 export default function HomeScreen({ navigation }) {
 
@@ -47,11 +48,12 @@ const styles = StyleSheet.create({
   },
   title: {
     alignItems: 'center',
-    marginBottom: 16
+    marginBottom: 16,
   },
   titleText: {
     fontSize: 24,
     fontWeight: "bold",
-    fontFamily: 'Inter_800ExtraBold'
+    fontFamily: 'Inter_800ExtraBold',
+    color: colors.gray[400]
   }
 });
