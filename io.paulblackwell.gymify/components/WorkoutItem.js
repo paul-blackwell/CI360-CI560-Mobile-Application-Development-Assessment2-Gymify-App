@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import {standardColors} from '../styles/colors';
 
@@ -17,6 +17,7 @@ export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}
         singularOrPlural = 'Exercises';
     }
 
+
     return (
         <TouchableOpacity
             style={styles.item}
@@ -24,7 +25,7 @@ export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}
                 //Go to WorkoutList screen and pass the workout id to that screen
                  navigation.navigate('WorkoutStack', {
                     screen: 'WorkoutScreen',
-                    params: { weekId: id, weekTitle: title }
+                    params: { workoutId: id, weekTitle: title }
                 });
             }}>
             <View style={styles.itemTitle}>

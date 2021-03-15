@@ -1,21 +1,33 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, StatusBar, SafeAreaView } from 'react-native';
-import {standardColors} from '../styles/colors';
+import React, { useContext } from 'react';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList } from 'react-native';
+import { WorkoutsContext } from '../context/workouts.context';
+import { standardColors } from '../styles/colors';
 
 let colors = standardColors;
 
 export default function WorkoutScreen({ route, navigation }) {
 
-  const { weekId, weekTitle } = route.params;
 
-  console.log(route.params)
+  // Get workouts context with will be an array with all of the workouts
+  const { workoutPlan } = useContext(WorkoutsContext);
+
+  // Get workout Id  from the route params
+  const { workoutId } = route.params;
+
+  // Get selected workout based on the workout Id passed in via the route
+  let selectedWorkout;
+  workoutPlan.post.forEach(week => {
+    week.workouts.forEach(workout => {
+      if (workout.id === workoutId) {
+        selectedWorkout = workout;
+      }
+    })
+  });
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      <View style={styles.main}>
-        <Text >Workout Screen {weekTitle}</Text>
-      </View>
+      
     </SafeAreaView>
   );
 }
@@ -27,10 +39,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: colors.gray[100]
   },
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    margin: 10,
-    alignItems: 'center'
-  },
+  
 });
