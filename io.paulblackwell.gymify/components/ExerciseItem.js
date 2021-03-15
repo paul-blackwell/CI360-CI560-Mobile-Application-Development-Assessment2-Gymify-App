@@ -1,21 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { standardColors } from '../styles/colors';
+import ExerciseThumbnail from '../components/smallerComponents/ExerciseThumbnail';
 
 
 let colors = standardColors;
-
-
-const ExerciseThumbnail = (props) => {
-    return (
-        <View style={styles.exerciseThumbnail} >
-            <View style={styles.exerciseThumbnailOverlay}></View>
-            <Image style={styles.exerciseThumbnailImage} source={{ uri: props.uri }} />
-        </View>
-    )
-}
-
 
 
 export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images }) => {
@@ -33,7 +24,7 @@ export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWei
             <Text>{maxWeight}</Text>
             <Text>{completed}</Text>
             <Text>{images[0].uri}</Text> */}
-            <ExerciseThumbnail uri={images[0].uri} />
+            <ExerciseThumbnail uri={images[0].uri}  exerciseCompleted={true}/>
             <View style={styles.item}>
                 <View style={styles.itemTitle}>
                     <Text style={styles.itemTitleText}>{title}</Text>
@@ -59,18 +50,18 @@ const styles = StyleSheet.create({
     },
     item: {
         flexDirection: 'row',
-        marginLeft: 12,
         backgroundColor: colors.white[100],
-        paddingVertical: 8,
+        paddingVertical: 12,
         paddingHorizontal: 20,
         marginVertical: 12,
+        marginLeft: 20,
         borderColor: colors.gray[200],
         borderWidth: 1,
         borderRadius: 4,
     },
     itemTitle: {
         flex: 1,
-        marginLeft: 58,
+        marginLeft: 48,
         justifyContent: 'center',
         width: '50%',
     },
@@ -89,21 +80,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    exerciseThumbnail: {
-        position: 'absolute',
-        borderColor: colors.gray[200],
-        borderWidth: 3,
-        overflow: 'hidden',
-        borderRadius: 50,
-        width: 78,
-        height: 78,
-        zIndex: 1
-    },
-    exerciseThumbnailOverlay: {
-
-    },
-    exerciseThumbnailImage: {
-        width: '100%',
-        height: '100%'
-    }
 });
