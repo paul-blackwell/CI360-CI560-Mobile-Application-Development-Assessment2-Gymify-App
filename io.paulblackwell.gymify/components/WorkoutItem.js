@@ -24,9 +24,8 @@ export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}
                 //Go to WorkoutList screen and pass the workout id to that screen
                  navigation.navigate('WorkoutStack', {
                     screen: 'WorkoutScreen',
-                    params: { weekId: id }
+                    params: { weekId: id, weekTitle: title }
                 });
-                console.log('I was pressed')
             }}>
             <View style={styles.itemTitle}>
                 <Text style={styles.itemTitleText}>{title}</Text>

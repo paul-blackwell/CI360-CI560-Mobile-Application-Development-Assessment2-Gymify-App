@@ -24,7 +24,7 @@ export default function WorkoutStack() {
             <Stack.Screen 
             name="WorkoutScreen" 
             component={WorkoutScreen}
-            options={{ title: '' }}
+            options={({ route }) => ({ title: route.params.weekTitle })}
              />
             <Stack.Screen name="ExerciseScreen" component={ExerciseScreen} />
             <Stack.Screen name="NewExerciseScreen" component={NewExerciseScreen} />

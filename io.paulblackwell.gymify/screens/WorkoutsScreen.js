@@ -37,7 +37,6 @@ export default function WorkoutsScreen({ route, navigation }) {
     <WorkoutItem warmups={item.warmups} exercises={item.exercises} title={item.title} id={item.id} navigation={navigation} />
   );
 
-  console.log(selectedWeek.workouts)
 
   return (
     <SafeAreaView style={styles.container}>
