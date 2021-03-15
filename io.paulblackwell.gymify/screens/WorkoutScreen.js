@@ -44,6 +44,9 @@ export default function WorkoutScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+      <View style={styles.title}>
+        <Text style={styles.titleText}>Warmup</Text>
+      </View>
       <FlatList
         data={selectedWorkout.warmups}
         renderItem={renderItem}
@@ -59,6 +62,16 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingHorizontal: 16,
     backgroundColor: colors.gray[100]
+  },
+  title: {
+    alignItems: 'center',
+    marginTop: 24,
+    marginBottom: 12,
+  },
+  titleText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    fontFamily: 'Inter_800ExtraBold'
   },
 
 });
