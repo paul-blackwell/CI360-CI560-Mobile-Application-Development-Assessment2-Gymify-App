@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 import { standardColors } from '../styles/colors';
+import ExerciseItem from '../components/ExerciseItem';
 
 let colors = standardColors;
 
@@ -24,10 +25,30 @@ export default function WorkoutScreen({ route, navigation }) {
     })
   });
 
+
+  // This is what the flat this will render 
+  const renderItem = ({ item }) => (
+    <ExerciseItem
+      title={item.title}
+      id={item.id}
+      time={item.time}
+      sets={item.sets}
+      reps={item.reps}
+      maxWeight={item.maxWeight}
+      completed={item.completed}
+      images={item.images}
+    />
+  );
+
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      
+      <FlatList
+        data={selectedWorkout.warmups}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
     </SafeAreaView>
   );
 }
@@ -39,5 +60,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: colors.gray[100]
   },
-  
+
 });
