@@ -34,6 +34,7 @@ export default function TabBarStack() {
         name="HomeStack"
         component={HomeStack}
         options={{
+          tabBarLabel: 'Home',
           tabBarIcon: ({ focused, color, size }) => {
             return (
               <TabBarIcon icon='home' color={color} />
