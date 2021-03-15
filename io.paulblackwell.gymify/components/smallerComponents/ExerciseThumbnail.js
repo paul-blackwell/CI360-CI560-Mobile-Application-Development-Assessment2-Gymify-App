@@ -11,7 +11,7 @@ export default ExerciseThumbnail = ({ exerciseCompleted, uri }) => {
     return (
         <View style={exerciseCompleted ? [styles.exerciseThumbnail, styles.exerciseThumbnailBorderGreen] : [styles.exerciseThumbnail, styles.exerciseThumbnailBorderGray]} >
             <View style={styles.exerciseThumbnailOverlay}>
-                <Feather style={styles.exerciseThumbnailOverlayIcon} name="check" size={24} color={colors.green[200]} />
+                <Feather style={styles.exerciseThumbnailOverlayIcon} name="check" size={32} color={colors.green[200]} />
             </View>
             <Image style={styles.exerciseThumbnailImage} source={{ uri: uri }} />
         </View>
