@@ -52,6 +52,14 @@ export default function WorkoutScreen({ route, navigation }) {
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
+       <View style={styles.title}>
+        <Text style={styles.titleText}>Training</Text>
+      </View>
+      <FlatList
+        data={selectedWorkout.exercises}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
     </SafeAreaView>
   );
 }
