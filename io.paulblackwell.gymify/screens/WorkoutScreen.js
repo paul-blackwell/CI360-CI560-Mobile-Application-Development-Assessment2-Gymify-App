@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity, Touchable } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 import { WorkoutsContext } from '../context/workouts.context';
 import { standardColors } from '../styles/colors';
 import ExerciseItem from '../components/ExerciseItem';
+
 
 let colors = standardColors;
 
@@ -43,24 +45,32 @@ export default function WorkoutScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      <View style={styles.title}>
-        <Text style={styles.titleText}>Warmup</Text>
-      </View>
-      <FlatList
-        data={selectedWorkout.warmups}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-       <View style={styles.title}>
-        <Text style={styles.titleText}>Training</Text>
-      </View>
-      <FlatList
-        data={selectedWorkout.exercises}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+      <ScrollView>
+        <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+        <View style={styles.title}>
+          <Text style={styles.titleText}>Warmup</Text>
+        </View>
+        <FlatList
+          data={selectedWorkout.warmups}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+        <View style={styles.title}>
+          <Text style={styles.titleText}>Training</Text>
+        </View>
+        <FlatList
+          data={selectedWorkout.exercises}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      </ScrollView>
+      <TouchableOpacity style={styles.newExerciseBtn} onPress={() => {
+        console.log('Add new exercise button clicked')
+      }}>
+        <AntDesign name="plus" size={24} color={colors.white[100]} />
+      </TouchableOpacity>
     </SafeAreaView>
+
   );
 }
 
@@ -81,5 +91,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: 'Inter_800ExtraBold'
   },
+  newExerciseBtn: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    margin: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 56,
+    height: 56,
+    backgroundColor: colors.purple[200],
+    zIndex: 1,
+    borderRadius: 50
+  }
 
 });
