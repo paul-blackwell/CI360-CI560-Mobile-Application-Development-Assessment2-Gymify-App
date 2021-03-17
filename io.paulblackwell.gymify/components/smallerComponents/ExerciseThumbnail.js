@@ -7,13 +7,35 @@ import { Feather } from '@expo/vector-icons';
 let colors = standardColors;
 
 
-export default ExerciseThumbnail = ({ exerciseCompleted, uri }) => {
+
+
+export default ExerciseThumbnail = ({ exerciseCompleted, uri, origin }) => {
+
+
+
+    /**
+     * This function just sets the image source to uri
+     * or gets it from the saved images, depending on where
+     * the image has come from
+     * @returns image uri or image path 
+     */
+    const getImage = () => {
+        if (origin === 'api') {
+            return { uri: uri }
+        } else {
+            return require('../../assets/icons/no_image_icon.png')
+        }
+    }
+
+
     return (
         <View style={exerciseCompleted ? [styles.exerciseThumbnail, styles.exerciseThumbnailBorderGreen] : [styles.exerciseThumbnail, styles.exerciseThumbnailBorderGray]} >
-            <View style={styles.exerciseThumbnailOverlay}>
-                <Feather style={styles.exerciseThumbnailOverlayIcon} name="check" size={32} color={colors.green[200]} />
-            </View>
-            <Image style={styles.exerciseThumbnailImage} source={{ uri: uri }} />
+            {exerciseCompleted &&
+                <View style={styles.exerciseThumbnailOverlay}>
+                    <Feather style={styles.exerciseThumbnailOverlayIcon} name="check" size={32} color={colors.green[200]} />
+                </View>
+            }
+            <Image style={styles.exerciseThumbnailImage} source={getImage()} />
         </View>
     )
 }
@@ -43,6 +65,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         zIndex: 1
+    },
+    exerciseThumbnailOverlayHidden: {
+
     },
     exerciseThumbnailOverlayIcon: {
 

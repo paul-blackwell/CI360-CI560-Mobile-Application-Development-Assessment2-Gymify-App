@@ -23,10 +23,6 @@ let colors = standardColors;
 export default function WorkoutScreen({ route, navigation }) {
 
 
-  // for Testing
-  //const [flatListLoading, setFlatListLoading] = useState(true);
-
-
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
 

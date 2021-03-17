@@ -10,7 +10,7 @@ import ExerciseThumbnail from '../components/smallerComponents/ExerciseThumbnail
 let colors = standardColors;
 
 
-export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images }) => {
+export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images}) => {
     return (
         <TouchableOpacity
             style={styles.itemWrapper}
@@ -25,7 +25,7 @@ export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWei
             <Text>{maxWeight}</Text>
             <Text>{completed}</Text>
             <Text>{images[0].uri}</Text> */}
-            <ExerciseThumbnail uri={images[0].uri}  exerciseCompleted={true}/>
+            <ExerciseThumbnail uri={images[0].uri} origin={images[0].origin} exerciseCompleted={completed}/>
             <View style={styles.item}>
                 <View style={styles.itemTitle}>
                     <Text style={styles.itemTitleText}>{truncate(title, 16)}</Text>
