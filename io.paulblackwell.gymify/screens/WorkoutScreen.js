@@ -1,9 +1,21 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity, LogBox } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { WorkoutsContext } from '../context/workouts.context';
 import { standardColors } from '../styles/colors';
 import ExerciseItem from '../components/ExerciseItem';
+
+
+
+
+/**
+ * Because there are two FlatLists in a ScrollView as part of the WorkoutScreen 
+ * a warning comes up 'VirtualizedLists should never be nested', this I to do with
+ *  a bug in React Native itself. So we a just ignoring it for now 
+ */
+LogBox.ignoreLogs([
+  'VirtualizedLists should never be nested', // TODO: Remove when fixed
+])
 
 
 let colors = standardColors;
@@ -50,7 +62,7 @@ export default function WorkoutScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      <ScrollView keyboardShouldPersistTaps='always'>
+      <ScrollView>
         <View style={styles.title}>
           <Text style={styles.titleText}>Warmup</Text>
         </View>
