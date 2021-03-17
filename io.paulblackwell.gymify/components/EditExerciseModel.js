@@ -23,13 +23,13 @@ export default EditExerciseModel = ({ openModel, setOpenModel }) => {
             >
                 <View style={styles.mainContent}>
                     <TouchableOpacity style={styles.editOption} onPress={() => {
-                        console.log('swap exercise')
+                        setModalDisplay('swap-exercise')
                     }}>
                         <AntDesign style={styles.editOptionIcon} name="swap" size={24} color={colors.gray[400]} />
                         <Text style={styles.editOptionText}>Swap Exercise</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.editOption} onPress={() => {
-                        setModalDisplay('delete-exercise')
+                        setModalDisplay('delete-exercise');
                     }}>
                         <AntDesign style={styles.editOptionIcon} name="delete" size={24} color={colors.red[100]} />
                         <Text style={[styles.editOptionText, styles.editOptionTextRed]}>Delete exercise</Text>
@@ -44,7 +44,24 @@ export default EditExerciseModel = ({ openModel, setOpenModel }) => {
 
             </CustomModal>
         );
-    } else if(modalDisplay === 'delete-exercise') {
+    } else if (modalDisplay === 'swap-exercise') {
+        return (
+            <CustomModal
+                title='Swap exercise'
+                open={openModel}
+                setOpen={setOpenModel}
+            >
+                <View style={styles.mainContent}>
+
+                </View>
+                <View>
+                    <ModelBtnSecondary title='Go back' onPress={() => {
+                        setModalDisplay('edit-exercise');
+                    }} />
+                </View>
+            </CustomModal>
+        )
+    } else if (modalDisplay === 'delete-exercise') {
         return (
             <CustomModal
                 title='Delete exercise'
@@ -52,20 +69,18 @@ export default EditExerciseModel = ({ openModel, setOpenModel }) => {
                 setOpen={setOpenModel}
             >
                 <View style={styles.mainContent}>
-                    <Text style={styles.modelText}>Are you sure you want to delete this exercise? If you do, you can always add the it agin using the “plus” button in the workout screen.</Text>
+                    <Text style={styles.modelText}>Are you sure you want to delete this exercise? If you do, you can always add the it again using the “plus” button in the workout screen.</Text>
                 </View>
                 <View>
-                    <ModelBtnPrimary title='Delete this  exercise ' onPress={()=> {
+                    <ModelBtnPrimary title='Delete this  exercise ' onPress={() => {
                         // TODO: DELETE EXERCISE 
                         setModalDisplay('edit-exercise')
                         setOpenModel(false)
                     }} />
                     <ModelBtnSecondary title='Go back to safety' onPress={() => {
-                        //setOpenModel(false);
                         setModalDisplay('edit-exercise')
                     }} />
                 </View>
-
             </CustomModal>
         )
     }
@@ -77,7 +92,7 @@ export default EditExerciseModel = ({ openModel, setOpenModel }) => {
 const styles = StyleSheet.create({
     modelText: {
         fontSize: 18,
-        color: colors.gray[300] 
+        color: colors.gray[300]
     },
     editOption: {
         flexDirection: 'row',

@@ -7,10 +7,18 @@ let colors = standardColors;
 
 
 
-export default ModelBtnPrimary = ({ title, onPress }) => {
+export default ModelBtnPrimary = ({ title, onPress, color }) => {
+
+    let buttonStyles;
+    if (color === 'green') {
+        buttonStyles = [styles.modalBtnPrimary, styles.modalBtnPrimaryColorGreen]
+    } else {
+        buttonStyles = [styles.modalBtnPrimary, styles.modalBtnPrimaryColorRed]
+    }
+
     return (
-        <TouchableOpacity style={styles.modalBtnPrimary} onPress={() => {
-            onPress()
+        <TouchableOpacity style={buttonStyles} onPress={() => {
+            onPress();
         }}>
             <Text style={styles.modalBtnPrimaryText}>{title}</Text>
         </TouchableOpacity>
@@ -23,8 +31,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 16,
         marginHorizontal: 20,
-        backgroundColor: colors.red[100],
         borderRadius: 4
+    },
+    modalBtnPrimaryColorRed: {
+        backgroundColor: colors.red[100],
+    },
+    modalBtnPrimaryColorGreen: {
+        backgroundColor: colors.green[200],
     },
     modalBtnPrimaryText: {
         color: colors.white[100],
