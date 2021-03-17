@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity, Touchable } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { WorkoutsContext } from '../context/workouts.context';
 import { standardColors } from '../styles/colors';
@@ -9,6 +9,10 @@ import ExerciseItem from '../components/ExerciseItem';
 let colors = standardColors;
 
 export default function WorkoutScreen({ route, navigation }) {
+
+
+  // for Testing
+  //const [flatListLoading, setFlatListLoading] = useState(true);
 
 
   // Get workouts context with will be an array with all of the workouts
@@ -45,24 +49,24 @@ export default function WorkoutScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+      <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+      <ScrollView keyboardShouldPersistTaps='always'>
         <View style={styles.title}>
           <Text style={styles.titleText}>Warmup</Text>
         </View>
-        <FlatList
-          data={selectedWorkout.warmups}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
+          <FlatList
+            data={selectedWorkout.warmups}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
         <View style={styles.title}>
           <Text style={styles.titleText}>Training</Text>
         </View>
-        <FlatList
-          data={selectedWorkout.exercises}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
+          <FlatList
+            data={selectedWorkout.exercises}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
       </ScrollView>
       <TouchableOpacity style={styles.newExerciseBtn} onPress={() => {
         console.log('Add new exercise button clicked')
