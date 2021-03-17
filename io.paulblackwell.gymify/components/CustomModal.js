@@ -20,17 +20,17 @@ export default CustomModal = ({ title, children, open , setOpen }) => {
             <View style={styles.modalBackground}></View>
             <View style={styles.modalContentContainer}>
                 <View style={styles.modalTitle}>
-                    <Text style={styles.modalTitleText}>Edit exercise </Text>
+                    <Text style={styles.modalTitleText}>{title} </Text>
                 </View>
                 <View style={styles.modalContent}>
-
+                        {children}
                 </View>
                 <View style={styles.modalButtons}>
-                    <TouchableOpacity style={styles.modalBtnPrimary} onPress={() => {
+                    {/* <TouchableOpacity style={styles.modalBtnPrimary} onPress={() => {
                         console.log('PrimaryButton fired')
                     }}>
                         <Text style={styles.modalBtnPrimaryText}>Delete</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                     <TouchableOpacity style={styles.modalBtnSecondary} onPress={() => {
                         //setModelOpen(false)
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         flex: 3,
-        paddingHorizontal: 20
+        marginTop: 18,
+        paddingHorizontal: 20,
     },
     modalTitle: {
         flex: 1,
