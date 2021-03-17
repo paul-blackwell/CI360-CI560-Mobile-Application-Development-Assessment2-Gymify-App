@@ -1,3 +1,11 @@
+/**
+   * Title: Smart way to truncate long strings
+   * Author: KooiInc
+   * Date: 17, March, 2021
+   * Code version: 1.0
+   * Availability: https://stackoverflow.com/questions/1199352/smart-way-to-truncate-long-strings
+   * 
+   */
 
 /**
  * @param {string}  str - the string that need to be truncated

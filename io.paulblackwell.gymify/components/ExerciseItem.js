@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { standardColors } from '../styles/colors';
+import truncate from '../utils/truncate';
 import ExerciseThumbnail from '../components/smallerComponents/ExerciseThumbnail';
 
 
@@ -27,7 +28,7 @@ export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWei
             <ExerciseThumbnail uri={images[0].uri}  exerciseCompleted={true}/>
             <View style={styles.item}>
                 <View style={styles.itemTitle}>
-                    <Text style={styles.itemTitleText}>{title}</Text>
+                    <Text style={styles.itemTitleText}>{truncate(title, 16)}</Text>
                     <Text style={styles.itemSubTitleText}>30 seconds</Text>
                 </View>
                 <TouchableOpacity 
