@@ -16,9 +16,6 @@ export default CustomModal = ({ title, children, open }) => {
             animationType="slide"
             transparent={true}
             visible={modelOpen}
-            // onRequestClose={() => {
-            //     Alert.alert("Modal has been closed.");
-            // }}
             style={styles.modalContainer}
         >
             <View style={styles.modalBackground}></View>
@@ -30,6 +27,12 @@ export default CustomModal = ({ title, children, open }) => {
 
                 </View>
                 <View style={styles.modalButtons}>
+                    <TouchableOpacity style={styles.modalBtnPrimary} onPress={() => {
+                        console.log('PrimaryButton fired')
+                    }}>
+                        <Text style={styles.modalBtnPrimaryText}>Delete</Text>
+                    </TouchableOpacity>
+
                     <TouchableOpacity style={styles.modalBtnSecondary} onPress={() => {
                         setModelOpen(false)
                     }}>
@@ -61,23 +64,25 @@ const styles = StyleSheet.create({
         minHeight: windowHeight / 2,
         left: 0,
         right: 0,
+        bottom: 0,
         margin: 16,
         //paddingVertical: 16,
-        paddingTop: 16,
+        //paddingTop: 16,
         backgroundColor: colors.white[100],
         zIndex: 100,
         borderRadius: 20,
         overflow: 'hidden'
     },
     modalContent: {
-        flex: 3
+        flex: 3,
+        paddingHorizontal: 20
     },
     modalTitle: {
         flex: 1,
-        backgroundColor: colors.purple[100],
+        //backgroundColor: colors.purple[100],
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 8,
+        //marginVertical: 8,
     },
     modalTitleText: {
         fontSize: 20,
@@ -85,18 +90,29 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter_800ExtraBold'
     },
     modalButtons: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'flex-end'
+        //flex: 1,
+        //backgroundColor: colors.purple[100]
+    },
+    modalBtnPrimary: {
+        alignItems: 'center',
+        paddingVertical: 16,
+        marginHorizontal: 20,
+        backgroundColor: colors.red[100],
+        borderRadius: 4
+    },
+    modalBtnPrimaryText: {
+        color: colors.white[100],
+        fontFamily: 'Inter_800ExtraBold',
+        fontSize: 18,
     },
     modalBtnSecondary: {
         width: '100%',
         alignItems: 'center',
-        paddingVertical: 16,
-        backgroundColor: colors.purple[100]
+        paddingVertical: 24,
+        //backgroundColor: colors.purple[100]
     },
     modalBtnSecondaryText: {
-        //color: colors.purple[200],
+        color: colors.purple[200],
         fontSize: 18,
     }
 });
