@@ -5,7 +5,8 @@ import { WorkoutsContext } from '../context/workouts.context';
 import { standardColors } from '../styles/colors';
 import ExerciseItem from '../components/ExerciseItem';
 
-
+// Just for testing
+import CustomModal from '../components/CustomModal';
 
 
 /**
@@ -21,6 +22,10 @@ LogBox.ignoreLogs([
 let colors = standardColors;
 
 export default function WorkoutScreen({ route, navigation }) {
+
+
+  // Make state to open and close model 
+  const [showModel, setShowModel] = useState(false);
 
 
   // Get workouts context with will be an array with all of the workouts
@@ -81,6 +86,7 @@ export default function WorkoutScreen({ route, navigation }) {
       }}>
         <AntDesign name="plus" size={24} color={colors.white[100]} />
       </TouchableOpacity>
+      <CustomModal open={true} />
     </SafeAreaView>
 
   );
