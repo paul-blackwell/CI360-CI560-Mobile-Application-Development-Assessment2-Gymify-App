@@ -6,7 +6,7 @@ import { standardColors } from '../styles/colors';
 import ExerciseItem from '../components/ExerciseItem';
 
 // Just for testing
-import CustomModal from '../components/CustomModal';
+import EditExerciseModel from '../components/EditExerciseModel';
 
 
 /**
@@ -25,7 +25,7 @@ export default function WorkoutScreen({ route, navigation }) {
 
 
   // Make state to open and close model 
-  const [showModel, setShowModel] = useState(false);
+  const [openEditExerciseModel, setOpenEditExerciseModel] = useState(false);
 
 
   // Get workouts context with will be an array with all of the workouts
@@ -56,6 +56,7 @@ export default function WorkoutScreen({ route, navigation }) {
       maxWeight={item.maxWeight}
       completed={item.completed}
       images={item.images}
+      setOpenModel={setOpenEditExerciseModel}
     />
   );
 
@@ -86,7 +87,7 @@ export default function WorkoutScreen({ route, navigation }) {
       }}>
         <AntDesign name="plus" size={24} color={colors.white[100]} />
       </TouchableOpacity>
-      <CustomModal open={true} />
+        <EditExerciseModel openModel={openEditExerciseModel} setOpenModel={setOpenEditExerciseModel}/>
     </SafeAreaView>
 
   );

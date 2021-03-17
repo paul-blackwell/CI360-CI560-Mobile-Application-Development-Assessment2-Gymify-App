@@ -6,16 +6,15 @@ let colors = standardColors;
 
 const windowHeight = Dimensions.get('window').height;
 
-export default CustomModal = ({ title, children, open }) => {
+export default CustomModal = ({ title, children, open , setOpen }) => {
 
-    const [modelOpen, setModelOpen] = useState(open);
-
+    //const [modelOpen, setModelOpen] = useState(open);
 
     return (
         <Modal
             animationType="slide"
             transparent={true}
-            visible={modelOpen}
+            visible={open}
             style={styles.modalContainer}
         >
             <View style={styles.modalBackground}></View>
@@ -34,7 +33,8 @@ export default CustomModal = ({ title, children, open }) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.modalBtnSecondary} onPress={() => {
-                        setModelOpen(false)
+                        //setModelOpen(false)
+                        setOpen(false)
                     }}>
                         <Text style={styles.modalBtnSecondaryText}>Cancel</Text>
                     </TouchableOpacity>

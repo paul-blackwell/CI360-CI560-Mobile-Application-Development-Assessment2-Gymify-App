@@ -28,7 +28,7 @@ const setSubTitle = (time, sets) => {
 }
 
 
-export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images}) => {
+export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel}) => {
 
     return (
         <TouchableOpacity
@@ -46,7 +46,8 @@ export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWei
                 <TouchableOpacity 
                 style={styles.itemIconContainer}
                 onPress={()=> {
-                    console.log('the menu was pressed')
+                    console.log('I was fired')
+                    setOpenModel(true);
                 }}
                 >
                     <MaterialCommunityIcons name="dots-horizontal" size={24} color={colors.gray[400]} />
