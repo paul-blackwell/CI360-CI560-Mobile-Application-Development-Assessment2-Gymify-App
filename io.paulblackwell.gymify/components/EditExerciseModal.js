@@ -134,7 +134,7 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                 setOpen={setOpenModel}
             >
                 <View style={styles.mainContent}>
-                    <Text style={styles.modelText}>Are you sure you want to delete this exercise? If you do, you can always add the it again using the “plus” button in the workout screen.</Text>
+                    <Text style={styles.modelText}>Are you sure you want to delete  <Text style={styles.modelTextBold}> {currentExerciseSelected.title}</Text>? If you do, you can always add the it again using the “plus” button in the workout screen.</Text>
                 </View>
                 <View>
                     <ModelBtnPrimary title='Delete this exercise' onPress={() => {
