@@ -4,9 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { WorkoutsContext } from '../context/workouts.context';
 import { standardColors } from '../styles/colors';
 import ExerciseItem from '../components/ExerciseItem';
-
-// Just for testing
-import EditExerciseModel from '../components/EditExerciseModel';
+import EditExerciseModal from '../components/EditExerciseModal';
 
 
 /**
@@ -87,7 +85,7 @@ export default function WorkoutScreen({ route, navigation }) {
       }}>
         <AntDesign name="plus" size={24} color={colors.white[100]} />
       </TouchableOpacity>
-        <EditExerciseModel openModel={openEditExerciseModel} setOpenModel={setOpenEditExerciseModel}/>
+        <EditExerciseModal openModel={openEditExerciseModel} setOpenModel={setOpenEditExerciseModel}/>
     </SafeAreaView>
 
   );

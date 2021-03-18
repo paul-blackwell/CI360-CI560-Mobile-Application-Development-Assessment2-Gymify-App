@@ -1,18 +1,44 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import CustomModal from '../components/CustomModal';
-import ModelBtnPrimary from '../components/smallerComponents/ModelBtnPrimary';
-import ModelBtnSecondary from '../components/smallerComponents/ModelBtnSecondary';
+import CustomModal from './CustomModal';
+import ModelBtnPrimary from './smallerComponents/ModelBtnPrimary';
+import ModelBtnSecondary from './smallerComponents/ModelBtnSecondary';
+import EditExerciseModalItem from '../components/EditExerciseModalItem';
 
 
 import { standardColors } from '../styles/colors';
 let colors = standardColors;
 
 
-export default EditExerciseModel = ({ openModel, setOpenModel }) => {
+const windowHeight = Dimensions.get('window').height;
 
+// Just for testing this will come from the context
+const DATA = [
+    { title: 'Bench press', id: 1 },
+    { title: 'Push-ups', id: 2 },
+    { title: 'Oly bar front squat', id: 3 },
+    { title: 'Leg Press machine', id: 4 },
+    { title: 'Deadlift', id: 5 },
+    { title: 'Running', id: 6 },
+    { title: 'Plyobox jumps', id: 7 },
+    { title: 'Leg Press machine', id: 8 },
+    { title: 'Deadlift', id: 9 },
+    { title: 'Running', id: 10 },
+    { title: 'Plyobox jumps', id: 11 },
+]
+
+
+export default EditExerciseModal = ({ openModel, setOpenModel }) => {
+
+    // Make state for what the modal is displaying ie the Edit exercise menu... 
     const [modalDisplay, setModalDisplay] = useState('edit-exercise');
+
+    // This is what the flat this will render in FlatList as part of the Swap exercise 
+    const renderItem = ({ item }) => (
+        <EditExerciseModalItem title={item.title} />
+    );
+
 
     if (modalDisplay === 'edit-exercise') {
         return (
@@ -51,8 +77,13 @@ export default EditExerciseModel = ({ openModel, setOpenModel }) => {
                 open={openModel}
                 setOpen={setOpenModel}
             >
-                <View style={styles.mainContent}>
-
+                <View style={{ maxHeight: (windowHeight / 3) * 2,}}>
+                    <FlatList
+                        style={{marginBottom: 16}}
+                        data={DATA} // Change this it will have to come from the context
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                    />
                 </View>
                 <View>
                     <ModelBtnSecondary title='Go back' onPress={() => {
@@ -101,7 +132,7 @@ const styles = StyleSheet.create({
     },
     mainContent: {
         flex: 1,
-        paddingTop: 16
+        paddingTop: 16,
     },
     editOptionIcon: {
         marginRight: 12

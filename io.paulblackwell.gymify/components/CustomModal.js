@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         position: 'absolute',
         minHeight: windowHeight / 2,
+        // maxHeight: windowHeight - 100, // just for testing
         left: 0,
         right: 0,
         bottom: 0,
