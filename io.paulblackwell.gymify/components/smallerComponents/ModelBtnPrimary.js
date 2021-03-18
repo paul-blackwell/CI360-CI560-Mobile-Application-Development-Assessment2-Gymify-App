@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     modalBtnPrimary: {
         alignItems: 'center',
         paddingVertical: 16,
-        marginHorizontal: 20,
+        //marginHorizontal: 20,
         borderRadius: 4
     },
     modalBtnPrimaryColorRed: {
