@@ -28,7 +28,7 @@ const setSubTitle = (time, sets) => {
 }
 
 
-export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel}) => {
+export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel, setCurrentExerciseSelected}) => {
 
     return (
         <TouchableOpacity
@@ -46,7 +46,7 @@ export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWei
                 <TouchableOpacity 
                 style={styles.itemIconContainer}
                 onPress={()=> {
-                    console.log('I was fired')
+                    setCurrentExerciseSelected({title: title, id: id}) // the modal will use this to know what exercise to edit 
                     setOpenModel(true);
                 }}
                 >

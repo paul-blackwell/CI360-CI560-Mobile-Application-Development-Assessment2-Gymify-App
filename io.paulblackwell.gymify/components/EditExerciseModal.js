@@ -29,14 +29,22 @@ const DATA = [
 ]
 
 
-export default EditExerciseModal = ({ openModel, setOpenModel }) => {
+export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSelected }) => {
 
     // Make state for what the modal is displaying ie the Edit exercise menu... 
     const [modalDisplay, setModalDisplay] = useState('edit-exercise');
 
+    // This will be used to store what exercise the user whats to swap
+    const [swapExercise, setSwapExercise] = useState('');
+
+
     // This is what the flat this will render in FlatList as part of the Swap exercise 
     const renderItem = ({ item }) => (
-        <EditExerciseModalItem title={item.title} />
+        <EditExerciseModalItem
+            title={item.title}
+            setSwapExercise={setSwapExercise}
+            setModalDisplay={setModalDisplay}
+        />
     );
 
 
@@ -77,10 +85,10 @@ export default EditExerciseModal = ({ openModel, setOpenModel }) => {
                 open={openModel}
                 setOpen={setOpenModel}
             >
-                <View style={{ maxHeight: (windowHeight / 3) * 2,}}>
+                <View style={{ maxHeight: (windowHeight / 3) * 2, }}>
                     <FlatList
-                        style={{marginBottom: 16}}
-                        data={DATA} // Change this it will have to come from the context
+                        style={{ marginBottom: 16 }}
+                        data={DATA} //TODO: Change this it will have to come from the context
                         renderItem={renderItem}
                         keyExtractor={item => item.id}
                     />
@@ -88,6 +96,32 @@ export default EditExerciseModal = ({ openModel, setOpenModel }) => {
                 <View>
                     <ModelBtnSecondary title='Go back' onPress={() => {
                         setModalDisplay('edit-exercise');
+                    }} />
+                </View>
+            </CustomModal>
+        )
+    } else if (modalDisplay === 'confirm-swap-exercise') {
+        return (
+            <CustomModal
+                title='Swap exercise'
+                open={openModel}
+                setOpen={setOpenModel}
+            >
+                <View style={styles.mainContent}>
+                    <Text style={styles.modelText}>Are you sure you want to swap the exercise
+                    <Text style={styles.modelTextBold}> {currentExerciseSelected.title} </Text>
+                    for 
+                    <Text style={styles.modelTextBold}> {swapExercise}</Text>?
+                    </Text>
+                </View>
+                <View>
+                    <ModelBtnPrimary title='Swap this exercise' color='green' onPress={() => {
+                        // TODO: SWAP exercise out in context 
+                        setModalDisplay('edit-exercise');
+                        setOpenModel(false);
+                    }} />
+                    <ModelBtnSecondary title='Go back' onPress={() => {
+                        setModalDisplay('swap-exercise');
                     }} />
                 </View>
             </CustomModal>
@@ -103,7 +137,7 @@ export default EditExerciseModal = ({ openModel, setOpenModel }) => {
                     <Text style={styles.modelText}>Are you sure you want to delete this exercise? If you do, you can always add the it again using the “plus” button in the workout screen.</Text>
                 </View>
                 <View>
-                    <ModelBtnPrimary title='Delete this  exercise ' onPress={() => {
+                    <ModelBtnPrimary title='Delete this exercise' onPress={() => {
                         // TODO: DELETE EXERCISE 
                         setModalDisplay('edit-exercise')
                         setOpenModel(false)
@@ -123,7 +157,13 @@ export default EditExerciseModal = ({ openModel, setOpenModel }) => {
 const styles = StyleSheet.create({
     modelText: {
         fontSize: 18,
-        color: colors.gray[300]
+        color: colors.gray[300],
+        fontFamily: 'Inter_400Regular'
+    },
+    modelTextBold: {
+        fontSize: 18,
+        color: colors.gray[400],
+        fontFamily: 'Inter_800ExtraBold'
     },
     editOption: {
         flexDirection: 'row',

@@ -4,11 +4,13 @@ import { standardColors } from '../styles/colors';
 
 let colors = standardColors;
 
-export default EditExerciseModalItem = ({ title }) => (
+export default EditExerciseModalItem = ({ title, setSwapExercise, setModalDisplay }) => (
     <TouchableOpacity
         style={styles.item}
         onPress={() => {
             // TODO: move to next section of the modal and update parent state
+            setSwapExercise(title) // will need to be made into and object with tile and id
+            setModalDisplay('confirm-swap-exercise')
         }}>
         <View style={styles.itemTitle}>
             <Text style={styles.itemTitleText}>{title}</Text>

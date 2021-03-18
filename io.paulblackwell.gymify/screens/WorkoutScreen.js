@@ -26,6 +26,15 @@ export default function WorkoutScreen({ route, navigation }) {
   const [openEditExerciseModel, setOpenEditExerciseModel] = useState(false);
 
 
+  /**
+   *  Make state for exercise selected, this will be used for when the user
+   * selects an individual exercise's edit menu. This will load the
+   * EditExerciseModal and it will need to know what the current exercise's  title
+   * and ID 
+   */
+  const [currentExerciseSelected, setCurrentExerciseSelected] = useState(false);
+
+
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
 
@@ -55,6 +64,7 @@ export default function WorkoutScreen({ route, navigation }) {
       completed={item.completed}
       images={item.images}
       setOpenModel={setOpenEditExerciseModel}
+      setCurrentExerciseSelected={setCurrentExerciseSelected}
     />
   );
 
@@ -66,26 +76,30 @@ export default function WorkoutScreen({ route, navigation }) {
         <View style={styles.title}>
           <Text style={styles.titleText}>Warmup</Text>
         </View>
-          <FlatList
-            data={selectedWorkout.warmups}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
+        <FlatList
+          data={selectedWorkout.warmups}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
         <View style={styles.title}>
           <Text style={styles.titleText}>Training</Text>
         </View>
-          <FlatList
-            data={selectedWorkout.exercises}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
+        <FlatList
+          data={selectedWorkout.exercises}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
       </ScrollView>
       <TouchableOpacity style={styles.newExerciseBtn} onPress={() => {
         console.log('Add new exercise button clicked')
       }}>
         <AntDesign name="plus" size={24} color={colors.white[100]} />
       </TouchableOpacity>
-        <EditExerciseModal openModel={openEditExerciseModel} setOpenModel={setOpenEditExerciseModel}/>
+      <EditExerciseModal
+        openModel={openEditExerciseModel}
+        setOpenModel={setOpenEditExerciseModel}
+        currentExerciseSelected={currentExerciseSelected}
+      />
     </SafeAreaView>
 
   );
