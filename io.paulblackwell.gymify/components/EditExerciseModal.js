@@ -90,7 +90,7 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                         style={{ marginBottom: 16 }}
                         data={DATA} //TODO: Change this it will have to come from the context
                         renderItem={renderItem}
-                        keyExtractor={item => item.id}
+                        keyExtractor={item => item.id.toString()} // remove toString when data comes from context 
                     />
                 </View>
                 <View>
