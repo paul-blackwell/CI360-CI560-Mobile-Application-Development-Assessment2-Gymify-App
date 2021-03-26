@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import CustomModal from './CustomModal';
 import ModelBtnPrimary from './smallerComponents/ModelBtnPrimary';
 import ModelBtnSecondary from './smallerComponents/ModelBtnSecondary';
 import EditExerciseModalItem from '../components/EditExerciseModalItem';
+
+// Just testing something
+import { WorkoutsContext } from '../context/workouts.context';
 
 
 import { standardColors } from '../styles/colors';
@@ -29,7 +32,12 @@ const DATA = [
 ]
 
 
-export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSelected }) => {
+export default EditExerciseModal = ({ openModel, setOpenModel, parentWorkoutId, currentExerciseSelected }) => {
+
+
+    // Get workouts context with will be an array with all of the workouts
+    const { workoutPlan, dispatch } = useContext(WorkoutsContext);
+
 
     // Make state for what the modal is displaying ie the Edit exercise menu... 
     const [modalDisplay, setModalDisplay] = useState('edit-exercise');
@@ -139,6 +147,8 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                 <View>
                     <ModelBtnPrimary title='Delete this exercise' onPress={() => {
                         // TODO: DELETE EXERCISE 
+                        dispatch({ type: 'DELETE_EXERCISE_FROM_WORKOUT', payload: {workoutId: parentWorkoutId, exerciseId: currentExerciseSelected.id } })
+
                         setModalDisplay('edit-exercise')
                         setOpenModel(false)
                     }} />

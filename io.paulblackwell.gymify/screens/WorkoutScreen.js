@@ -98,6 +98,7 @@ export default function WorkoutScreen({ route, navigation }) {
       <EditExerciseModal
         openModel={openEditExerciseModel}
         setOpenModel={setOpenEditExerciseModel}
+        parentWorkoutId={workoutId}
         currentExerciseSelected={currentExerciseSelected}
       />
     </SafeAreaView>
