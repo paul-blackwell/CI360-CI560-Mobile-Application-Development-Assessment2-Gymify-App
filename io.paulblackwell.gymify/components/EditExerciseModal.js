@@ -32,7 +32,7 @@ const DATA = [
 ]
 
 
-export default EditExerciseModal = ({ openModel, setOpenModel, parentWorkoutId, currentExerciseSelected }) => {
+export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSelected }) => {
 
 
     // Get workouts context with will be an array with all of the workouts
@@ -147,7 +147,7 @@ export default EditExerciseModal = ({ openModel, setOpenModel, parentWorkoutId, 
                 <View>
                     <ModelBtnPrimary title='Delete this exercise' onPress={() => {
                         // TODO: DELETE EXERCISE 
-                        dispatch({ type: 'DELETE_EXERCISE_FROM_WORKOUT', payload: {workoutId: parentWorkoutId, exerciseId: currentExerciseSelected.id } })
+                        dispatch({ type: 'DELETE_EXERCISE_FROM_WORKOUT', payload: {currentExerciseSelectedId: currentExerciseSelected.id } })
 
                         setModalDisplay('edit-exercise')
                         setOpenModel(false)
