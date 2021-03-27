@@ -20,31 +20,34 @@ const reducer = (state, action) => {
                 error: ''
             }
         case 'DELETE_EXERCISE_FROM_WORKOUT':
-           
-        //let updatedState;
-        console.log(`payload: ${action.payload.currentExerciseSelectedId}`)
-        const newState = state.post.forEach(week => { // Loop though each week
+        state.post.forEach(week => { // Loop though each week
                 week.workouts.forEach(workout => { // Loop though each workout 
-                    // workout.warmups.forEach(warmup => { // Loop though each warmup
-                    //     if(warmup.id === action.payload.currentExerciseSelectedId) { // If warm up id is the same as currentExerciseSelectedId delete it
-                    //         console.log(warmup.id)
-                    //     }
-                    // })
-                    workout.warmups.filter(warmup => warmup.id !== action.payload.currentExerciseSelectedId);
-                    //workout.exercises.forEach(exercise => { // Loop though each exercise
-                        //console.log(exercise.id)
-                    //})
-                })
+                    workout.warmups.forEach(warmup => { // Loop though each warmup
+                        /**
+                         * If warm up id is the same as currentExerciseSelectedId delete it,
+                         * do this by getting is position for the parent array 
+                         */
+                        if(warmup.id === action.payload.currentExerciseSelectedId) { 
+                            workout.warmups.splice(workout.warmups.indexOf(warmup), 1)
+                        }
+                    })
 
-                // will need to do this for workouts
+                    workout.exercises.forEach(exercise => { // Loop though each exercise
+                        /**
+                         * If warm up id is the same as currentExerciseSelectedId delete it,
+                         * do this by getting is position for the parent array 
+                         */
+                        if(exercise.id === action.payload.currentExerciseSelectedId) { 
+                            workout.exercises.splice(workout.exercises.indexOf(exercise), 1)
+                        }
+                    })
+                })
             });
 
-            console.log(newState)
-            // return {
-            //     loading: false,
-            //     post: '', 
-            //     error: ''
-            // }
+            // Save 
+
+            // By returning the now updated state the context will update
+            return state;
         default:
             return state;
     }
