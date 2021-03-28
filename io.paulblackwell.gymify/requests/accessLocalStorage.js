@@ -56,6 +56,7 @@ export const retrieveLocalData = async (key, setState) => {
 
 export const pushToLocalStorage = async (key, data) => {
 
+    console.log('push to local fired')
     try {
         await AsyncStorage.setItem(key, JSON.stringify(data));
     } catch (error) {
@@ -108,8 +109,8 @@ export const deleteLocalData = (key) => {
         try {
             await AsyncStorage.removeItem(keyExtractor);
             // Uncomment to show all keys in AsyncStorage
-            //const keys = await AsyncStorage.getAllKeys();
-            //console.log(keys)
+            const keys = await AsyncStorage.getAllKeys();
+            console.log(keys)
         } catch (error) {
             console.error('Error clearing app data.');
         }

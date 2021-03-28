@@ -5,7 +5,10 @@ import { WorkoutsContext } from '../context/workouts.context';
 
 import Loader from '../components/Loader';
 import WeeklyWorkoutItem from '../components/WeeklyWorkoutItem';
-import {standardColors} from '../styles/colors';
+import { standardColors } from '../styles/colors';
+
+// Just for testing 
+import { deleteLocalData } from '../requests/accessLocalStorage';
 
 
 let colors = standardColors;
@@ -13,11 +16,20 @@ let colors = standardColors;
 export default function HomeScreen({ navigation }) {
 
   // Get workouts context with will be an array with all of the workouts
-  const { workoutPlan } = useContext(WorkoutsContext);
+  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
 
   
+  /**
+   * Save update local storage to the current context, nothing 
+   * will change if the current context has already come from local storage
+   */
+  //dispatch({ type: 'UPDATE_LOCAL_STORAGE', payload: workoutPlan })
+
+  // Just for testing
+  deleteLocalData('test')
+
   const renderItem = ({ item }) => (
-    <WeeklyWorkoutItem title={item.title} id={item.id} navigation={navigation} />
+    <WeeklyWorkoutItem title={item.title} id={item.id} navigation={navigation} dispatch={dispatch} workoutPlan={workoutPlan} />
   );
 
 

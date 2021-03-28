@@ -23,15 +23,15 @@ export const WorkoutsProvider = (props) => {
 
 
     // Just for testing
-    //deleteLocalData('workoutPlan')
+    deleteLocalData('workoutPlan')
 
 
     // This will be used to save data from API locally
     const pushToLocalStorage = async (data) => {
         try {
-          await AsyncStorage.setItem('workoutPlan', JSON.stringify(data));
+            await AsyncStorage.setItem('workoutPlan', JSON.stringify(data));
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
     }
 
@@ -58,8 +58,10 @@ export const WorkoutsProvider = (props) => {
                     .then(response => {
                         // Pass response data to dispatch in reducer
                         dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
-                            // Save data locally 
-                            pushToLocalStorage(response.data)
+                        // Save data locally 
+                        //pushToLocalStorage(response.data)
+                        //console.log('made a API call')
+                        //pushToLocalStorage('workoutPlan', response.data)
                     })
                     .catch(error => {
                         dispatch({ type: 'FETCH_API_ERROR' })

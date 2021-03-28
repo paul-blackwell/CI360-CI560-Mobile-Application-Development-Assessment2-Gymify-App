@@ -1,3 +1,4 @@
+import {pushToLocalStorage} from '../requests/accessLocalStorage';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -19,9 +20,14 @@ const reducer = (state, action) => {
                 post: action.payload,
                 error: ''
             }
+        case 'UPDATE_LOCAL_STORAGE' :
+            //pushToLocalStorage('workoutPlan', action.payload);
+            console.log('the reducer fired')
+            return state;
         case 'DELETE_EXERCISE_FROM_WORKOUT':
         state.post.forEach(week => { // Loop though each week
                 week.workouts.forEach(workout => { // Loop though each workout 
+                    
                     workout.warmups.forEach(warmup => { // Loop though each warmup
                         /**
                          * If warm up id is the same as currentExerciseSelectedId delete it,
@@ -44,7 +50,8 @@ const reducer = (state, action) => {
                 })
             });
 
-            // Save 
+            // Save changes locally 
+            //pushToLocalStorage('workoutplan')
 
             // By returning the now updated state the context will update
             return state;
@@ -52,6 +59,8 @@ const reducer = (state, action) => {
             return state;
     }
 }
+
+
 
 
 export default reducer;
