@@ -21,7 +21,7 @@ const reducer = (state, action) => {
                 error: ''
             }
         case 'UPDATE_LOCAL_STORAGE' :
-            //pushToLocalStorage('workoutPlan', action.payload);
+            pushToLocalStorage('workoutPlan', action.payload);
             console.log('the reducer fired')
             return state;
         case 'DELETE_EXERCISE_FROM_WORKOUT':

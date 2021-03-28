@@ -44,41 +44,18 @@ export const retrieveLocalData = async (key, setState) => {
 }
 
 
-// export const pushToLocalStorage = async (key, data, setState) => {
 
-//     try {
-//         await AsyncStorage.setItem(key, JSON.stringify(data));
-//         setState(data)
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
 
 export const pushToLocalStorage = async (key, data) => {
-
     console.log('push to local fired')
     try {
+        await AsyncStorage.removeItem(key) // Remove old data
         await AsyncStorage.setItem(key, JSON.stringify(data));
     } catch (error) {
         console.log(error);
     }
 }
 
-
-
-// export const fetchFromLocalStorage = async (key, setState) => {
-//     try {
-//         const value = await AsyncStorage.getItem(key);
-//         if (value !== null) {
-//             setState(value)
-//             console.log('i WAS FIRED')
-//         } else if (value === null) {
-//             setState('No data under this key');
-//         }
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
 
 
 export const fetchFromLocalStorage = async (key) => {
@@ -120,6 +97,26 @@ export const deleteLocalData = (key) => {
         removeItem(key);
     }, []);
 }
+
+
+// This just shows all the keys saved in local storage - this is for testing 
+export const showLocalDataKeys = () => {
+    const getDataKeys = async () => {
+        try {
+            const keys = await AsyncStorage.getAllKeys();
+            console.log(keys)
+        } catch (error) {
+            console.error('Error clearing app data.');
+        }
+    }
+
+    useEffect(() => {
+        getDataKeys();
+    }, []);
+}
+
+
+
 
 
 

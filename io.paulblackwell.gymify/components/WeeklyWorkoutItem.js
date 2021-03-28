@@ -5,15 +5,10 @@ import {standardColors} from '../styles/colors';
 
 let colors = standardColors;
 
-export default WeeklyWorkoutItem = ({ title, id, navigation, dispatch, workoutPlan }) => (
+export default WeeklyWorkoutItem = ({ title, id, navigation }) => (
     <TouchableOpacity 
     style={styles.item} 
     onPress={() => {
-
-        // Just for testing
-        dispatch({ type: 'UPDATE_LOCAL_STORAGE', payload: workoutPlan })
-
-
          //Go to WorkoutList screen and pass the workout id to that screen
          navigation.navigate('WorkoutStack', {
             screen: 'WorkoutsScreen',
