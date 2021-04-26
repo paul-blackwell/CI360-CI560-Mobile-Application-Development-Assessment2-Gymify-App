@@ -59,6 +59,7 @@ export default function WorkoutScreen({ route, navigation }) {
   //console.log(selectedWorkout.warmups)
 
 
+  const [warmups, setWarmups] = useState([]);
   const [exercises, setExercises] = useState([]);
 
   // just for testing
@@ -67,16 +68,27 @@ export default function WorkoutScreen({ route, navigation }) {
     // Set the context to loading 
     dispatch({ type: 'SET_LOADING', payload: true })
 
+    let warmupsArr = [];
     let exercisesArr = [];
-    
+
     const request = async () => {
+      axios
+        .get('https://gymify-strapi-api.herokuapp.com/warmups')
+        .then(response => {
+          selectedWorkout.warmups.forEach(warmup => {
+            warmupsArr.push(response.data.find(element => element.id === warmup))
+            setWarmups(warmupsArr);
+          });
+        })
+        .catch(error => {
+          console.log(error)
+        });
       axios
         .get('https://gymify-strapi-api.herokuapp.com/exercises')
         .then(response => {
           selectedWorkout.exercises.forEach(exercise => {
             exercisesArr.push(response.data.find(element => element.id === exercise))
             setExercises(exercisesArr);
-            dispatch({ type: 'SET_LOADING', payload: false });
           });
         })
         .catch(error => {
@@ -87,6 +99,16 @@ export default function WorkoutScreen({ route, navigation }) {
   }, [setExercises])
 
 
+  /**
+   * This will keep an eye out to see if the warmups and 
+   * exercises states update if they do check to see they lengths are
+   * both greater that 0, and update the loading context to false.
+   */
+  useEffect(() => {
+    if (warmups.length > 0 && exercises.length > 0) {
+      dispatch({ type: 'SET_LOADING', payload: false });
+    }
+  }, [warmups, exercises])
 
 
   // This is what the flat this will render 
@@ -114,6 +136,14 @@ export default function WorkoutScreen({ route, navigation }) {
         :
         <ScrollView>
           <View style={styles.title}>
+            <Text style={styles.titleText}>Warmup</Text>
+          </View>
+          <FlatList
+            data={warmups}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+          <View style={styles.title}>
             <Text style={styles.titleText}>Training</Text>
           </View>
           <FlatList
@@ -123,34 +153,6 @@ export default function WorkoutScreen({ route, navigation }) {
           />
         </ScrollView>
       }
-      {/* <ScrollView>
-        <View style={styles.title}>
-          <Text style={styles.titleText}>Warmup</Text>
-        </View>
-        <FlatList
-          data={selectedWorkout.warmups}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
-        <View style={styles.title}>
-          <Text style={styles.titleText}>Training</Text>
-        </View>
-        <FlatList
-          data={selectedWorkout.exercises}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
-      </ScrollView>
-      <TouchableOpacity style={styles.newExerciseBtn} onPress={() => {
-        console.log('Add new exercise button clicked')
-      }}>
-        <AntDesign name="plus" size={24} color={colors.white[100]} />
-      </TouchableOpacity>
-      <EditExerciseModal
-        openModel={openEditExerciseModel}
-        setOpenModel={setOpenEditExerciseModel}
-        currentExerciseSelected={currentExerciseSelected}
-      /> */}
     </SafeAreaView>
 
   );
