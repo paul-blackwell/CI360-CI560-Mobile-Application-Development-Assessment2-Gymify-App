@@ -7,8 +7,9 @@ import ExerciseItem from '../components/ExerciseItem';
 import EditExerciseModal from '../components/EditExerciseModal';
 import Loader from '../components/Loader';
 
-import getWarmups from '../requests/getWarmups';
-import getExercises from '../requests/getExercises';
+// import getWarmups from '../requests/getWarmups';
+// import getExercises from '../requests/getExercises';
+import getWorkout from '../requests/getWorkout';
 
 
 /**
@@ -56,15 +57,8 @@ export default function WorkoutScreen({ route, navigation }) {
   });
 
 
+  const [workout, setWorkout] = useState(null);
 
-  //console.log(selectedWorkout.exercises)
-  //console.log(selectedWorkout.warmups)
-
-
-  const [warmups, setWarmups] = useState([]);
-  const [exercises, setExercises] = useState([]);
-
-  // just for testing
   useEffect(() => {
 
     // Set the context to loading 
@@ -74,22 +68,21 @@ export default function WorkoutScreen({ route, navigation }) {
      * Make GET requests to API to get workouts and Exercises,
      * and set them to state 
      */
-    getWarmups(selectedWorkout, setWarmups);
-    getExercises(selectedWorkout, setExercises);
+    getWorkout(selectedWorkout.id, setWorkout)
 
-  }, [setExercises, setWarmups])
+  }, [setWorkout])
 
 
   /**
-   * This will keep an eye out to see if the warmups and 
-   * exercises states update if they do check to see they lengths are
-   * both greater that 0, and update the loading context to false.
+   * This will keep an eye out to see if the workouts 
+   * state updates if it does check to see if its not equal to null, 
+   * and update the loading context to false.
    */
   useEffect(() => {
-    if (warmups.length > 0 && exercises.length > 0) {
+    if (workout !== null) {
       dispatch({ type: 'SET_LOADING', payload: false });
     }
-  }, [warmups, exercises])
+  }, [workout])
 
 
   // This is what the flat this will render 
@@ -112,16 +105,17 @@ export default function WorkoutScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      {workoutPlan.loading ?
+      {workoutPlan.loading &&
         <Loader loading={workoutPlan.loading} />
-        :
+      }
+      {workout &&
         <>
           <ScrollView>
             <View style={styles.title}>
               <Text style={styles.titleText}>Warmup</Text>
             </View>
             <FlatList
-              data={warmups}
+              data={workout.warmups}
               renderItem={renderItem}
               keyExtractor={item => item.id}
             />
@@ -129,7 +123,7 @@ export default function WorkoutScreen({ route, navigation }) {
               <Text style={styles.titleText}>Training</Text>
             </View>
             <FlatList
-              data={exercises}
+              data={workout.exercises}
               renderItem={renderItem}
               keyExtractor={item => item.id}
             />
@@ -140,12 +134,13 @@ export default function WorkoutScreen({ route, navigation }) {
             <AntDesign name="plus" size={24} color={colors.white[100]} />
           </TouchableOpacity>
           <EditExerciseModal
-          openModel={openEditExerciseModel}
-          setOpenModel={setOpenEditExerciseModel}
-          currentExerciseSelected={currentExerciseSelected}
+            openModel={openEditExerciseModel}
+            setOpenModel={setOpenEditExerciseModel}
+            currentExerciseSelected={currentExerciseSelected}
           />
         </>
       }
+
     </SafeAreaView>
 
   );
