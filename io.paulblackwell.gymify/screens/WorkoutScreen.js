@@ -1,12 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity, LogBox } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import axios from 'axios';
 import { WorkoutsContext } from '../context/workouts.context';
 import { standardColors } from '../styles/colors';
 import ExerciseItem from '../components/ExerciseItem';
 import EditExerciseModal from '../components/EditExerciseModal';
 import Loader from '../components/Loader';
+
+import getWarmups from '../requests/getWarmups';
+import getExercises from '../requests/getExercises';
 
 
 /**
@@ -68,35 +70,14 @@ export default function WorkoutScreen({ route, navigation }) {
     // Set the context to loading 
     dispatch({ type: 'SET_LOADING', payload: true })
 
-    let warmupsArr = [];
-    let exercisesArr = [];
+    /**
+     * Make GET requests to API to get workouts and Exercises,
+     * and set them to state 
+     */
+    getWarmups(selectedWorkout,setWarmups);
+    getExercises(selectedWorkout, setExercises);
 
-    const request = async () => {
-      axios
-        .get('https://gymify-strapi-api.herokuapp.com/warmups')
-        .then(response => {
-          selectedWorkout.warmups.forEach(warmup => {
-            warmupsArr.push(response.data.find(element => element.id === warmup))
-            setWarmups(warmupsArr);
-          });
-        })
-        .catch(error => {
-          console.log(error)
-        });
-      axios
-        .get('https://gymify-strapi-api.herokuapp.com/exercises')
-        .then(response => {
-          selectedWorkout.exercises.forEach(exercise => {
-            exercisesArr.push(response.data.find(element => element.id === exercise))
-            setExercises(exercisesArr);
-          });
-        })
-        .catch(error => {
-          console.log(error)
-        });
-    }
-    request();
-  }, [setExercises])
+  }, [setExercises, setWarmups])
 
 
   /**
