@@ -68,7 +68,7 @@ export default function WorkoutScreen({ route, navigation }) {
     dispatch({ type: 'SET_LOADING', payload: true })
 
     let exercisesArr = [];
-
+    
     const request = async () => {
       axios
         .get('https://gymify-strapi-api.herokuapp.com/exercises')

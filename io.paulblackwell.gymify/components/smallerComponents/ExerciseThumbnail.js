@@ -19,13 +19,13 @@ export default ExerciseThumbnail = ({ exerciseCompleted, uri, origin }) => {
      * the image has come from
      * @returns image uri or image path 
      */
-    const getImage = () => {
-        if (origin === 'api') {
-            return { uri: uri }
-        } else {
-            return require('../../assets/icons/no_image_icon.png')
-        }
-    }
+    // const getImage = () => {
+    //     if (origin === 'api') {
+    //         return { uri: uri }
+    //     } else {
+    //         return require('../../assets/icons/no_image_icon.png')
+    //     }
+    // }
 
 
     return (
@@ -35,7 +35,8 @@ export default ExerciseThumbnail = ({ exerciseCompleted, uri, origin }) => {
                     <Feather style={styles.exerciseThumbnailOverlayIcon} name="check" size={32} color={colors.green[200]} />
                 </View>
             }
-            <Image style={styles.exerciseThumbnailImage} source={getImage()} />
+            {/* <Image style={styles.exerciseThumbnailImage} source={getImage()} /> */}
+            <Image style={styles.exerciseThumbnailImage} source={{ uri: uri }} />
         </View>
     )
 }
