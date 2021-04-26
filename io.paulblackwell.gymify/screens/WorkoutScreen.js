@@ -59,24 +59,32 @@ export default function WorkoutScreen({ route, navigation }) {
   //console.log(selectedWorkout.warmups)
 
 
+  const [exercises, setExercises] = useState([]);
+
   // just for testing
   useEffect(() => {
 
     // Set the context to loading 
     dispatch({ type: 'SET_LOADING', payload: true })
 
+    let exercisesArr = [];
+
     const request = async () => {
       axios
         .get('https://gymify-strapi-api.herokuapp.com/exercises')
         .then(response => {
-          //console.log(response.data)
+          selectedWorkout.exercises.forEach(exercise => {
+            exercisesArr.push(response.data.find(element => element.id === exercise))
+            setExercises(exercisesArr);
+            dispatch({ type: 'SET_LOADING', payload: false });
+          });
         })
         .catch(error => {
           console.log(error)
         });
     }
     request();
-  }, [])
+  }, [setExercises])
 
 
 
@@ -100,11 +108,22 @@ export default function WorkoutScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {workoutPlan.loading &&
+      <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+      {workoutPlan.loading ?
         <Loader loading={workoutPlan.loading} />
+        :
+        <ScrollView>
+          <View style={styles.title}>
+            <Text style={styles.titleText}>Training</Text>
+          </View>
+          <FlatList
+            data={exercises}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        </ScrollView>
       }
-      {/* <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      <ScrollView>
+      {/* <ScrollView>
         <View style={styles.title}>
           <Text style={styles.titleText}>Warmup</Text>
         </View>
