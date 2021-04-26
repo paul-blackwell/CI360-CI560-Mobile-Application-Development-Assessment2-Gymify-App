@@ -18,25 +18,7 @@ export default function HomeScreen({ navigation }) {
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
 
- // console.log(workoutPlan);
-
-  
-  /**
-   * Save update local storage to the current context, nothing 
-   * will change if the current context has already come from local storage
-   */
-  //dispatch({ type: 'UPDATE_LOCAL_STORAGE', payload: workoutPlan })
-  // useEffect(() => {
-  //   pushToLocalStorage('workoutPlan', workoutPlan)
-  // }, [])
-
-  //console.log(workoutPlan)
-
-  // Just for testing
-  //showLocalDataKeys()
-  //deleteLocalData('workoutPlan')
-
-
+ 
   const renderItem = ({ item }) => (
     <WeeklyWorkoutItem title={item.title} id={item.id} navigation={navigation}/>
   );

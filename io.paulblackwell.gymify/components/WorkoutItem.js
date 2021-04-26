@@ -8,6 +8,7 @@ let colors = standardColors;
 
 export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}) => {
 
+    
     let singularOrPlural;
     const totalNumberExercises = warmups.length + exercises.length;
 

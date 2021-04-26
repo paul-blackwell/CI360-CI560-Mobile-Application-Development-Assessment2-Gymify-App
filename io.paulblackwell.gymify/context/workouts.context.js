@@ -22,12 +22,11 @@ export const WorkoutsProvider = (props) => {
     const [workoutPlan, dispatch] = useReducer(reducer, initialState);
 
 
-
     useEffect(() => {
-
         const request = async () => {
             axios
-                .get('https://cryptic-garden-88403.herokuapp.com/workout-plans')
+                //.get('https://cryptic-garden-88403.herokuapp.com/workout-plans')
+                .get('https://gymify-strapi-api.herokuapp.com/weeks')
                 .then(response => {
                     // Pass response data to dispatch in reducer
                     dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data })
@@ -37,7 +36,6 @@ export const WorkoutsProvider = (props) => {
                     console.log(error)
                 });
     }
-
         request();
 
     }, []);

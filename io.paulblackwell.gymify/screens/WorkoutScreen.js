@@ -1,10 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity, LogBox } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import axios from 'axios';
 import { WorkoutsContext } from '../context/workouts.context';
 import { standardColors } from '../styles/colors';
 import ExerciseItem from '../components/ExerciseItem';
 import EditExerciseModal from '../components/EditExerciseModal';
+import Loader from '../components/Loader';
 
 
 /**
@@ -36,7 +38,7 @@ export default function WorkoutScreen({ route, navigation }) {
 
 
   // Get workouts context with will be an array with all of the workouts
-  const { workoutPlan } = useContext(WorkoutsContext);
+  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
 
   // Get workout Id  from the route params
   const { workoutId } = route.params;
@@ -50,6 +52,33 @@ export default function WorkoutScreen({ route, navigation }) {
       }
     })
   });
+
+
+
+  //console.log(selectedWorkout.exercises)
+  //console.log(selectedWorkout.warmups)
+
+
+  // just for testing
+  useEffect(() => {
+
+    // Set the context to loading 
+    dispatch({ type: 'SET_LOADING', payload: true })
+
+    const request = async () => {
+      axios
+        .get('https://gymify-strapi-api.herokuapp.com/exercises')
+        .then(response => {
+          //console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        });
+    }
+    request();
+  }, [])
+
+
 
 
   // This is what the flat this will render 
@@ -71,7 +100,10 @@ export default function WorkoutScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+      {workoutPlan.loading &&
+        <Loader loading={workoutPlan.loading} />
+      }
+      {/* <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
       <ScrollView>
         <View style={styles.title}>
           <Text style={styles.titleText}>Warmup</Text>
@@ -99,7 +131,7 @@ export default function WorkoutScreen({ route, navigation }) {
         openModel={openEditExerciseModel}
         setOpenModel={setOpenEditExerciseModel}
         currentExerciseSelected={currentExerciseSelected}
-      />
+      /> */}
     </SafeAreaView>
 
   );

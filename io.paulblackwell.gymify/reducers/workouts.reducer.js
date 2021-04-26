@@ -1,4 +1,4 @@
-import {pushToLocalStorage} from '../requests/accessLocalStorage';
+import { pushToLocalStorage } from '../requests/accessLocalStorage';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -20,20 +20,22 @@ const reducer = (state, action) => {
                 post: action.payload,
                 error: ''
             }
-        case 'UPDATE_LOCAL_STORAGE' :
+        case 'SET_LOADING':
+            return { ...state, loading: action.payload}
+        case 'UPDATE_LOCAL_STORAGE':
             pushToLocalStorage('workoutPlan', action.payload);
             console.log('the reducer fired')
             return state;
         case 'DELETE_EXERCISE_FROM_WORKOUT':
-        state.post.forEach(week => { // Loop though each week
+            state.post.forEach(week => { // Loop though each week
                 week.workouts.forEach(workout => { // Loop though each workout 
-                    
+
                     workout.warmups.forEach(warmup => { // Loop though each warmup
                         /**
                          * If warm up id is the same as currentExerciseSelectedId delete it,
                          * do this by getting is position for the parent array 
                          */
-                        if(warmup.id === action.payload.currentExerciseSelectedId) { 
+                        if (warmup.id === action.payload.currentExerciseSelectedId) {
                             workout.warmups.splice(workout.warmups.indexOf(warmup), 1)
                         }
                     })
@@ -43,7 +45,7 @@ const reducer = (state, action) => {
                          * If warm up id is the same as currentExerciseSelectedId delete it,
                          * do this by getting is position for the parent array 
                          */
-                        if(exercise.id === action.payload.currentExerciseSelectedId) { 
+                        if (exercise.id === action.payload.currentExerciseSelectedId) {
                             workout.exercises.splice(workout.exercises.indexOf(exercise), 1)
                         }
                     })
