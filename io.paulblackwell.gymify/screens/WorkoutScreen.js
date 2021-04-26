@@ -74,7 +74,7 @@ export default function WorkoutScreen({ route, navigation }) {
      * Make GET requests to API to get workouts and Exercises,
      * and set them to state 
      */
-    getWarmups(selectedWorkout,setWarmups);
+    getWarmups(selectedWorkout, setWarmups);
     getExercises(selectedWorkout, setExercises);
 
   }, [setExercises, setWarmups])
@@ -115,24 +115,36 @@ export default function WorkoutScreen({ route, navigation }) {
       {workoutPlan.loading ?
         <Loader loading={workoutPlan.loading} />
         :
-        <ScrollView>
-          <View style={styles.title}>
-            <Text style={styles.titleText}>Warmup</Text>
-          </View>
-          <FlatList
-            data={warmups}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
+        <>
+          <ScrollView>
+            <View style={styles.title}>
+              <Text style={styles.titleText}>Warmup</Text>
+            </View>
+            <FlatList
+              data={warmups}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+            <View style={styles.title}>
+              <Text style={styles.titleText}>Training</Text>
+            </View>
+            <FlatList
+              data={exercises}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
+          </ScrollView>
+          <TouchableOpacity style={styles.newExerciseBtn} onPress={() => {
+            console.log('Add new exercise')
+          }}>
+            <AntDesign name="plus" size={24} color={colors.white[100]} />
+          </TouchableOpacity>
+          <EditExerciseModal
+          openModel={openEditExerciseModel}
+          setOpenModel={setOpenEditExerciseModel}
+          currentExerciseSelected={currentExerciseSelected}
           />
-          <View style={styles.title}>
-            <Text style={styles.titleText}>Training</Text>
-          </View>
-          <FlatList
-            data={exercises}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
-        </ScrollView>
+        </>
       }
     </SafeAreaView>
 
