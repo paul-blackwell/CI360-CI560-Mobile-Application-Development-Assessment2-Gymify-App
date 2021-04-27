@@ -6,7 +6,8 @@ const reducer = (state, action) => {
             return {
                 loading: false,
                 post: action.payload,
-                error: ''
+                error: '',
+                jwt: ''
             }
         case 'FETCH_API_ERROR':
             return {
@@ -20,8 +21,10 @@ const reducer = (state, action) => {
                 post: action.payload,
                 error: ''
             }
+        case 'FETCH_JWT_SUCCESS':
+            return {...state, jwt: action.payload}
         case 'SET_LOADING':
-            return { ...state, loading: action.payload}
+            return { ...state, loading: action.payload }
         case 'UPDATE_LOCAL_STORAGE':
             pushToLocalStorage('workoutPlan', action.payload);
             console.log('the reducer fired')
