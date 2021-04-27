@@ -57,8 +57,9 @@ export default function WorkoutScreen({ route, navigation }) {
   });
 
 
-  const [workout, setWorkout] = useState(null);
 
+  // This will make an API call to get the workout 
+  const [workout, setWorkout] = useState(null);
   useEffect(() => {
 
     // Set the context to loading 

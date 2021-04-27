@@ -1,8 +1,7 @@
 import React, { useReducer, createContext, useEffect } from 'react';
 import reducer from '../reducers/workouts.reducer';
-import AsyncStorage from '@react-native-community/async-storage';
-import { deleteLocalData } from '../requests/accessLocalStorage';
 import axios from 'axios';
+import authenticate from '../requests/authenticate';
 
 
 
@@ -25,7 +24,6 @@ export const WorkoutsProvider = (props) => {
     useEffect(() => {
         const request = async () => {
             axios
-                //.get('https://cryptic-garden-88403.herokuapp.com/workout-plans')
                 .get('https://gymify-strapi-api.herokuapp.com/weeks')
                 .then(response => {
                     // Pass response data to dispatch in reducer
@@ -35,11 +33,17 @@ export const WorkoutsProvider = (props) => {
                     dispatch({ type: 'FETCH_API_ERROR' })
                     console.log(error)
                 });
-    }
-        request();
+        }
 
+
+
+        request();
     }, []);
 
+
+    useEffect(() => {
+        authenticate();
+    })
 
 
 
