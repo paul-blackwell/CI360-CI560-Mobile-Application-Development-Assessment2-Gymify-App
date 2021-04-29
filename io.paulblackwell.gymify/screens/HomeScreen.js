@@ -18,7 +18,7 @@ export default function HomeScreen({ navigation }) {
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
 
-  console.log(workoutPlan.jwt)
+  //console.log(workoutPlan.jwt)
 
  
   const renderItem = ({ item }) => (

@@ -1,10 +1,11 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import CustomModal from './CustomModal';
 import ModelBtnPrimary from './smallerComponents/ModelBtnPrimary';
 import ModelBtnSecondary from './smallerComponents/ModelBtnSecondary';
 import EditExerciseModalItem from '../components/EditExerciseModalItem';
+import deleteExerciseFromWorkout from '../requests/deleteExerciseFromWorkout';
 
 // Just testing something
 import { WorkoutsContext } from '../context/workouts.context';
@@ -54,6 +55,24 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
             setModalDisplay={setModalDisplay}
         />
     );
+
+
+    /**
+     * This will delete the exercise from the workout itself,
+     * not the individual workout
+     */
+    const [deleteExercise, setDeleteExercise] = useState(false);
+    const [modelLoading, setModelLoading] = useState(false);
+    useEffect(() => {
+        if(deleteExercise) {
+            deleteExerciseFromWorkout(1, currentExerciseSelected.id, setModelLoading);
+
+            setDeleteExercise(false); // then change the state back ro false
+        }
+
+    },[deleteExercise]);
+
+
 
 
     if (modalDisplay === 'edit-exercise') {
@@ -147,8 +166,8 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                 <View>
                     <ModelBtnPrimary title='Delete this exercise' onPress={() => {
                         // TODO: DELETE EXERCISE 
-                        dispatch({ type: 'DELETE_EXERCISE_FROM_WORKOUT', payload: {currentExerciseSelectedId: currentExerciseSelected.id } })
-
+                        //dispatch({ type: 'DELETE_EXERCISE_FROM_WORKOUT', payload: {currentExerciseSelectedId: currentExerciseSelected.id } })
+                        setDeleteExercise(true); // Trigger state change
                         setModalDisplay('edit-exercise')
                         setOpenModel(false)
                     }} />
