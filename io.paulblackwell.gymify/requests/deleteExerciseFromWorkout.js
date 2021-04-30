@@ -42,37 +42,44 @@ const deleteExerciseFromWorkout = async (workout, exerciseID, jwt, setState) => 
 
 
 
+
+    axios
+    .delete(
+      `https://gymify-strapi-api.herokuapp.com/workouts/${workout.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+      }
+    )
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+
+
     // axios
-    // .delete('https://gymify-strapi-api.herokuapp.com/workout/id')
+    //     .post(`https://gymify-strapi-api.herokuapp.com/workouts`, {
+    //         ...workout,
+    //         id: workoutID,
+    //         _id: workoutID,
+    //         exercises: updatedExercises,
+    //         warmups: updatedWarmups
+    //     },
+    //         {
+    //             headers: {
+    //                 'Authorization': `Bearer ${jwt}`
+    //             }
+    //         })
     //     .then(response => {
-    //         workout.exercises.forEach(exercise => {
-    //             exercisesArr.push(response.data.find(element => element.id === exercise))
-    //             setState(exercisesArr);
-    //         });
+    //         //console.log(response)
     //     })
     //     .catch(error => {
     //         console.log(error)
-    // });
-
-    axios
-        .post(`https://gymify-strapi-api.herokuapp.com/workouts`, {
-            ...workout,
-            id: workoutID,
-            _id: workoutID,
-            exercises: updatedExercises,
-            warmups: updatedWarmups
-        },
-            {
-                headers: {
-                    'Authorization': `Bearer ${jwt}`
-                }
-            })
-        .then(response => {
-            //console.log(response)
-        })
-        .catch(error => {
-            console.log(error)
-        });
+    //     });
 
 
 
