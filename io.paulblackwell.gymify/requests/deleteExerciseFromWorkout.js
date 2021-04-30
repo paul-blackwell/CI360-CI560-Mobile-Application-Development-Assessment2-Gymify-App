@@ -24,11 +24,11 @@ import axios from 'axios';
  */
 
 
-const deleteExerciseFromWorkout = async (workout, exerciseID,jwt, setState) => {
+const deleteExerciseFromWorkout = async (workout, exerciseID, jwt, setState) => {
 
     const workoutID = workout.id;
 
-   
+
     /**
      * This will push all the exercise to the updatedExercises array that are
      * equal to the exerciseID (currently selected exercise) was we only what
@@ -37,11 +37,8 @@ const deleteExerciseFromWorkout = async (workout, exerciseID,jwt, setState) => {
      * Note: Because deleteExerciseFromWorkout will also be used on warmup,
      * well will also do this work the warmups (updatedWarmups)
      */
-    const updatedExercises = [];
-    updatedExercises.push(workout.exercises.filter(exercise => exercise.id !== exerciseID));
-  
-    const updatedWarmups = [];
-    updatedWarmups.push(workout.warmups.filter(warmup => warmup.id !== exerciseID));
+    const updatedExercises = workout.exercises.filter(exercise => exercise.id !== exerciseID);
+    const updatedWarmups = workout.warmups.filter(warmup => warmup.id !== exerciseID);
 
 
 
@@ -56,10 +53,33 @@ const deleteExerciseFromWorkout = async (workout, exerciseID,jwt, setState) => {
     //     .catch(error => {
     //         console.log(error)
     // });
+
+    axios
+        .post(`https://gymify-strapi-api.herokuapp.com/workouts`, {
+            ...workout,
+            id: workoutID,
+            _id: workoutID,
+            exercises: updatedExercises,
+            warmups: updatedWarmups
+        },
+            {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`
+                }
+            })
+        .then(response => {
+            //console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+
+
 }
 
 
-export default  deleteExerciseFromWorkout;
+export default deleteExerciseFromWorkout;
 
 
 
