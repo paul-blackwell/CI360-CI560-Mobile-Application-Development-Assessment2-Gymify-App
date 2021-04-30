@@ -24,9 +24,27 @@ import axios from 'axios';
  */
 
 
-const deleteExerciseFromWorkout = async (workoutID, exerciseID,jwt, setState) => {
+const deleteExerciseFromWorkout = async (workout, exerciseID,jwt, setState) => {
 
-    console.log(exerciseID);
+    const workoutID = workout.id;
+
+   
+    /**
+     * This will push all the exercise to the updatedExercises array that are
+     * equal to the exerciseID (currently selected exercise) was we only what
+     * to remove currently selected exercise.
+     * 
+     * Note: Because deleteExerciseFromWorkout will also be used on warmup,
+     * well will also do this work the warmups (updatedWarmups)
+     */
+    const updatedExercises = [];
+    updatedExercises.push(workout.exercises.filter(exercise => exercise.id !== exerciseID));
+  
+    const updatedWarmups = [];
+    updatedWarmups.push(workout.warmups.filter(warmup => warmup.id !== exerciseID));
+
+
+
     // axios
     // .delete('https://gymify-strapi-api.herokuapp.com/workout/id')
     //     .then(response => {
@@ -42,3 +60,7 @@ const deleteExerciseFromWorkout = async (workoutID, exerciseID,jwt, setState) =>
 
 
 export default  deleteExerciseFromWorkout;
+
+
+
+

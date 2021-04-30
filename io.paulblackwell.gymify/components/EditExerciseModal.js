@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import CustomModal from './CustomModal';
@@ -33,11 +33,11 @@ const DATA = [
 ]
 
 
-export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSelected }) => {
+export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSelected, selectedWorkout }) => {
 
 
     // Get workouts context with will be an array with all of the workouts
-    const { workoutPlan, dispatch } = useContext(WorkoutsContext);
+    const { workoutPlan } = useContext(WorkoutsContext);
 
 
     // Make state for what the modal is displaying ie the Edit exercise menu... 
@@ -64,13 +64,13 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
     const [deleteExercise, setDeleteExercise] = useState(false);
     const [modelLoading, setModelLoading] = useState(false);
     useEffect(() => {
-        if(deleteExercise) {
-            deleteExerciseFromWorkout(1, currentExerciseSelected.id, setModelLoading);
+        if (deleteExercise) {
+            deleteExerciseFromWorkout(selectedWorkout, currentExerciseSelected.id, workoutPlan.jwt, setModelLoading);
 
             setDeleteExercise(false); // then change the state back ro false
         }
 
-    },[deleteExercise]);
+    }, [deleteExercise]);
 
 
 
@@ -137,7 +137,7 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                 <View style={styles.mainContent}>
                     <Text style={styles.modelText}>Are you sure you want to swap the exercise
                     <Text style={styles.modelTextBold}> {currentExerciseSelected.title} </Text>
-                    for 
+                    for
                     <Text style={styles.modelTextBold}> {swapExercise}</Text>?
                     </Text>
                 </View>

@@ -103,6 +103,7 @@ export default function WorkoutScreen({ route, navigation }) {
   );
 
 
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
@@ -138,6 +139,7 @@ export default function WorkoutScreen({ route, navigation }) {
             openModel={openEditExerciseModel}
             setOpenModel={setOpenEditExerciseModel}
             currentExerciseSelected={currentExerciseSelected}
+            selectedWorkout={workout}
           />
         </>
       }
