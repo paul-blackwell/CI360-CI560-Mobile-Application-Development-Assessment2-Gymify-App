@@ -59,19 +59,19 @@ export default function WorkoutScreen({ route, navigation }) {
 
 
   // This will make an API call to get the workout 
-  const [workout, setWorkout] = useState(null);
-  useEffect(() => {
+  // const [workout, setWorkout] = useState(null);
+  // useEffect(() => {
 
-    // Set the context to loading 
-    dispatch({ type: 'SET_LOADING', payload: true })
+  //   // Set the context to loading 
+  //   dispatch({ type: 'SET_LOADING', payload: true })
 
-    /**
-     * Make GET requests to API to get workouts and Exercises,
-     * and set them to state 
-     */
-    getWorkout(selectedWorkout.id, setWorkout)
+  //   /**
+  //    * Make GET requests to API to get workouts and Exercises,
+  //    * and set them to state 
+  //    */
+  //   getWorkout(selectedWorkout.id, setWorkout)
 
-  }, [setWorkout])
+  // }, [setWorkout])
 
 
   /**
@@ -79,11 +79,11 @@ export default function WorkoutScreen({ route, navigation }) {
    * state updates if it does check to see if its not equal to null, 
    * and update the loading context to false.
    */
-  useEffect(() => {
-    if (workout !== null) {
-      dispatch({ type: 'SET_LOADING', payload: false });
-    }
-  }, [workout])
+  // useEffect(() => {
+  //   if (workout !== null) {
+  //     dispatch({ type: 'SET_LOADING', payload: false });
+  //   }
+  // }, [workout])
 
 
   // This is what the flat this will render 
@@ -110,14 +110,14 @@ export default function WorkoutScreen({ route, navigation }) {
       {workoutPlan.loading &&
         <Loader loading={workoutPlan.loading} />
       }
-      {workout &&
+      {selectedWorkout &&
         <>
           <ScrollView>
             <View style={styles.title}>
               <Text style={styles.titleText}>Warmup</Text>
             </View>
             <FlatList
-              data={workout.warmups}
+              data={selectedWorkout.warmups}
               renderItem={renderItem}
               keyExtractor={item => item.id}
             />
@@ -125,7 +125,7 @@ export default function WorkoutScreen({ route, navigation }) {
               <Text style={styles.titleText}>Training</Text>
             </View>
             <FlatList
-              data={workout.exercises}
+              data={selectedWorkout.exercises}
               renderItem={renderItem}
               keyExtractor={item => item.id}
             />
@@ -139,7 +139,7 @@ export default function WorkoutScreen({ route, navigation }) {
             openModel={openEditExerciseModel}
             setOpenModel={setOpenEditExerciseModel}
             currentExerciseSelected={currentExerciseSelected}
-            selectedWorkout={workout}
+            selectedWorkout={selectedWorkout}
           />
         </>
       }
