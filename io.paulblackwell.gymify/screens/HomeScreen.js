@@ -7,8 +7,6 @@ import Loader from '../components/Loader';
 import WeeklyWorkoutItem from '../components/WeeklyWorkoutItem';
 import { standardColors } from '../styles/colors';
 
-// Just for testing 
-import { deleteLocalData, pushToLocalStorage, showLocalDataKeys } from '../requests/accessLocalStorage';
 
 
 let colors = standardColors;
@@ -18,7 +16,6 @@ export default function HomeScreen({ navigation }) {
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan } = useContext(WorkoutsContext);
 
-  //console.log(workoutPlan.jwt)
 
  
   const renderItem = ({ item }) => (
