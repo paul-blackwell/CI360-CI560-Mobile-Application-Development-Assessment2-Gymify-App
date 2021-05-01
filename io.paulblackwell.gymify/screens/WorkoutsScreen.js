@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, StatusBar, SafeAreaView, FlatList, View } from 'react-native';
 import { WorkoutsContext } from '../context/workouts.context';
 
-import {standardColors} from '../styles/colors';
+import { standardColors } from '../styles/colors';
 import WorkoutItem from '../components/WorkoutItem';
 
 let colors = standardColors;
@@ -11,7 +11,7 @@ export default function WorkoutsScreen({ route, navigation }) {
 
 
   // Get workouts context with will be an array with all of the workouts
-  const { workoutPlan } = useContext(WorkoutsContext);
+  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
 
   /**
    * If the user has come from the HomeScreen get the Workouts 
@@ -34,8 +34,25 @@ export default function WorkoutsScreen({ route, navigation }) {
 
 
   const renderItem = ({ item }) => (
-    <WorkoutItem warmups={item.warmups} exercises={item.exercises} title={item.title} id={item.id} navigation={navigation} />
+    <WorkoutItem
+      warmups={item.warmups}
+      exercises={item.exercises}
+      title={item.title}
+      id={item.id}
+      navigation={navigation}
+    />
   );
+
+
+  /**
+   * We will need to update the context for the current selected week,
+   * we will need to do this because the WorkoutScreen needs to make an
+   * API request using the works parent week's id (selected), and it has no
+   * way of getting it. Thats why its being set in the context 
+   */
+  useEffect(() => {
+    dispatch({ type: 'SET_CURRENT_SELECTED_WEEK', payload: selectedWeek })
+  },[])
 
 
   return (

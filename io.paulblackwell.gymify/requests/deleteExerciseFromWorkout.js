@@ -37,44 +37,44 @@ const deleteExerciseFromWorkout = async (workout, exerciseID, jwt, setState) => 
      * Note: Because deleteExerciseFromWorkout will also be used on warmup,
      * well will also do this work the warmups (updatedWarmups)
      */
-    const updatedExercises = workout.exercises.filter(exercise => exercise.id !== exerciseID);
-    const updatedWarmups = workout.warmups.filter(warmup => warmup.id !== exerciseID);
+    // const updatedExercises = workout.exercises.filter(exercise => exercise.id !== exerciseID);
+    // const updatedWarmups = workout.warmups.filter(warmup => warmup.id !== exerciseID);
 
 
-    console.log(workoutID)
+    //console.log(workoutID)
 
-    axios
-        .delete(
-            `https://gymify-strapi-api.herokuapp.com/workouts/${workout.id}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${jwt}`
-                }
-            }
-        )
-        .then((response) => {
-            axios.post(`https://gymify-strapi-api.herokuapp.com/workouts`, {
-                ...workout,
-                id: workoutID,
-                _id: workoutID,
-                exercises: updatedExercises,
-                warmups: updatedWarmups
-            },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${jwt}`
-                    }
-                })
-                .then(response => {
-                    //console.log(response)
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    // axios
+    //     .delete(
+    //         `https://gymify-strapi-api.herokuapp.com/workouts/${workout.id}`,
+    //         {
+    //             headers: {
+    //                 Authorization: `Bearer ${jwt}`
+    //             }
+    //         }
+    //     )
+    //     .then((response) => {
+    //         axios.post(`https://gymify-strapi-api.herokuapp.com/workouts`, {
+    //             ...workout,
+    //             id: workoutID,
+    //             _id: workoutID,
+    //             exercises: updatedExercises,
+    //             warmups: updatedWarmups
+    //         },
+    //             {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${jwt}`
+    //                 }
+    //             })
+    //             .then(response => {
+    //                 //console.log(response)
+    //             })
+    //             .catch(error => {
+    //                 console.log(error)
+    //             });
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
 
 
     // axios

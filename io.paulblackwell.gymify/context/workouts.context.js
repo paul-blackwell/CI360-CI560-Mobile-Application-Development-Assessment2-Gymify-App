@@ -8,7 +8,9 @@ import {API_IDENTIFIER, API_PASSWORD} from "@env"
 const initialState = {
     loading: true,
     error: '',
-    post: {}
+    post: {},
+    jwt: '',
+    currentSelectedWeek: ''
 }
 
 

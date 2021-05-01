@@ -7,9 +7,6 @@ import ExerciseItem from '../components/ExerciseItem';
 import EditExerciseModal from '../components/EditExerciseModal';
 import Loader from '../components/Loader';
 
-// import getWarmups from '../requests/getWarmups';
-// import getExercises from '../requests/getExercises';
-import getWorkout from '../requests/getWorkout';
 
 
 /**
@@ -24,7 +21,7 @@ LogBox.ignoreLogs([
 
 let colors = standardColors;
 
-export default function WorkoutScreen({ route, navigation }) {
+export default function WorkoutScreen({ route, navigation}) {
 
 
   // Make state to open and close model 
@@ -58,34 +55,6 @@ export default function WorkoutScreen({ route, navigation }) {
 
 
 
-  // This will make an API call to get the workout 
-  // const [workout, setWorkout] = useState(null);
-  // useEffect(() => {
-
-  //   // Set the context to loading 
-  //   dispatch({ type: 'SET_LOADING', payload: true })
-
-  //   /**
-  //    * Make GET requests to API to get workouts and Exercises,
-  //    * and set them to state 
-  //    */
-  //   getWorkout(selectedWorkout.id, setWorkout)
-
-  // }, [setWorkout])
-
-
-  /**
-   * This will keep an eye out to see if the workouts 
-   * state updates if it does check to see if its not equal to null, 
-   * and update the loading context to false.
-   */
-  // useEffect(() => {
-  //   if (workout !== null) {
-  //     dispatch({ type: 'SET_LOADING', payload: false });
-  //   }
-  // }, [workout])
-
-
   // This is what the flat this will render 
   const renderItem = ({ item }) => (
     <ExerciseItem
@@ -101,7 +70,6 @@ export default function WorkoutScreen({ route, navigation }) {
       setCurrentExerciseSelected={setCurrentExerciseSelected}
     />
   );
-
 
 
   return (
