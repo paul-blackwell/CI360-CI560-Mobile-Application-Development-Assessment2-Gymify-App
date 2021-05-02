@@ -63,14 +63,20 @@ export default function WorkoutScreen({ route, navigation }) {
 
 
 
-
+  /**
+   * This will update the context if an exercise is deleted,
+   * it does this by making a request to the API then if the request is
+   * successful it will update the context and hide the loader
+   */
   const [updateContext, setUpdateContext] = useState(false)
   useEffect(() => {
-    if(updateContext) {
+    if (updateContext) {
       getWeeks(setShowLoader, dispatch)
       setUpdateContext(false)
     }
   }, [updateContext])
+
+  console.log()
 
 
 
