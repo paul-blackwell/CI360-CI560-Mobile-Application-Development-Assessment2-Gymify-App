@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity, LogBox } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { WorkoutsContext } from '../context/workouts.context';
@@ -38,7 +38,7 @@ export default function WorkoutScreen({ route, navigation}) {
 
 
   // Get workouts context with will be an array with all of the workouts
-  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
+  const { workoutPlan } = useContext(WorkoutsContext);
 
   // Get workout Id  from the route params
   const { workoutId } = route.params;
@@ -52,6 +52,8 @@ export default function WorkoutScreen({ route, navigation}) {
       }
     })
   });
+
+  console.log()
 
 
 
@@ -108,6 +110,7 @@ export default function WorkoutScreen({ route, navigation}) {
             setOpenModel={setOpenEditExerciseModel}
             currentExerciseSelected={currentExerciseSelected}
             selectedWorkout={selectedWorkout}
+            parentWeek={workoutPlan.currentSelectedWeek}
           />
         </>
       }

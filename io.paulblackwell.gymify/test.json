@@ -1,0 +1,218 @@
+[
+  {
+    "published_at": "2021-05-01T11:36:17.012Z",
+    "created_by": "60635d041acf6c4c88eb0165",
+    "updatedAt": "2021-05-01T11:36:17.219Z",
+    "warmups": [
+      {
+        "published_at": "2021-04-26T09:25:37.071Z",
+        "completed": false,
+        "time": 10,
+        "created_by": "60635d041acf6c4c88eb0165",
+        "updatedAt": "2021-04-26T09:25:37.143Z",
+        "sets": 0,
+        "__v": 0,
+        "reps": 0,
+        "title": "Running",
+        "images": [
+          {
+            "id": "827f7fbd-cc02-10dc-241c-1770748ecb20",
+            "uri": "https://images.paulblackwell.io/gymify/man_treadmill.jpeg"
+          }
+        ],
+        "_id": "6086870d2fdd1c42d0a34dbb",
+        "id": "6086870d2fdd1c42d0a34dbb",
+        "createdAt": "2021-04-26T09:25:33.948Z",
+        "updated_by": "60635d041acf6c4c88eb0165",
+        "maxWeight": 0,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus orci, nulla magnis vulputate volutpat semper purus. Aliquam viverra orci,"
+      }
+    ],
+    "__v": 0,
+    "title": "Workout 2",
+    "_id": "608d3d2e19ca80001548fbd7",
+    "id": "608d3d2e19ca80001548fbd7",
+    "createdAt": "2021-05-01T11:36:14.460Z",
+    "exercises": [
+      {
+        "published_at": "2021-04-29T14:38:39.733Z",
+        "completed": false,
+        "time": 0,
+        "created_by": "60635d041acf6c4c88eb0165",
+        "updatedAt": "2021-04-29T14:38:39.802Z",
+        "sets": 3,
+        "__v": 0,
+        "reps": 12,
+        "title": "Pushups",
+        "images": [
+          {
+            "id": "07e38fad-d7fe-7648-58ff-905277d71b25",
+            "origin": "api",
+            "uri": "https://images.paulblackwell.io/gymify/man_pushup.jpeg"
+          },
+          {
+            "id": "000c66cb-a06b-1cf5-cba5-90a34d98bfc0",
+            "origin": "api",
+            "uri": "https://images.paulblackwell.io/gymify/man_pushup2.jpeg"
+          }
+        ],
+        "_id": "608ac4ebe5fe964e40efa27f",
+        "id": "608ac4ebe5fe964e40efa27f",
+        "createdAt": "2021-04-29T14:38:35.597Z",
+        "updated_by": "60635d041acf6c4c88eb0165",
+        "maxWeight": 0,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus orci, nulla magnis vulputate volutpat semper purus. Aliquam viverra orci,"
+      }
+    ],
+    "updated_by": "60635d041acf6c4c88eb0165"
+  },
+  {
+    "published_at": "2021-05-01T08:36:23.180Z",
+    "created_by": "60635d041acf6c4c88eb0165",
+    "updatedAt": "2021-05-01T08:36:23.580Z",
+    "warmups": [
+      {
+        "published_at": "2021-04-26T09:25:37.071Z",
+        "completed": false,
+        "time": 10,
+        "created_by": "60635d041acf6c4c88eb0165",
+        "updatedAt": "2021-04-26T09:25:37.143Z",
+        "sets": 0,
+        "__v": 0,
+        "reps": 0,
+        "title": "Running",
+        "images": [
+          {
+            "id": "827f7fbd-cc02-10dc-241c-1770748ecb20",
+            "uri": "https://images.paulblackwell.io/gymify/man_treadmill.jpeg"
+          }
+        ],
+        "_id": "6086870d2fdd1c42d0a34dbb",
+        "id": "6086870d2fdd1c42d0a34dbb",
+        "createdAt": "2021-04-26T09:25:33.948Z",
+        "updated_by": "60635d041acf6c4c88eb0165",
+        "maxWeight": 0,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus orci, nulla magnis vulputate volutpat semper purus. Aliquam viverra orci,"
+      },
+      {
+        "published_at": "2021-04-26T09:27:49.470Z",
+        "completed": false,
+        "time": 0.3,
+        "created_by": "60635d041acf6c4c88eb0165",
+        "updatedAt": "2021-04-26T09:27:49.538Z",
+        "sets": 0,
+        "__v": 0,
+        "reps": 0,
+        "title": "Plank",
+        "images": [
+          {
+            "id": "581e0418-976c-71ce-318d-534e9677fdbd",
+            "uri": "https://images.paulblackwell.io/gymify/man_plank.jpeg"
+          },
+          {
+            "id": "bb4d0675-474c-e20c-365b-a9b3f232484a",
+            "uri": "https://images.paulblackwell.io/gymify/woman_plank.jpeg"
+          }
+        ],
+        "_id": "608687932fdd1c42d0a34dbd",
+        "id": "608687932fdd1c42d0a34dbd",
+        "createdAt": "2021-04-26T09:27:47.947Z",
+        "updated_by": "60635d041acf6c4c88eb0165",
+        "maxWeight": 0,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus orci, nulla magnis vulputate volutpat semper purus. Aliquam viverra orci,"
+      }
+    ],
+    "__v": 0,
+    "title": "Workout 1",
+    "_id": "608d13031004e60015fa9fc6",
+    "id": "608d13031004e60015fa9fc6",
+    "createdAt": "2021-05-01T08:36:19.986Z",
+    "exercises": [
+      {
+        "published_at": "2021-04-26T09:32:44.636Z",
+        "completed": false,
+        "time": 0,
+        "created_by": "60635d041acf6c4c88eb0165",
+        "updatedAt": "2021-04-26T09:32:44.700Z",
+        "sets": 3,
+        "__v": 0,
+        "reps": 12,
+        "title": "Incline dumbbell bench press",
+        "images": [
+          {
+            "id": "15b1e1b8-392b-3572-c540-55d32208bb28",
+            "uri": "https://images.paulblackwell.io/gymify/woman_incline-dumbbell-bench_press.jpeg"
+          },
+          {
+            "id": "f1d3fa1c-1205-5149-56d8-e4aa37245a49",
+            "uri": "https://images.paulblackwell.io/gymify/woman_incline-dumbbell-bench_press2.jpeg"
+          },
+          {
+            "id": "652cf4c4-9ae4-0e05-d0fc-8aa249c03b52",
+            "uri": "https://images.paulblackwell.io/gymify/woman_incline-dumbbell-bench_press3.jpeg"
+          }
+        ],
+        "_id": "608688b92fdd1c42d0a34dc0",
+        "id": "608688b92fdd1c42d0a34dc0",
+        "createdAt": "2021-04-26T09:32:41.823Z",
+        "updated_by": "60635d041acf6c4c88eb0165",
+        "maxWeight": 25,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus orci, nulla magnis vulputate volutpat semper purus. Aliquam viverra orci,"
+      },
+      {
+        "published_at": "2021-04-29T14:39:35.739Z",
+        "completed": false,
+        "time": 0,
+        "created_by": "60635d041acf6c4c88eb0165",
+        "updatedAt": "2021-04-29T14:39:35.806Z",
+        "sets": 3,
+        "__v": 0,
+        "reps": 12,
+        "title": "Bench press",
+        "images": [
+          {
+            "id": "de8f5e9c-1599-a3f5-e0b5-14d7d170841d",
+            "origin": "api",
+            "uri": "https://images.paulblackwell.io/gymify/man_plank.jpeg"
+          }
+        ],
+        "_id": "608ac526e5fe964e40efa280",
+        "id": "608ac526e5fe964e40efa280",
+        "createdAt": "2021-04-29T14:39:34.056Z",
+        "updated_by": "60635d041acf6c4c88eb0165",
+        "maxWeight": 20,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus orci, nulla magnis vulputate volutpat semper purus. Aliquam viverra orci,"
+      },
+      {
+        "published_at": "2021-04-29T14:38:39.733Z",
+        "completed": false,
+        "time": 0,
+        "created_by": "60635d041acf6c4c88eb0165",
+        "updatedAt": "2021-04-29T14:38:39.802Z",
+        "sets": 3,
+        "__v": 0,
+        "reps": 12,
+        "title": "Pushups",
+        "images": [
+          {
+            "id": "07e38fad-d7fe-7648-58ff-905277d71b25",
+            "origin": "api",
+            "uri": "https://images.paulblackwell.io/gymify/man_pushup.jpeg"
+          },
+          {
+            "id": "000c66cb-a06b-1cf5-cba5-90a34d98bfc0",
+            "origin": "api",
+            "uri": "https://images.paulblackwell.io/gymify/man_pushup2.jpeg"
+          }
+        ],
+        "_id": "608ac4ebe5fe964e40efa27f",
+        "id": "608ac4ebe5fe964e40efa27f",
+        "createdAt": "2021-04-29T14:38:35.597Z",
+        "updated_by": "60635d041acf6c4c88eb0165",
+        "maxWeight": 0,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus orci, nulla magnis vulputate volutpat semper purus. Aliquam viverra orci,"
+      }
+    ],
+    "updated_by": "60635d041acf6c4c88eb0165"
+  }
+]
