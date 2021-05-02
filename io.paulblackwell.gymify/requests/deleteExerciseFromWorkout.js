@@ -11,15 +11,21 @@ import axios from 'axios';
  * @param {string} jwt This is the JSON web joken that the API will need to use
  * to a authenticate
  * 
- * @param {function} setState will be used to set the loader to show after the api request
+ * @param {function} setLoader will be used to set the loader to show after the api request
  * is successful 
  * 
  */
 
-const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setState) => {
+const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setLoader, setUpdateContext) => {
 
     const weekID = week.id;
     const workoutID = workout.id;
+
+      /**
+        * This will update the loader in the parent
+        * component to show the loader
+       */
+      setLoader(false)
 
 
     /**
@@ -52,7 +58,7 @@ const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setStat
 
 
     // Send a request to the API and update the workouts for that week
-    axios.put(`https://gymify-strapi-api.herokuapp.com/weeks/${weekID }`, {
+    axios.put(`https://gymify-strapi-api.herokuapp.com/weeks/${weekID}`, {
         workouts: updatedWorkouts
     },
         {
@@ -61,7 +67,18 @@ const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setStat
             }
         })
         .then(response => {
-            //console.log(response)
+            /**
+             * The request work so set state to true.
+             * This will update the loader in the parent
+             * component 
+             */
+            setLoader(true);
+
+            /**
+             * setUpdateContent to true this will make an API request in the parent
+             *  component and update the context
+             */
+            setUpdateContext(true)
         })
         .catch(error => {
             console.log(error)

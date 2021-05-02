@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, FlatList, ScrollView, TouchableOpacity, LogBox } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { WorkoutsContext } from '../context/workouts.context';
@@ -6,6 +6,7 @@ import { standardColors } from '../styles/colors';
 import ExerciseItem from '../components/ExerciseItem';
 import EditExerciseModal from '../components/EditExerciseModal';
 import Loader from '../components/Loader';
+import getWeeks from '../requests/getWeeks';
 
 
 
@@ -21,7 +22,7 @@ LogBox.ignoreLogs([
 
 let colors = standardColors;
 
-export default function WorkoutScreen({ route, navigation}) {
+export default function WorkoutScreen({ route, navigation }) {
 
 
   // Make state to open and close model 
@@ -38,7 +39,7 @@ export default function WorkoutScreen({ route, navigation}) {
 
 
   // Get workouts context with will be an array with all of the workouts
-  const { workoutPlan } = useContext(WorkoutsContext);
+  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
 
   // Get workout Id  from the route params
   const { workoutId } = route.params;
@@ -53,7 +54,23 @@ export default function WorkoutScreen({ route, navigation}) {
     })
   });
 
-  console.log()
+
+  /**
+   * This will handle showing wether to show the loading component
+   * or not 
+   */
+  const [showLoader, setShowLoader] = useState(false)
+
+
+
+
+  const [updateContext, setUpdateContext] = useState(false)
+  useEffect(() => {
+    if(updateContext) {
+      getWeeks(setShowLoader, dispatch)
+      setUpdateContext(false)
+    }
+  }, [updateContext])
 
 
 
@@ -77,10 +94,9 @@ export default function WorkoutScreen({ route, navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      {workoutPlan.loading &&
-        <Loader loading={workoutPlan.loading} />
-      }
-      {selectedWorkout &&
+      {showLoader
+        ? <Loader loading={showLoader} />
+        :
         <>
           <ScrollView>
             <View style={styles.title}>
@@ -111,9 +127,12 @@ export default function WorkoutScreen({ route, navigation}) {
             currentExerciseSelected={currentExerciseSelected}
             selectedWorkout={selectedWorkout}
             parentWeek={workoutPlan.currentSelectedWeek}
+            setShowLoader={setShowLoader}
+            setUpdateContext={setUpdateContext}
           />
         </>
       }
+
 
     </SafeAreaView>
 

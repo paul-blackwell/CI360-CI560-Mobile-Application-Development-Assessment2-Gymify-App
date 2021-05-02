@@ -33,7 +33,7 @@ const DATA = [
 ]
 
 
-export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSelected, selectedWorkout, parentWeek }) => {
+export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSelected, selectedWorkout, parentWeek, setShowLoader, setUpdateContext }) => {
 
 
     // Get workouts context with will be an array with all of the workouts
@@ -62,10 +62,16 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
      * not the individual workout
      */
     const [deleteExercise, setDeleteExercise] = useState(false);
-    const [modelLoading, setModelLoading] = useState(false);
     useEffect(() => {
         if (deleteExercise) {
-            deleteExerciseFromWorkout(parentWeek, selectedWorkout, currentExerciseSelected.id, workoutPlan.jwt, setModelLoading);
+            deleteExerciseFromWorkout(
+                parentWeek,
+                selectedWorkout,
+                currentExerciseSelected.id,
+                workoutPlan.jwt,
+                setShowLoader,
+                setUpdateContext
+            );
 
             setDeleteExercise(false); // then change the state back ro false
         }
