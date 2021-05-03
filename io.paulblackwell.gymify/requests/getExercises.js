@@ -1,15 +1,11 @@
 import axios from 'axios';
 
-const getExercises = async (workout, setState) => {
+const getExercises = async (setExercises) => {
 
-    let exercisesArr = [];
     axios
     .get('https://gymify-strapi-api.herokuapp.com/exercises')
         .then(response => {
-            workout.exercises.forEach(exercise => {
-                exercisesArr.push(response.data.find(element => element.id === exercise))
-                setState(exercisesArr);
-            });
+           setExercises(response.data)
         })
         .catch(error => {
             console.log(error)

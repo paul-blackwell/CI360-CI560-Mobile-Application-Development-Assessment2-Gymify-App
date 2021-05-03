@@ -6,6 +6,8 @@ import ModelBtnPrimary from './smallerComponents/ModelBtnPrimary';
 import ModelBtnSecondary from './smallerComponents/ModelBtnSecondary';
 import EditExerciseModalItem from '../components/EditExerciseModalItem';
 import deleteExerciseFromWorkout from '../requests/deleteExerciseFromWorkout';
+import getExercises from '../requests/getExercises';
+import getWarmups from '../requests/getWarmups';
 
 // Just testing something
 import { WorkoutsContext } from '../context/workouts.context';
@@ -81,6 +83,45 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
 
 
 
+    /**
+     * This will get all of the warmups and save it to state
+     */
+    const [warmups, setWarmups] = useState(null);
+    useEffect(() => {
+        if (warmups === null) {
+            getWarmups(setWarmups);
+        }
+    }, [warmups])
+
+
+    /**
+     * This will get all of the exercises and save it to state
+     */
+    const [exercises, setExercises] = useState(null);
+    useEffect(() => {
+        if (exercises === null) {
+            getExercises(setExercises);
+        }
+    }, [exercises])
+
+
+
+    /**
+     * Once all of the warmups and exercises have been
+     * retrieved add them together so they can be used 
+     * in the swap exercise FlatList. Then set the modelLoading 
+     * to false 
+     */
+    const [modelLoading, setModelLoading] = useState(true);
+    const [warmupsAndExercises, setWarmupsAndExercises] = useState([])
+    useEffect(() => {
+        if (warmups !== null && exercises !== null) {
+            setWarmupsAndExercises(warmups.concat(exercises));
+            setModelLoading(false);
+        }
+    }, [warmups, exercises])
+
+
     if (modalDisplay === 'edit-exercise') {
         return (
             <CustomModal
@@ -119,12 +160,16 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                 setOpen={setOpenModel}
             >
                 <View style={{ maxHeight: (windowHeight / 3) * 2, }}>
-                    <FlatList
-                        style={{ marginBottom: 16 }}
-                        data={DATA} //TODO: Change this it will have to come from the context
-                        renderItem={renderItem}
-                        keyExtractor={item => item.id.toString()} // remove toString when data comes from context 
-                    />
+                    {modelLoading ?
+                        <Text style={styles.modelLoader}>Loading...</Text>
+                        :
+                        <FlatList
+                            style={{ marginBottom: 16 }}
+                            data={warmupsAndExercises} //TODO: Change this it will have to come from the context
+                            renderItem={renderItem}
+                            keyExtractor={item => item.id.toString()} // remove toString when data comes from context 
+                        />
+                    }
                 </View>
                 <View>
                     <ModelBtnSecondary title='Go back' onPress={() => {
@@ -171,8 +216,6 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                 </View>
                 <View>
                     <ModelBtnPrimary title='Delete this exercise' onPress={() => {
-                        // TODO: DELETE EXERCISE 
-                        //dispatch({ type: 'DELETE_EXERCISE_FROM_WORKOUT', payload: {currentExerciseSelectedId: currentExerciseSelected.id } })
                         setDeleteExercise(true); // Trigger state change
                         setModalDisplay('edit-exercise')
                         setOpenModel(false)
@@ -219,4 +262,9 @@ const styles = StyleSheet.create({
     editOptionTextRed: {
         color: colors.red[100]
     },
+    modelLoader: {
+        height: "100%",
+        marginTop: "50%",
+        alignSelf: "center",
+    }
 });
