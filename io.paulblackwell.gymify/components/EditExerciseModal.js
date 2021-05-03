@@ -121,7 +121,10 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
     }, [warmups, exercises]);
 
 
-     // This will be used to store what exercise the user whats to swap
+     /**
+      * This will swap exercise in workout if the user
+      * clicks on the 'Swap this exercise' button 
+      */
     const [replacementExercise, setReplacementExercise] = useState(null);
     const [swapExercise, setSwapExercise] = useState(false);
     useEffect(() => {
@@ -212,7 +215,6 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                 </View>
                 <View>
                     <ModelBtnPrimary title='Swap this exercise' color='green' onPress={() => {
-                        // TODO: SWAP exercise out in context 
                         setSwapExercise(true);
                         setModalDisplay('edit-exercise');
                         setOpenModel(false);

@@ -14,6 +14,8 @@ import axios from 'axios';
  * @param {function} setLoader will be used to set the loader to show after the api request
  * is successful 
  * 
+ * @param {function} setUpdateContext will force the parent component to update the context 
+ * 
  */
 
 const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setLoader, setUpdateContext) => {

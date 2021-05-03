@@ -2,6 +2,27 @@ import axios from 'axios';
 import uuid from '../utils/uuid';
 
 
+
+/**
+ * @param {int} week is the current week that is selected 
+ * 
+ * @param {int} workout is the current workout that is selected 
+ * 
+ * @param {int} exerciseID is the id for the exercise we want to replace
+ * 
+ * @param {string} jwt This is the JSON web joken that the API will need to use
+ * to a authenticate
+ * 
+ * @param {function} setLoader will be used to set the loader to show after the api request
+ * is successful 
+ * 
+ * @param {function} setUpdateContext will force the parent component to update the context 
+ * 
+ * @param {function} replacementExercise is the exercise the will be used to replace the old 
+ * exercise 
+ * 
+ */
+
 const swapExerciseInWorkout = async (week, workout, exerciseID, jwt, setLoader, setUpdateContext, replacementExercise) => {
 
     const weekID = week.id;
