@@ -8,6 +8,7 @@ import EditExerciseModalItem from '../components/EditExerciseModalItem';
 import deleteExerciseFromWorkout from '../requests/deleteExerciseFromWorkout';
 import getExercises from '../requests/getExercises';
 import getWarmups from '../requests/getWarmups';
+import swapExerciseInWorkout from '../requests/swapExerciseInWorkout';
 
 // Just testing something
 import { WorkoutsContext } from '../context/workouts.context';
@@ -45,16 +46,15 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
     // Make state for what the modal is displaying ie the Edit exercise menu... 
     const [modalDisplay, setModalDisplay] = useState('edit-exercise');
 
-    // This will be used to store what exercise the user whats to swap
-    const [swapExercise, setSwapExercise] = useState('');
 
 
     // This is what the flat this will render in FlatList as part of the Swap exercise 
     const renderItem = ({ item }) => (
         <EditExerciseModalItem
             title={item.title}
-            setSwapExercise={setSwapExercise}
             setModalDisplay={setModalDisplay}
+            setReplacementExercise={setReplacementExercise}
+            item={item}
         />
     );
 
@@ -79,7 +79,6 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
         }
 
     }, [deleteExercise]);
-
 
 
 
@@ -119,7 +118,26 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
             setWarmupsAndExercises(warmups.concat(exercises));
             setModelLoading(false);
         }
-    }, [warmups, exercises])
+    }, [warmups, exercises]);
+
+
+     // This will be used to store what exercise the user whats to swap
+    const [replacementExercise, setReplacementExercise] = useState(null);
+    const [swapExercise, setSwapExercise] = useState(false);
+    useEffect(() => {
+        if (swapExercise) {
+            swapExerciseInWorkout(
+                parentWeek,
+                selectedWorkout,
+                currentExerciseSelected.id,
+                workoutPlan.jwt,
+                setShowLoader,
+                setUpdateContext,
+                replacementExercise
+            )
+            setSwapExercise(false);
+        }
+    }, [swapExercise, replacementExercise]);
 
 
     if (modalDisplay === 'edit-exercise') {
@@ -165,9 +183,9 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                         :
                         <FlatList
                             style={{ marginBottom: 16 }}
-                            data={warmupsAndExercises} //TODO: Change this it will have to come from the context
+                            data={warmupsAndExercises}
                             renderItem={renderItem}
-                            keyExtractor={item => item.id.toString()} // remove toString when data comes from context 
+                            keyExtractor={item => item.id.toString()}
                         />
                     }
                 </View>
@@ -189,14 +207,16 @@ export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSe
                     <Text style={styles.modelText}>Are you sure you want to swap the exercise
                     <Text style={styles.modelTextBold}> {currentExerciseSelected.title} </Text>
                     for
-                    <Text style={styles.modelTextBold}> {swapExercise}</Text>?
+                    <Text style={styles.modelTextBold}> {replacementExercise.title}</Text>?
                     </Text>
                 </View>
                 <View>
                     <ModelBtnPrimary title='Swap this exercise' color='green' onPress={() => {
                         // TODO: SWAP exercise out in context 
+                        setSwapExercise(true);
                         setModalDisplay('edit-exercise');
                         setOpenModel(false);
+
                     }} />
                     <ModelBtnSecondary title='Go back' onPress={() => {
                         setModalDisplay('swap-exercise');
