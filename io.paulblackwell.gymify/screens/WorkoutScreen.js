@@ -45,7 +45,7 @@ export default function WorkoutScreen({ route, navigation }) {
   const { workoutId } = route.params;
 
   // Get selected workout based on the workout Id passed in via the route
-  let selectedWorkout;
+  var selectedWorkout;
   workoutPlan.post.forEach(week => {
     if(week.id === workoutPlan.currentSelectedWeek.id) {
       week.workouts.forEach(workout => {
@@ -56,8 +56,7 @@ export default function WorkoutScreen({ route, navigation }) {
     }
   });
 
-  
-  
+
 
   /**
    * This will handle showing wether to show the loading component

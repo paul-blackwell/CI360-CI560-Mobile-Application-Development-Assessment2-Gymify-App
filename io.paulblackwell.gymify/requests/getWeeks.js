@@ -14,8 +14,8 @@ const getWeeks = async (setLoading, dispatch) => {
         .get('https://gymify-strapi-api.herokuapp.com/weeks')
         .then(response => {
             // Pass response data to dispatch in reducer
-            dispatch({ type: 'FETCH_API_SUCCESS', payload: response.data });
-            setLoading(false);
+            dispatch({ type: 'FETCH_UPDATED_DATA_FROM_API', payload: response.data });
+            setLoading(false)
         })
         .catch(error => {
             dispatch({ type: 'FETCH_API_ERROR' })

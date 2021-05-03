@@ -14,12 +14,13 @@ let colors = standardColors;
 export default function HomeScreen({ navigation }) {
 
   // Get workouts context with will be an array with all of the workouts
-  const { workoutPlan } = useContext(WorkoutsContext);
+  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
 
 
  
   const renderItem = ({ item }) => (
-    <WeeklyWorkoutItem title={item.title} id={item.id} navigation={navigation}/>
+    //<WeeklyWorkoutItem title={item.title} id={item.id} navigation={navigation} />
+    <WeeklyWorkoutItem title={item.title} id={item.id} navigation={navigation} dispatch={dispatch} item={item}/>
   );
 
 

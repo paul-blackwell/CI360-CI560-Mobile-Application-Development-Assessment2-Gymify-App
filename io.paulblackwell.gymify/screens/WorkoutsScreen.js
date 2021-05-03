@@ -44,17 +44,6 @@ export default function WorkoutsScreen({ route, navigation }) {
   );
 
 
-  /**
-   * We will need to update the context for the current selected week,
-   * we will need to do this because the WorkoutScreen needs to make an
-   * API request using the works parent week's id (selected), and it has no
-   * way of getting it. Thats why its being set in the context 
-   */
-  useEffect(() => {
-    dispatch({ type: 'SET_CURRENT_SELECTED_WEEK', payload: selectedWeek })
-  },[])
-
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />

@@ -4,7 +4,7 @@ const reducer = (state, action) => {
         case 'FETCH_API_SUCCESS':
             return {
                 loading: false,
-                post: action.payload,
+                post: action.payload.sort((a, b) => a.order - b.order),
                 error: '',
                 jwt: '',
                 currentSelectedWeek: ''
@@ -17,6 +17,8 @@ const reducer = (state, action) => {
                 jwt: '',
                 currentSelectedWeek: ''
             }
+        case 'FETCH_UPDATED_DATA_FROM_API':
+            return {...state,   post: action.payload.sort((a, b) => a.order - b.order),}
         case 'FETCH_JWT_SUCCESS':
             return { ...state, jwt: action.payload }
         case 'SET_LOADING':
