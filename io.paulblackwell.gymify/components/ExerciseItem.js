@@ -28,7 +28,7 @@ const setSubTitle = (time, sets) => {
 }
 
 
-export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel, setCurrentExerciseSelected }) => {
+export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel, setCurrentExerciseSelected, item }) => {
 
     return (
         <TouchableOpacity
@@ -37,7 +37,7 @@ export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWei
                 //Go to Exercise screen 
                 navigation.navigate('WorkoutStack', {
                     screen: 'ExerciseScreen',
-                    params: { exerciseTitle: title }
+                    params: { exerciseTitle: title, selectedExercise: item }
                 });
             }}
         >

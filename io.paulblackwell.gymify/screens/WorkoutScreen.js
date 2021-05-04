@@ -44,8 +44,6 @@ export default function WorkoutScreen({ route, navigation }) {
   // Get workout Id  from the route params
   //const { workoutId } = route.params;
 
-  console.log(route)
-
   // Get selected workout based on the workout Id passed in via the route
   var selectedWorkout;
   workoutPlan.post.forEach(week => {
@@ -97,6 +95,7 @@ export default function WorkoutScreen({ route, navigation }) {
       images={item.images}
       setOpenModel={setOpenEditExerciseModel}
       setCurrentExerciseSelected={setCurrentExerciseSelected}
+      item={item}
     />
   );
 
