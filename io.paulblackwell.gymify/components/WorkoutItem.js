@@ -6,7 +6,7 @@ import {standardColors} from '../styles/colors';
 
 let colors = standardColors;
 
-export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}) => {
+export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation,dispatch, item}) => {
 
     
     let singularOrPlural;
@@ -23,6 +23,9 @@ export default WeeklyWorkoutItem = ({ title, id, warmups, exercises, navigation}
         <TouchableOpacity
             style={styles.item}
             onPress={() => {
+
+                dispatch({ type: 'SET_CURRENT_SELECTED_WORKOUT', payload: item})
+
                 //Go to WorkoutList screen and pass the workout id to that screen
                  navigation.navigate('WorkoutStack', {
                     screen: 'WorkoutScreen',

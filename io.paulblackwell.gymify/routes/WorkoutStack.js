@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 export default function WorkoutStack() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator >
             <Stack.Screen
                 name="WorkoutsScreen"
                 component={WorkoutsScreen}
@@ -24,6 +24,7 @@ export default function WorkoutStack() {
             <Stack.Screen 
             name="WorkoutScreen" 
             component={WorkoutScreen}
+            //initialParams={{ defaultWeekID: "608fd766cb07ef00157c4988" }}
             options={({ route }) => ({ title: route.params.weekTitle })}
              />
             <Stack.Screen name="ExerciseScreen" component={ExerciseScreen} />

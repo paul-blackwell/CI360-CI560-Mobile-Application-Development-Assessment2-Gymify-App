@@ -7,7 +7,8 @@ const reducer = (state, action) => {
                 post: action.payload.sort((a, b) => a.order - b.order),
                 error: '',
                 jwt: '',
-                currentSelectedWeek: ''
+                currentSelectedWeek: '',
+                currentSelectedWorkout: '',
             }
         case 'FETCH_API_ERROR':
             return {
@@ -25,6 +26,8 @@ const reducer = (state, action) => {
             return { ...state, loading: action.payload }
         case 'SET_CURRENT_SELECTED_WEEK':
             return { ...state, currentSelectedWeek: action.payload }
+        case 'SET_CURRENT_SELECTED_WORKOUT':
+            return { ...state, currentSelectedWorkout: action.payload }
         default:
             return state;
     }

@@ -33,6 +33,29 @@ export default function WorkoutsScreen({ route, navigation }) {
   }
 
 
+  /**
+   * If the user navigated to this screen from the bottom tab menu for the first
+   * time and have not previously been on the Home screen, get Workouts 
+   * from the context (first week) update the context for the current selected week,
+  * we will need to do this because the WorkoutScreen needs to make an
+  * API request using the works parent week's id (selected), and it has no
+  * way of getting it. Thats why its being set in the context 
+   */
+  useEffect(() => {
+    if(route.params === undefined) {
+      dispatch({ type: 'SET_CURRENT_SELECTED_WEEK', payload: selectedWeek})
+    }
+  },[])
+
+
+  //console.log('selectedWeek.id ' + selectedWeek.id)
+  //console.log('workoutPlan.currentSelectedWeek.id ' + workoutPlan.currentSelectedWeek.id)
+  //console.log('------------------------------------------------------------------------')
+
+
+
+
+
   const renderItem = ({ item }) => (
     <WorkoutItem
       warmups={item.warmups}
@@ -40,6 +63,8 @@ export default function WorkoutsScreen({ route, navigation }) {
       title={item.title}
       id={item.id}
       navigation={navigation}
+      dispatch={dispatch}
+      item={item}
     />
   );
 

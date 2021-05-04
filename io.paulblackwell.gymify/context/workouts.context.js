@@ -10,7 +10,8 @@ const initialState = {
     error: '',
     post: {},
     jwt: '',
-    currentSelectedWeek: ''
+    currentSelectedWeek: '',
+    currentSelectedWorkout: '',
 }
 
 

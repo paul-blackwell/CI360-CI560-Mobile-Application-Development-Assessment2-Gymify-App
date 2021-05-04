@@ -44,12 +44,14 @@ export default function WorkoutScreen({ route, navigation }) {
   // Get workout Id  from the route params
   const { workoutId } = route.params;
 
+  console.log(route)
+
   // Get selected workout based on the workout Id passed in via the route
   var selectedWorkout;
   workoutPlan.post.forEach(week => {
-    if(week.id === workoutPlan.currentSelectedWeek.id) {
+    if (week.id === workoutPlan.currentSelectedWeek.id) {
       week.workouts.forEach(workout => {
-        if (workout.id === workoutId) {
+        if (workout.id === workoutPlan.currentSelectedWorkout.id) {
           selectedWorkout = workout;
         }
       })
@@ -74,7 +76,7 @@ export default function WorkoutScreen({ route, navigation }) {
   const [updateContext, setUpdateContext] = useState(false)
   useEffect(() => {
     if (updateContext) {
-      getWeeks(setShowLoader, dispatch)
+      getWeeks(setShowLoader, dispatch);
       setUpdateContext(false)
     }
   }, [updateContext])
@@ -96,6 +98,25 @@ export default function WorkoutScreen({ route, navigation }) {
       setCurrentExerciseSelected={setCurrentExerciseSelected}
     />
   );
+
+
+
+  /**
+   * If the user  was previously on this screen, then navigated
+   * to the home screen, then navigates to the WorkoutsScreen.The APP will
+   * error with TypeError: undefined is not an object (evaluating 'selectedWorkout.warmups').
+   * This is to do with the stack navigator loading in this screen for a split second and
+   * the selectedWorkout will be undefined because of this, cursing the error. 
+   * A quick fix for now is if this happens just return a black screen and it will 
+   * only show for a split second.
+   */
+  if (selectedWorkout === undefined) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+      </SafeAreaView >
+    )
+  }
 
 
   return (
@@ -139,9 +160,7 @@ export default function WorkoutScreen({ route, navigation }) {
           />
         </>
       }
-
-
-    </SafeAreaView>
+    </SafeAreaView >
 
   );
 }

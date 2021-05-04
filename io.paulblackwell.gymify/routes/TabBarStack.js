@@ -14,6 +14,7 @@ let colors = standardColors;
 
 const Tab = createBottomTabNavigator();
 
+
 export default function TabBarStack() {
   return (
     <Tab.Navigator
