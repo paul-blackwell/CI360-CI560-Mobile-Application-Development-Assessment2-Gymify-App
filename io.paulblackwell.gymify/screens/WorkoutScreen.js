@@ -42,7 +42,7 @@ export default function WorkoutScreen({ route, navigation }) {
   const { workoutPlan, dispatch } = useContext(WorkoutsContext);
 
   // Get workout Id  from the route params
-  const { workoutId } = route.params;
+  //const { workoutId } = route.params;
 
   console.log(route)
 
@@ -88,6 +88,7 @@ export default function WorkoutScreen({ route, navigation }) {
     <ExerciseItem
       title={item.title}
       id={item.id}
+      navigation={navigation}
       time={item.time}
       sets={item.sets}
       reps={item.reps}

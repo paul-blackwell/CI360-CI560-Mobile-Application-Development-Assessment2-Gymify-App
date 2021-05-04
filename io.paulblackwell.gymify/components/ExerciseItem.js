@@ -18,7 +18,7 @@ let colors = standardColors;
  * @returns a string with either the exercise in seconds, minutes or sets  
  */
 const setSubTitle = (time, sets) => {
-    if(time > 0 && time < 1) { //If it is a timed exercise and in seconds
+    if (time > 0 && time < 1) { //If it is a timed exercise and in seconds
         return `${time.toFixed(2).toString().replace('0.', '')} seconds`
     } else if (time > 0 && time >= 1) { //If it is a timed exercise and in minutes 
         return `${time} minutes`
@@ -28,27 +28,31 @@ const setSubTitle = (time, sets) => {
 }
 
 
-export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel, setCurrentExerciseSelected}) => {
+export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel, setCurrentExerciseSelected }) => {
 
     return (
         <TouchableOpacity
             style={styles.itemWrapper}
             onPress={() => {
-                console.log('I was pressed')
+                //Go to Exercise screen 
+                navigation.navigate('WorkoutStack', {
+                    screen: 'ExerciseScreen',
+                    params: { exerciseTitle: title }
+                });
             }}
         >
-            <ExerciseThumbnail uri={images[0].uri} origin={images[0].origin} exerciseCompleted={completed}/>
+            <ExerciseThumbnail uri={images[0].uri} origin={images[0].origin} exerciseCompleted={completed} />
             <View style={styles.item}>
                 <View style={styles.itemTitle}>
                     <Text style={styles.itemTitleText}>{truncate(title, 16)}</Text>
                     <Text style={styles.itemSubTitleText}>{setSubTitle(time, sets)}</Text>
                 </View>
-                <TouchableOpacity 
-                style={styles.itemIconContainer}
-                onPress={()=> {
-                    setCurrentExerciseSelected({title: title, id: id}) // the modal will use this to know what exercise to edit 
-                    setOpenModel(true);
-                }}
+                <TouchableOpacity
+                    style={styles.itemIconContainer}
+                    onPress={() => {
+                        setCurrentExerciseSelected({ title: title, id: id }) // the modal will use this to know what exercise to edit 
+                        setOpenModel(true);
+                    }}
                 >
                     <MaterialCommunityIcons name="dots-horizontal" size={24} color={colors.gray[400]} />
                 </TouchableOpacity>

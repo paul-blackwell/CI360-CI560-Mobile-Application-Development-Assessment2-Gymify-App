@@ -21,13 +21,17 @@ export default function WorkoutStack() {
                     headerTitle: props => <Header navigation={navigation} />,
                 })}
             />
-            <Stack.Screen 
-            name="WorkoutScreen" 
-            component={WorkoutScreen}
-            //initialParams={{ defaultWeekID: "608fd766cb07ef00157c4988" }}
-            options={({ route }) => ({ title: route.params.weekTitle })}
-             />
-            <Stack.Screen name="ExerciseScreen" component={ExerciseScreen} />
+            <Stack.Screen
+                name="WorkoutScreen"
+                component={WorkoutScreen}
+                //initialParams={{ defaultWeekID: "608fd766cb07ef00157c4988" }}
+                options={({ route }) => ({ title: route.params.weekTitle })}
+            />
+            <Stack.Screen
+                name="ExerciseScreen"
+                component={ExerciseScreen}
+                options={({ route }) => ({ title: route.params.exerciseTitle })}
+            />
             <Stack.Screen name="NewExerciseScreen" component={NewExerciseScreen} />
         </Stack.Navigator>
     );
