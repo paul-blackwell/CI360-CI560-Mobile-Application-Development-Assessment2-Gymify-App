@@ -9,6 +9,7 @@ const reducer = (state, action) => {
                 jwt: '',
                 currentSelectedWeek: '',
                 currentSelectedWorkout: '',
+                showTabBar: true,
             }
         case 'FETCH_API_ERROR':
             return {
@@ -28,6 +29,8 @@ const reducer = (state, action) => {
             return { ...state, currentSelectedWeek: action.payload }
         case 'SET_CURRENT_SELECTED_WORKOUT':
             return { ...state, currentSelectedWorkout: action.payload }
+            case 'SHOW_TAB_BAR':
+            return { ...state, showTabBar: action.payload }
         default:
             return state;
     }

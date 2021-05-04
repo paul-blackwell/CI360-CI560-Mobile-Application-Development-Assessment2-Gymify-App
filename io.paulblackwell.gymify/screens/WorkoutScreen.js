@@ -96,6 +96,7 @@ export default function WorkoutScreen({ route, navigation }) {
       setOpenModel={setOpenEditExerciseModel}
       setCurrentExerciseSelected={setCurrentExerciseSelected}
       item={item}
+      dispatch={dispatch}
     />
   );
 

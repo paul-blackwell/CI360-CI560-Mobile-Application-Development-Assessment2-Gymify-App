@@ -28,12 +28,13 @@ const setSubTitle = (time, sets) => {
 }
 
 
-export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel, setCurrentExerciseSelected, item }) => {
+export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel, setCurrentExerciseSelected, item, dispatch }) => {
 
     return (
         <TouchableOpacity
             style={styles.itemWrapper}
             onPress={() => {
+                dispatch({ type: 'SHOW_TAB_BAR', payload: false })
                 //Go to Exercise screen 
                 navigation.navigate('WorkoutStack', {
                     screen: 'ExerciseScreen',

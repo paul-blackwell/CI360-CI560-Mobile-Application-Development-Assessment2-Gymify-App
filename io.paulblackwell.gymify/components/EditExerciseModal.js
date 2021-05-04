@@ -20,21 +20,6 @@ let colors = standardColors;
 
 const windowHeight = Dimensions.get('window').height;
 
-// Just for testing this will come from the context
-const DATA = [
-    { title: 'Bench press', id: 1 },
-    { title: 'Push-ups', id: 2 },
-    { title: 'Oly bar front squat', id: 3 },
-    { title: 'Leg Press machine', id: 4 },
-    { title: 'Deadlift', id: 5 },
-    { title: 'Running', id: 6 },
-    { title: 'Plyobox jumps', id: 7 },
-    { title: 'Leg Press machine', id: 8 },
-    { title: 'Deadlift', id: 9 },
-    { title: 'Running', id: 10 },
-    { title: 'Plyobox jumps', id: 11 },
-]
-
 
 export default EditExerciseModal = ({ openModel, setOpenModel, currentExerciseSelected, selectedWorkout, parentWeek, setShowLoader, setUpdateContext }) => {
 

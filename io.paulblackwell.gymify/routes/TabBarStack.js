@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useContext} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import WorkoutStack from '../routes/WorkoutStack';
@@ -10,12 +10,18 @@ import ActivityStack from '../routes/ActivityStack';
 import {standardColors} from '../styles/colors';
 import TabBarIcon from '../components/smallerComponents/TabBarIcon';
 
+
+import { WorkoutsContext } from '../context/workouts.context';
+
 let colors = standardColors;
 
 const Tab = createBottomTabNavigator();
 
 
 export default function TabBarStack() {
+
+  const { workoutPlan } = useContext(WorkoutsContext);
+
   return (
     <Tab.Navigator
       tabBarOptions={
@@ -47,6 +53,7 @@ export default function TabBarStack() {
         name="WorkoutStack"
         component={WorkoutStack}
         options={{
+          tabBarVisible: workoutPlan.showTabBar,
           tabBarLabel: 'Workouts',
           tabBarIcon: ({ focused, color, size }) => {
             return (

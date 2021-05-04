@@ -12,6 +12,7 @@ const initialState = {
     jwt: '',
     currentSelectedWeek: '',
     currentSelectedWorkout: '',
+    showTabBar: true,
 }
 
 
