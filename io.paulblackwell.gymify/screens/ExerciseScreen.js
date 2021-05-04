@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, StatusBar, SafeAreaView } from 'react-native';
+import React, { useContext, useEffect,  } from 'react';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView, BackHandler } from 'react-native';
 import { standardColors } from '../styles/colors';
 import { WorkoutsContext } from '../context/workouts.context';
 
@@ -13,8 +13,18 @@ export default function ExerciseScreen({ navigation, route }) {
   const { dispatch } = useContext(WorkoutsContext);
 
   // useEffect(() => {
-  //   dispatch({ type: 'SHOW_TAB_BAR', payload: false })
-  // })
+  //   //dispatch({ type: 'SHOW_TAB_BAR', payload: false })
+  //   const backAction = () => {
+  //     console.log('The back button was press')
+  //   }
+
+  //   const backHandler = BackHandler.addEventListener(
+  //     "hardwareBackPress",
+  //     backAction
+  //   );
+
+  //   return () => backHandler.remove();
+  // }, [])
 
 
 
