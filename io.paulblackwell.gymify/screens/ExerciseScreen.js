@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, } from 'react-native';
 import { standardColors } from '../styles/colors';
 import { WorkoutsContext } from '../context/workouts.context';
+import ExerciseBtnPrimary from '../components/smallerComponents/ExerciseBtnPrimary';
 
 
 let colors = standardColors;
@@ -36,16 +37,18 @@ export default function ExerciseScreen({ navigation, route }) {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-      <View style={styles.main}>
-        <Text >Exercise Screen</Text>
-        <Text>{selectedExercise.title}</Text>
-      </View>
+    <>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+        <View style={styles.main}>
+          <Text >Exercise Screen</Text>
+          <Text>{selectedExercise.title}</Text>
+        </View>
+      </SafeAreaView>
       <View style={styles.exerciseTabBar}>
-        <Text>Start</Text>
+        <ExerciseBtnPrimary title='Start' onPress={() => console.log('i was clicked')}/>
       </View>
-    </SafeAreaView>
+    </>
   );
 }
 
@@ -64,7 +67,15 @@ const styles = StyleSheet.create({
   },
   exerciseTabBar: {
     position: 'absolute',
-    bottom: -5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    bottom: 0,
+    backgroundColor: colors.white[100],
+    shadowOffset: { width: 10, height: 10 },
+    shadowColor: 'black',
+    shadowOpacity: 1,
+    elevation: 3,
     zIndex: 1000
   }
 });
