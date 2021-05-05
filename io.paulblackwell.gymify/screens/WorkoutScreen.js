@@ -25,6 +25,16 @@ let colors = standardColors;
 export default function WorkoutScreen({ route, navigation }) {
 
 
+  
+  // Get workouts context with will be an array with all of the workouts
+  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
+
+  // Get workout Id  from the route params
+  //const { workoutId } = route.params;
+
+
+
+
   // Make state to open and close model 
   const [openEditExerciseModel, setOpenEditExerciseModel] = useState(false);
 
@@ -37,12 +47,6 @@ export default function WorkoutScreen({ route, navigation }) {
    */
   const [currentExerciseSelected, setCurrentExerciseSelected] = useState(false);
 
-
-  // Get workouts context with will be an array with all of the workouts
-  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
-
-  // Get workout Id  from the route params
-  //const { workoutId } = route.params;
 
   // Get selected workout based on the workout Id passed in via the route
   var selectedWorkout;
