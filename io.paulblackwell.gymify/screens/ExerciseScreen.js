@@ -37,18 +37,8 @@ export default function ExerciseScreen({ navigation, route }) {
     )
   }
 
-  //console.log(selectedExercise.time.toString())
+  
 
-  const getSeconds = (time) => {
-    // Get the seconds after the de
-    let seconds;
-    seconds = time.toFixed(2);
-    seconds = seconds.toString().substring(seconds.indexOf(".") + 1); // Get rid of everything before decimal point;
-    seconds = parseInt(seconds)
-    console.log(seconds);
-  }
-
-  getSeconds(0.30)
 
 
   return (
@@ -57,7 +47,7 @@ export default function ExerciseScreen({ navigation, route }) {
         <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
         <View style={styles.main}>
           <ImageCarousel images={selectedExercise.images} />
-          <Timer minutes={1} seconds={30} />
+          <Timer time={selectedExercise.time} />
         </View>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
