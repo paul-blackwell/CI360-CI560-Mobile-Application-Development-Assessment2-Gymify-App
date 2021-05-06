@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Entypo } from '@expo/vector-icons';
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Dimensions } from 'react-native';
 import CarouselImage from '../components/smallerComponents/CarouselImage';
 import CarouselSettingsIcon from '../components/smallerComponents/CarouselSettingsIcon';
 
@@ -13,22 +13,17 @@ const windowHeight = Dimensions.get('window').height;
 export default ImageCarousel = ({ images }) => {
 
 
-    // images.forEach(image => {
-    //     console.log(image.uri)
-    // });
-
-
     /**
      * If their are no images, don't show the chevrons and set the
      * CarouselImage uri to null, this will make it render an image
      * with a no image placeholder
      */
 
-    if(images.length === 0) {
+    if (images.length === 0) {
         return (
             <View>
                 <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
-                <View style={[styles.imageCarouselContainer], {marginHorizontal: 48}}>
+                <View style={[styles.imageCarouselContainer], { marginHorizontal: 48 }}>
                     <CarouselImage uri={null} />
                 </View>
             </View>
@@ -41,33 +36,54 @@ export default ImageCarousel = ({ images }) => {
      * If their is only one image render  carousel without
      * chevrons
      */
-    // if(images.length <= 1) {
-    //     return (
-    //         <View>
-    //             <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
-    //             <View style={styles.imageCarouselContainer}>
-    //                 <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => console.log('i was clicked')}>
-    //                     <Entypo name="chevron-small-left" size={24} color={colors.gray[400]} />
-    //                 </TouchableOpacity>
-    //                 <CarouselImage uri={images[0].uri} />
-    //                 <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => console.log('i was clicked')}>
-    //                     <Entypo name="chevron-small-right" size={24} color={colors.gray[400]} />
-    //                 </TouchableOpacity>
-    //             </View>
-    //         </View>
-    //     )
-    // }
+    if (images.length <= 1) {
+        return (
+            <View>
+                <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
+                <View style={[styles.imageCarouselContainer], { marginHorizontal: 48 }}>
+                    <CarouselImage uri={images[0].uri} justOneImage={true} />
+                </View>
+            </View>
+        )
+    }
+
+
+
+    
+    /**
+     * This will allow the user to click through the carousel images
+     */
+    const [currentCarouselPosition, setCurrentCarouselPosition] = useState(0);
+    const updateCurrentCarouselPosition = (direction) => {
+        let increment = currentCarouselPosition;
+        if (direction === 'right') {
+            if (images.length - 1 === currentCarouselPosition) {
+                setCurrentCarouselPosition(0);
+                return;
+            }
+            increment ++;
+            setCurrentCarouselPosition(increment)
+        } else if (direction === 'left') {
+            if(currentCarouselPosition === 0) {
+                setCurrentCarouselPosition(images.length - 1);
+                return;
+            }
+            increment --;
+            setCurrentCarouselPosition(increment)
+        }
+    }
+
 
 
     return (
         <View>
             <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
             <View style={styles.imageCarouselContainer}>
-                <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => console.log('i was clicked')}>
+                <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => updateCurrentCarouselPosition('left')}>
                     <Entypo name="chevron-small-left" size={24} color={colors.gray[400]} />
                 </TouchableOpacity>
-                <CarouselImage uri={images[0].uri} />
-                <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => console.log('i was clicked')}>
+                <CarouselImage uri={images[currentCarouselPosition].uri} />
+                <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => updateCurrentCarouselPosition('right')}>
                     <Entypo name="chevron-small-right" size={24} color={colors.gray[400]} />
                 </TouchableOpacity>
             </View>

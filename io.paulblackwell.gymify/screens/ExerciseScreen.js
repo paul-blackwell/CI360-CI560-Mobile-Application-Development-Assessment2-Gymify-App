@@ -42,7 +42,7 @@ export default function ExerciseScreen({ navigation, route }) {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
         <View style={styles.main}>
-         <ImageCarousel images={[]} />
+         <ImageCarousel images={selectedExercise.images} />
         </View>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
