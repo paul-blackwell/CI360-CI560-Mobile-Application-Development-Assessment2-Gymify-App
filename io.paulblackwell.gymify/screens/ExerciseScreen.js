@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, StatusBar, SafeAreaView, } from 'react-native';
 import { standardColors } from '../styles/colors';
 import { WorkoutsContext } from '../context/workouts.context';
 import ExerciseBtnPrimary from '../components/smallerComponents/ExerciseBtnPrimary';
+import ImageCarousel from '../components/ImageCarousel';
 
 
 let colors = standardColors;
@@ -41,8 +42,7 @@ export default function ExerciseScreen({ navigation, route }) {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
         <View style={styles.main}>
-          <Text >Exercise Screen</Text>
-          <Text>{selectedExercise.title}</Text>
+         <ImageCarousel images={selectedExercise.images} />
         </View>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
@@ -60,10 +60,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray[100],
   },
   main: {
-    flex: 1,
-    justifyContent: 'center',
-    margin: 10,
-    alignItems: 'center'
+    // flex: 1,
+    // justifyContent: 'center',
+    // margin: 10,
+    // alignItems: 'center'
   },
   exerciseTabBar: {
     position: 'absolute',
