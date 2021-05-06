@@ -37,8 +37,24 @@ export default function ExerciseScreen({ navigation, route }) {
     )
   }
 
-  
 
+
+  const [toggleStartTimer, setToggleStartTimer] = useState(false);
+  const [timerStopped, setTimerStopped] = useState(null);
+  const handelStartTimer = () => {
+    setToggleStartTimer(toggleStartTimer => !toggleStartTimer)
+  }
+
+  useEffect(() => {
+    if (timerStopped) {
+      setToggleStartTimer(false);
+    }
+  }, [timerStopped])
+
+
+  const handelComplete = () => {
+    console.log('handelComplete')
+  }
 
 
   return (
@@ -47,11 +63,31 @@ export default function ExerciseScreen({ navigation, route }) {
         <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
         <View style={styles.main}>
           <ImageCarousel images={selectedExercise.images} />
-          <Timer time={selectedExercise.time} />
+          <Timer
+            time={selectedExercise.time}
+            toggleStartTimer={toggleStartTimer}
+            setToggleStartTimer={setToggleStartTimer}
+            setTimerStopped={setTimerStopped} />
         </View>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
-        <ExerciseBtnPrimary title='Start' onPress={() => console.log('i was clicked')} />
+        {/* {!toggleStartTimer ?
+          <ExerciseBtnPrimary title='Start' onPress={handelStartTimer} />
+          :
+          <ExerciseBtnPrimary title='Pause' onPress={handelStartTimer} />
+        } */}
+        {!toggleStartTimer && !timerStopped &&
+          <ExerciseBtnPrimary title='Start' onPress={handelStartTimer} />
+        }
+
+        {toggleStartTimer && !timerStopped &&
+          <ExerciseBtnPrimary title='Pause' onPress={handelStartTimer} />
+        }
+
+        {timerStopped &&
+          <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
+        }
+
       </View>
     </>
   );

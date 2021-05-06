@@ -15,7 +15,7 @@ let colors = standardColors;
    * 
    */
 
-const Timer = ({ time, startTimer }) => {
+const Timer = ({ time, toggleStartTimer, setToggleStartTimer, setTimerStopped }) => {
 
 
     /**
@@ -36,35 +36,45 @@ const Timer = ({ time, startTimer }) => {
     const [secondsLeft, setSecondsLeft] = useState(getSeconds(time));
     const [minutesLeft, setMinutesLeft] = useState(parseInt(time));
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     // exit early when we reach 0 on secondsLeft and minutesLeft
-    //     if (!secondsLeft && !minutesLeft) return;
+        console.log(toggleStartTimer)
 
-    //     /**
-    //      * I there are no secondsLeft but there is still minutesLeft
-    //      * and 60 to seconds left and remove a minute from minutesLeft
-    //      */
-    //     if (!secondsLeft && minutesLeft) {
-    //         setSecondsLeft(59)
-    //         setMinutesLeft(minutesLeft - 1)
-    //     }
+        // If parent component toggleStartTimer state is false just return 
+        if (!toggleStartTimer) return;
+
+        // exit early when we reach 0 on secondsLeft and minutesLeft
+        if (!secondsLeft && !minutesLeft) {
+            setTimerStopped(true)
+            return;
+        }
+
+        /**
+         * I there are no secondsLeft but there is still minutesLeft
+         * and 60 to seconds left and remove a minute from minutesLeft
+         */
+        if (!secondsLeft && minutesLeft) {
+            setSecondsLeft(59)
+            setMinutesLeft(minutesLeft - 1)
+        }
 
 
-    //     // save intervalId to clear the interval when the
-    //     // component re-renders
-    //     const intervalId = setInterval(() => {
-    //         setSecondsLeft(secondsLeft - 1);
-    //     }, 1000);
+        // save intervalId to clear the interval when the
+        // component re-renders
+        const intervalId = setInterval(() => {
+            setSecondsLeft(secondsLeft - 1);
+        }, 1000);
 
-    //     // clear interval on re-render to avoid memory leaks
-    //     return () => clearInterval(intervalId);
-    //     // add secondsLeft as a dependency to re-rerun the effect
-    //     // when we update it
-    // }, [secondsLeft]);
+        // clear interval on re-render to avoid memory leaks
+        return () => clearInterval(intervalId);
+        // add secondsLeft as a dependency to re-rerun the effect
+        // when we update it
+    }, [secondsLeft, minutesLeft, toggleStartTimer]);
 
     const handleRefresh = () => {
-        console.log('refresh')
+        setSecondsLeft(getSeconds(time))
+        setMinutesLeft(parseInt(time))
+        setToggleStartTimer(false);
     }
 
 
@@ -72,7 +82,7 @@ const Timer = ({ time, startTimer }) => {
     return (
         <View style={styles.timerContainer}>
             <View style={styles.timerMain}>
-                <Text style={styles.timerText}>{minutesLeft} : {secondsLeft}</Text>
+                <Text style={styles.timerText}>{minutesLeft.toString().length < 2 ? `0${minutesLeft}` : minutesLeft} : {secondsLeft.toString().length < 2 ? `0${secondsLeft}` : secondsLeft}</Text>
             </View>
             <TouchableOpacity style={styles.timerRefreshBtn} onPress={handleRefresh}>
                 <Ionicons name="refresh" size={24} color={colors.purple[200]} />
@@ -84,7 +94,6 @@ const Timer = ({ time, startTimer }) => {
 const styles = StyleSheet.create({
     timerContainer: {
         marginTop: 24,
-        backgroundColor: colors.purple[100],
         paddingBottom: 32
     },
     timerMain: {
