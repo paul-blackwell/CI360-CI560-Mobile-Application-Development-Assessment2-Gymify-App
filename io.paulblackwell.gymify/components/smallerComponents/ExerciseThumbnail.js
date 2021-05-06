@@ -9,23 +9,23 @@ let colors = standardColors;
 
 
 
-export default ExerciseThumbnail = ({ exerciseCompleted, uri, origin }) => {
+export default ExerciseThumbnail = ({ exerciseCompleted, uri}) => {
 
 
 
     /**
      * This function just sets the image source to uri
-     * or gets it from the saved images, depending on where
-     * the image has come from
+     * or gets it from the saved images, if the image
+     * exists or not
      * @returns image uri or image path 
      */
-    // const getImage = () => {
-    //     if (origin === 'api') {
-    //         return { uri: uri }
-    //     } else {
-    //         return require('../../assets/icons/no_image_icon.png')
-    //     }
-    // }
+    const getImage = () => {
+        if (uri === null || uri === undefined) {
+            return require('../../assets/icons/no_image_icon.png')
+        } else {
+            return { uri: uri }
+        }
+    }
 
 
     return (
@@ -35,8 +35,7 @@ export default ExerciseThumbnail = ({ exerciseCompleted, uri, origin }) => {
                     <Feather style={styles.exerciseThumbnailOverlayIcon} name="check" size={32} color={colors.green[200]} />
                 </View>
             }
-            {/* <Image style={styles.exerciseThumbnailImage} source={getImage()} /> */}
-            <Image style={styles.exerciseThumbnailImage} source={{ uri: uri }} />
+            <Image style={styles.exerciseThumbnailImage} source={getImage()} />
         </View>
     )
 }

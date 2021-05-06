@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, Text } from 'react-native';
 
 
 
@@ -15,10 +15,13 @@ export default CarouselImage = ({ uri }) => {
      */
     if (uri === null) {
         return (
-            <Image
-                style={[styles.carouselImage, { elevation: 5, }]}
+            <View style={styles.carouselImageContainer}>
+            {/* <Image
+                style={[styles.carouselImage, {height: '100%', width: '100%'}]}
                 source={require('../../assets/icons/no_image_icon_large.png')}
-            />
+            /> */}
+            <Text>No image</Text>
+        </View>
         )
     }
 

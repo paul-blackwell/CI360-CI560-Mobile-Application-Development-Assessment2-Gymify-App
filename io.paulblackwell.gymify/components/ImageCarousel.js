@@ -17,17 +17,60 @@ export default ImageCarousel = ({ images }) => {
     //     console.log(image.uri)
     // });
 
- 
+
+    /**
+     * If their are no images, don't show the chevrons and set the
+     * CarouselImage uri to null, this will make it render an image
+     * with a no image placeholder
+     */
+
+    if(images.length === 0) {
+        return (
+            <View>
+                <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
+                <View style={[styles.imageCarouselContainer], {marginHorizontal: 48}}>
+                    <CarouselImage uri={null} />
+                </View>
+            </View>
+        )
+    }
+
+
+
+    /**
+     * If their is only one image render  carousel without
+     * chevrons
+     */
+    // if(images.length <= 1) {
+    //     return (
+    //         <View>
+    //             <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
+    //             <View style={styles.imageCarouselContainer}>
+    //                 <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => console.log('i was clicked')}>
+    //                     <Entypo name="chevron-small-left" size={24} color={colors.gray[400]} />
+    //                 </TouchableOpacity>
+    //                 <CarouselImage uri={images[0].uri} />
+    //                 <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => console.log('i was clicked')}>
+    //                     <Entypo name="chevron-small-right" size={24} color={colors.gray[400]} />
+    //                 </TouchableOpacity>
+    //             </View>
+    //         </View>
+    //     )
+    // }
+
+
     return (
-        <View style={styles.imageCarouselContainer}>
-            <CarouselSettingsIcon onPress={()=> {console.log('i was clicked')}} />
-            <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => 'i was clicked'}>
-                <Entypo name="chevron-small-left" size={24} color={colors.gray[400]} />
-            </TouchableOpacity>
-            <CarouselImage uri={images[0].uri}/>
-            <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => 'i was clicked'}>
-                <Entypo name="chevron-small-right" size={24} color={colors.gray[400]} />
-            </TouchableOpacity>
+        <View>
+            <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
+            <View style={styles.imageCarouselContainer}>
+                <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => console.log('i was clicked')}>
+                    <Entypo name="chevron-small-left" size={24} color={colors.gray[400]} />
+                </TouchableOpacity>
+                <CarouselImage uri={images[0].uri} />
+                <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => console.log('i was clicked')}>
+                    <Entypo name="chevron-small-right" size={24} color={colors.gray[400]} />
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }

@@ -30,6 +30,16 @@ const setSubTitle = (time, sets) => {
 
 export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWeight, completed, images, setOpenModel, setCurrentExerciseSelected, item, dispatch }) => {
 
+
+    // This will stop the ExerciseItem erroring if there is no image
+    let imageUri;
+    if(images.length < 1) {
+        imageUri = null
+    } else {
+        imageUri = images[0].uri
+    }
+ 
+
     return (
         <TouchableOpacity
             style={styles.itemWrapper}
@@ -42,7 +52,7 @@ export default ExerciseItem = ({ title, id, navigation, time, sets, reps, maxWei
                 });
             }}
         >
-            <ExerciseThumbnail uri={images[0].uri} origin={images[0].origin} exerciseCompleted={completed} />
+            <ExerciseThumbnail uri={imageUri} exerciseCompleted={completed} />
             <View style={styles.item}>
                 <View style={styles.itemTitle}>
                     <Text style={styles.itemTitleText}>{truncate(title, 16)}</Text>
