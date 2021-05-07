@@ -6,6 +6,7 @@ import ExerciseBtnPrimary from '../components/smallerComponents/ExerciseBtnPrima
 import ImageCarousel from '../components/ImageCarousel';
 import Timer from '../components/Timer';
 import ExerciseIcon from '../components/smallerComponents/ExerciseIcon';
+import ImageCarouselSettingsModal from '../components/ImageCarouselSettingsModal';
 
 
 let colors = standardColors;
@@ -72,6 +73,12 @@ export default function ExerciseScreen({ navigation, route }) {
         setToggleStartTimer(false);
       }
     }, [timerStopped])
+    
+
+
+    /**This is the state that opens the setting model for the ImageCarousel */
+    const [openImageSettings, setOpenImageSetting] = useState(false);
+
 
 
     return (
@@ -99,13 +106,12 @@ export default function ExerciseScreen({ navigation, route }) {
           {timerStopped &&
             <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
           }
-
         </View>
+        <ImageCarouselSettingsModal openModel={true} setOpenModel={()=> {console.log('I was clicked')}} />
       </>
     );
   }
 
-  console.log()
 
   return (
     <>
