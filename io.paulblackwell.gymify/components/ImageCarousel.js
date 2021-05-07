@@ -10,7 +10,14 @@ let colors = standardColors;
 
 const windowHeight = Dimensions.get('window').height;
 
-export default ImageCarousel = ({ images }) => {
+export default ImageCarousel = ({ images, setOpenModel}) => {
+
+
+    // This will open the image settings model
+    const handelIconPress = () => {
+        setOpenModel(true)
+    }
+
 
 
     /**
@@ -22,7 +29,7 @@ export default ImageCarousel = ({ images }) => {
     if (images.length === 0) {
         return (
             <View>
-                <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
+                <CarouselSettingsIcon onPress={handelIconPress} />
                 <View style={[styles.imageCarouselContainer], { marginHorizontal: 48 }}>
                     <CarouselImage uri={null} />
                 </View>
@@ -39,7 +46,7 @@ export default ImageCarousel = ({ images }) => {
     if (images.length <= 1) {
         return (
             <View>
-                <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
+                <CarouselSettingsIcon onPress={handelIconPress} />
                 <View style={[styles.imageCarouselContainer], { marginHorizontal: 48 }}>
                     <CarouselImage uri={images[0].uri} justOneImage={true} />
                 </View>
@@ -77,7 +84,7 @@ export default ImageCarousel = ({ images }) => {
 
     return (
         <View>
-            <CarouselSettingsIcon onPress={() => { console.log('i was clicked') }} />
+            <CarouselSettingsIcon onPress={handelIconPress} />
             <View style={styles.imageCarouselContainer}>
                 <TouchableOpacity style={styles.imageCarouselChevron} onPress={() => updateCurrentCarouselPosition('left')}>
                     <Entypo name="chevron-small-left" size={24} color={colors.gray[400]} />

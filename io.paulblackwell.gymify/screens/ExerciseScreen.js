@@ -53,6 +53,10 @@ export default function ExerciseScreen({ navigation, route }) {
   }
 
 
+  /**This is the state that opens the setting model for the ImageCarousel */
+  const [openImageSettings, setOpenImageSetting] = useState(false);
+
+
 
   /**
    * If the exercise is time render the screen with a timer and
@@ -73,11 +77,7 @@ export default function ExerciseScreen({ navigation, route }) {
         setToggleStartTimer(false);
       }
     }, [timerStopped])
-    
 
-
-    /**This is the state that opens the setting model for the ImageCarousel */
-    const [openImageSettings, setOpenImageSetting] = useState(false);
 
 
 
@@ -86,7 +86,7 @@ export default function ExerciseScreen({ navigation, route }) {
         <SafeAreaView style={styles.container}>
           <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
           <ScrollView style={styles.main}>
-            <ImageCarousel images={selectedExercise.images} />
+            <ImageCarousel images={selectedExercise.images} setOpenModel={setOpenImageSetting} />
             <Timer
               time={selectedExercise.time}
               toggleStartTimer={toggleStartTimer}
@@ -107,7 +107,7 @@ export default function ExerciseScreen({ navigation, route }) {
             <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
           }
         </View>
-        <ImageCarouselSettingsModal openModel={true} setOpenModel={()=> {console.log('I was clicked')}} />
+        <ImageCarouselSettingsModal openModel={openImageSettings} setOpenModel={setOpenImageSetting} />
       </>
     );
   }
@@ -118,7 +118,7 @@ export default function ExerciseScreen({ navigation, route }) {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
         <ScrollView style={styles.main}>
-          <ImageCarousel images={selectedExercise.images} />
+          <ImageCarousel images={selectedExercise.images} setOpenModel={setOpenImageSetting} />
           <Text style={styles.recordText}>
             Your record:
             <Text styles={styles.recordTextBold}> {selectedExercise.maxWeight}kg</Text>
@@ -140,6 +140,7 @@ export default function ExerciseScreen({ navigation, route }) {
       <View style={styles.exerciseTabBar}>
         <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
       </View>
+      <ImageCarouselSettingsModal openModel={openImageSettings} setOpenModel={setOpenImageSetting} />
     </>
   );
 
