@@ -5,6 +5,7 @@ import { WorkoutsContext } from '../context/workouts.context';
 import ExerciseBtnPrimary from '../components/smallerComponents/ExerciseBtnPrimary';
 import ImageCarousel from '../components/ImageCarousel';
 import Timer from '../components/Timer';
+import ExerciseIcon from '../components/smallerComponents/ExerciseIcon';
 
 
 let colors = standardColors;
@@ -104,18 +105,27 @@ export default function ExerciseScreen({ navigation, route }) {
     );
   }
 
+  console.log()
+
   return (
     <>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
         <ScrollView style={styles.main}>
           <ImageCarousel images={selectedExercise.images} />
+          <Text style={styles.recordText}>
+            Your record: 
+            <Text styles={styles.recordTextBold}> {selectedExercise.maxWeight}kg</Text>
+          </Text>
+          <View style={styles.info}>
+              <ExerciseIcon />
+          </View>
           <Text style={styles.descriptionTitle}>Description</Text>
           <Text style={styles.description}>{selectedExercise.description}</Text>
         </ScrollView>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
-          <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
+        <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
       </View>
     </>
   );
@@ -154,9 +164,24 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_800ExtraBold',
     color: colors.gray[400]
   },
+  info: {
+
+  },
   description: {
     marginTop: 8,
     color: colors.gray[300],
     paddingBottom: 84
-  }
+  },
+  recordText: {
+    textAlign: "center",
+    marginTop: 24,
+    fontSize: 16,
+    color: colors.gray[400],
+  },
+  recordTextBold: {
+    fontSize: 16,
+    fontWeight: "bold",
+    fontFamily: 'Inter_800ExtraBold',
+    color: colors.gray[400]
+  },
 });
