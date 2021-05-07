@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
     timerText: {
         fontSize: 24,
         fontWeight: "bold",
-        fontFamily: 'Inter_800ExtraBold'
+        fontFamily: 'Inter_800ExtraBold',
+        color: colors.gray[400]
     },
     timerRefreshBtn: {
         position: "absolute",

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, StatusBar, SafeAreaView, Button } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView, ScrollView } from 'react-native';
 import { standardColors } from '../styles/colors';
 import { WorkoutsContext } from '../context/workouts.context';
 import ExerciseBtnPrimary from '../components/smallerComponents/ExerciseBtnPrimary';
@@ -39,58 +39,89 @@ export default function ExerciseScreen({ navigation, route }) {
 
 
 
-/**
- * This will handle the timer state (weather to stop or start) 
- */
-  const [toggleStartTimer, setToggleStartTimer] = useState(false);
-  const [timerStopped, setTimerStopped] = useState(null);
-  const handelStartTimer = () => {
-    setToggleStartTimer(toggleStartTimer => !toggleStartTimer)
-  }
-  useEffect(() => {
-    if (timerStopped) {
-      setToggleStartTimer(false);
-    }
-  }, [timerStopped])
 
 
   /**
-   * This will send a request to the API to
-   * update the exercise to be completed 
-   */
+     * This will send a request to the API to
+     * update the exercise to be completed 
+     */
   const handelComplete = () => {
     console.log('handelComplete')
     // TODO: handle API request
   }
 
 
+
+  /**
+   * If the exercise is time render the screen with a timer and
+   * the state needed to make it work
+   */
+  if (selectedExercise.time > 0) {
+
+    /**
+   * This will handle the timer state (weather to stop or start) 
+   */
+    const [toggleStartTimer, setToggleStartTimer] = useState(false);
+    const [timerStopped, setTimerStopped] = useState(null);
+    const handelStartTimer = () => {
+      setToggleStartTimer(toggleStartTimer => !toggleStartTimer)
+    }
+    useEffect(() => {
+      if (timerStopped) {
+        setToggleStartTimer(false);
+      }
+    }, [timerStopped])
+
+
+    return (
+      <>
+        <SafeAreaView style={styles.container}>
+          <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+          <ScrollView style={styles.main}>
+            <ImageCarousel images={selectedExercise.images} />
+            <Timer
+              time={selectedExercise.time}
+              toggleStartTimer={toggleStartTimer}
+              setToggleStartTimer={setToggleStartTimer}
+              setTimerStopped={setTimerStopped} />
+            <Text style={styles.descriptionTitle}>Description</Text>
+            <Text style={styles.description}>{selectedExercise.description}</Text>
+          </ScrollView>
+        </SafeAreaView>
+        <View style={styles.exerciseTabBar}>
+          {!toggleStartTimer && !timerStopped &&
+            <ExerciseBtnPrimary title='Start' onPress={handelStartTimer} />
+          }
+          {toggleStartTimer && !timerStopped &&
+            <ExerciseBtnPrimary title='Pause' onPress={handelStartTimer} />
+          }
+          {timerStopped &&
+            <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
+          }
+
+        </View>
+      </>
+    );
+  }
+
   return (
     <>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
-        <View style={styles.main}>
+        <ScrollView style={styles.main}>
           <ImageCarousel images={selectedExercise.images} />
-          <Timer
-            time={selectedExercise.time}
-            toggleStartTimer={toggleStartTimer}
-            setToggleStartTimer={setToggleStartTimer}
-            setTimerStopped={setTimerStopped} />
-        </View>
+          <Text style={styles.descriptionTitle}>Description</Text>
+          <Text style={styles.description}>{selectedExercise.description}</Text>
+        </ScrollView>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
-        {!toggleStartTimer && !timerStopped &&
-          <ExerciseBtnPrimary title='Start' onPress={handelStartTimer} />
-        }
-        {toggleStartTimer && !timerStopped &&
-          <ExerciseBtnPrimary title='Pause' onPress={handelStartTimer} />
-        }
-        {timerStopped &&
           <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
-        }
-
       </View>
     </>
   );
+
+
+
 }
 
 const styles = StyleSheet.create({
@@ -101,10 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray[100],
   },
   main: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // margin: 10,
-    // alignItems: 'center'
+    // paddingBottom: 200
   },
   exerciseTabBar: {
     position: 'absolute',
@@ -118,5 +146,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     elevation: 3,
     zIndex: 1000
+  },
+  descriptionTitle: {
+    fontSize: 18,
+    marginTop: 16,
+    fontWeight: "bold",
+    fontFamily: 'Inter_800ExtraBold',
+    color: colors.gray[400]
+  },
+  description: {
+    marginTop: 8,
+    color: colors.gray[300],
+    paddingBottom: 84
   }
 });
