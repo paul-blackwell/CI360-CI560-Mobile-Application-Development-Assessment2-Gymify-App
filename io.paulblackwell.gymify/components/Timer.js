@@ -3,24 +3,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Image, View, Dimensions, Text, TouchableOpacity } from 'react-native';
 
 import { standardColors } from '../styles/colors';
-import { color } from 'react-native-reanimated';
 let colors = standardColors;
 
-/**
-   * Title: Implementing a countdown timer in React with Hooks
-   * Author: Asaf Aviv
-   * Date: 06, May, 2021
-   * Code version: 1.0
-   * Availability:  https://stackoverflow.com/questions/57137094/implementing-a-countdown-timer-in-react-with-hooks
-   * 
-   */
+
 
 const Timer = ({ time, toggleStartTimer, setToggleStartTimer, setTimerStopped }) => {
 
 
     /**
      * As time prop will be something like 1.30 we need to 
-     * get the seconds and minutes from it
+     * get the seconds from it, we can use use parseInt() to
+     * get the minutes 
      */
     const getSeconds = (time) => {
         let seconds;
@@ -38,7 +31,6 @@ const Timer = ({ time, toggleStartTimer, setToggleStartTimer, setTimerStopped })
 
     useEffect(() => {
 
-        console.log(toggleStartTimer)
 
         // If parent component toggleStartTimer state is false just return 
         if (!toggleStartTimer) return;
@@ -71,6 +63,7 @@ const Timer = ({ time, toggleStartTimer, setToggleStartTimer, setTimerStopped })
         // when we update it
     }, [secondsLeft, minutesLeft, toggleStartTimer]);
 
+    // Reset everything and stop timer on button press
     const handleRefresh = () => {
         setSecondsLeft(getSeconds(time))
         setMinutesLeft(parseInt(time))

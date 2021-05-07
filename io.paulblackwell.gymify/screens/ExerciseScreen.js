@@ -39,12 +39,14 @@ export default function ExerciseScreen({ navigation, route }) {
 
 
 
+/**
+ * This will handle the timer state (weather to stop or start) 
+ */
   const [toggleStartTimer, setToggleStartTimer] = useState(false);
   const [timerStopped, setTimerStopped] = useState(null);
   const handelStartTimer = () => {
     setToggleStartTimer(toggleStartTimer => !toggleStartTimer)
   }
-
   useEffect(() => {
     if (timerStopped) {
       setToggleStartTimer(false);
@@ -52,8 +54,13 @@ export default function ExerciseScreen({ navigation, route }) {
   }, [timerStopped])
 
 
+  /**
+   * This will send a request to the API to
+   * update the exercise to be completed 
+   */
   const handelComplete = () => {
     console.log('handelComplete')
+    // TODO: handle API request
   }
 
 
@@ -71,19 +78,12 @@ export default function ExerciseScreen({ navigation, route }) {
         </View>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
-        {/* {!toggleStartTimer ?
-          <ExerciseBtnPrimary title='Start' onPress={handelStartTimer} />
-          :
-          <ExerciseBtnPrimary title='Pause' onPress={handelStartTimer} />
-        } */}
         {!toggleStartTimer && !timerStopped &&
           <ExerciseBtnPrimary title='Start' onPress={handelStartTimer} />
         }
-
         {toggleStartTimer && !timerStopped &&
           <ExerciseBtnPrimary title='Pause' onPress={handelStartTimer} />
         }
-
         {timerStopped &&
           <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
         }
