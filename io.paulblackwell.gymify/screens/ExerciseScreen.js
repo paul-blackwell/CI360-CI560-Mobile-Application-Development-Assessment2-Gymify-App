@@ -114,11 +114,18 @@ export default function ExerciseScreen({ navigation, route }) {
         <ScrollView style={styles.main}>
           <ImageCarousel images={selectedExercise.images} />
           <Text style={styles.recordText}>
-            Your record: 
+            Your record:
             <Text styles={styles.recordTextBold}> {selectedExercise.maxWeight}kg</Text>
           </Text>
-          <View style={styles.info}>
+          <View style={styles.setsAndReps}>
+            <View style={styles.setsAndRepsInfo}>
               <ExerciseIcon />
+              <Text style={styles.setsAndRepsInfoText}>{selectedExercise.sets} x sets</Text>
+            </View>
+            <View style={styles.setsAndRepsInfo}>
+              <ExerciseIcon />
+              <Text style={styles.setsAndRepsInfoText}>{selectedExercise.reps} x repetitions</Text>
+            </View>
           </View>
           <Text style={styles.descriptionTitle}>Description</Text>
           <Text style={styles.description}>{selectedExercise.description}</Text>
@@ -164,8 +171,25 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_800ExtraBold',
     color: colors.gray[400]
   },
-  info: {
-
+  setsAndReps: {
+    marginTop: 20
+  },
+  setsAndRepsInfo: {
+    flexDirection: "row",
+    marginTop: 8,
+    padding: 20,
+    backgroundColor: colors.white[100],
+    borderColor: colors.gray[200],
+    borderWidth: 1,
+    borderRadius: 4,
+  },
+  setsAndRepsInfoText: {
+    flex: 1,
+    textAlign: "right",
+    fontSize: 16,
+    fontWeight: "bold",
+    fontFamily: 'Inter_800ExtraBold',
+    color: colors.gray[400]
   },
   description: {
     marginTop: 8,
