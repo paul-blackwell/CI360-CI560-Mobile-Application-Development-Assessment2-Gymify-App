@@ -11,8 +11,6 @@ let colors = standardColors;
 
 const ImageCarouselSettingsModal = ({ openModel, setOpenModel }) => {
 
-    console.log('Model was rendered')
-
 
     return (
         <CustomModal

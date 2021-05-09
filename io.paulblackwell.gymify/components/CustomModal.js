@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Modal, Dimensions } from 'react-native';
 
 import { standardColors } from '../styles/colors';
 let colors = standardColors;

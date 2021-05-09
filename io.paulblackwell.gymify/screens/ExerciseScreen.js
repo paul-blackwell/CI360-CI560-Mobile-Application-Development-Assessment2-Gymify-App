@@ -7,6 +7,7 @@ import ImageCarousel from '../components/ImageCarousel';
 import Timer from '../components/Timer';
 import ExerciseIcon from '../components/smallerComponents/ExerciseIcon';
 import ImageCarouselSettingsModal from '../components/ImageCarouselSettingsModal';
+import ExerciseHighestWeightInput from '../components/ExerciseHighestWeightInput';
 
 
 let colors = standardColors;
@@ -55,6 +56,14 @@ export default function ExerciseScreen({ navigation, route }) {
 
   /**This is the state that opens the setting model for the ImageCarousel */
   const [openImageSettings, setOpenImageSetting] = useState(false);
+
+
+  /** This will handle if the ExerciseHighestWeightInput is showing.
+   * The ExerciseHighestWeightInput allows the user to enter the highest
+   * weight of an exercise but it only shows for not timed exercises 
+   */
+  const [showExerciseHighestWeightInput, setShowExerciseHighestWeightInput] = useState(true)
+
 
 
 
@@ -140,6 +149,7 @@ export default function ExerciseScreen({ navigation, route }) {
       <View style={styles.exerciseTabBar}>
         <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
       </View>
+      <ExerciseHighestWeightInput show={showExerciseHighestWeightInput} />
       <ImageCarouselSettingsModal openModel={openImageSettings} setOpenModel={setOpenImageSetting} />
     </>
   );
