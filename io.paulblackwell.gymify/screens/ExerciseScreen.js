@@ -149,7 +149,7 @@ export default function ExerciseScreen({ navigation, route }) {
       <View style={styles.exerciseTabBar}>
         <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
       </View>
-      <ExerciseHighestWeightInput show={showExerciseHighestWeightInput} />
+      <ExerciseHighestWeightInput show={showExerciseHighestWeightInput} setShow={setShowExerciseHighestWeightInput} />
       <ImageCarouselSettingsModal openModel={openImageSettings} setOpenModel={setOpenImageSetting} />
     </>
   );
