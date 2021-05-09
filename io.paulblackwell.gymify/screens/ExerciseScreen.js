@@ -62,7 +62,7 @@ export default function ExerciseScreen({ navigation, route }) {
    * The ExerciseHighestWeightInput allows the user to enter the highest
    * weight of an exercise but it only shows for not timed exercises 
    */
-  const [showExerciseHighestWeightInput, setShowExerciseHighestWeightInput] = useState(true)
+  const [showExerciseHighestWeightInput, setShowExerciseHighestWeightInput] = useState(false)
 
 
 
@@ -147,7 +147,7 @@ export default function ExerciseScreen({ navigation, route }) {
         </ScrollView>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
-        <ExerciseBtnPrimary title='Complete' onPress={handelComplete} />
+        <ExerciseBtnPrimary title='Complete' onPress={() => {setShowExerciseHighestWeightInput(true)}} />
       </View>
       <ExerciseHighestWeightInput show={showExerciseHighestWeightInput} setShow={setShowExerciseHighestWeightInput} />
       <ImageCarouselSettingsModal openModel={openImageSettings} setOpenModel={setOpenImageSetting} />

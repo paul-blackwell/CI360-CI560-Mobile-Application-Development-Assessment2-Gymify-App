@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Modal, Dimensions, TextInput, ToastAndroid } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Modal, Dimensions, TextInput, } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
 
@@ -14,10 +14,6 @@ const ExerciseHighestWeightInput = ({ show, setShow }) => {
 
     const [highestWeight, setHighestWeight] = useState(null);
 
-
-    // const showErrorToast = () => {
-    //     ToastAndroid.show("You must enter an number greater than 0", ToastAndroid.SHORT);
-    // }
 
     const toastConfig = {
         error: ({ text1, props, ...rest }) => (
@@ -38,12 +34,6 @@ const ExerciseHighestWeightInput = ({ show, setShow }) => {
                 text1: 'You must enter  valid weight.',
                 type: 'error',
                 height: 200,
-                // error: ({ text1, props, ...rest }) => (
-                //     <View style={{ zIndex: 200 }}>
-                //         <Text>{text1}</Text>
-                //         <Text>{props.guid}</Text>
-                //     </View>
-                // ),
             });
             return;
         }
