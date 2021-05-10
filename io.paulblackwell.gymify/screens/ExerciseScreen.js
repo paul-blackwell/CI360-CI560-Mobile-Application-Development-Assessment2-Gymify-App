@@ -8,6 +8,7 @@ import Timer from '../components/Timer';
 import ExerciseIcon from '../components/smallerComponents/ExerciseIcon';
 import ImageCarouselSettingsModal from '../components/ImageCarouselSettingsModal';
 import ExerciseHighestWeightInput from '../components/ExerciseHighestWeightInput';
+import markExerciseAsComplete from '../requests/markExerciseAsComplete';
 
 
 let colors = standardColors;
@@ -48,10 +49,25 @@ export default function ExerciseScreen({ navigation, route }) {
      * This will send a request to the API to
      * update the exercise to be completed 
      */
+  const [complete, setComplete] = useState(false);
   const handelComplete = () => {
-    console.log('handelComplete')
-    // TODO: handle API request
+    setComplete(true);
   }
+
+  // Loader state
+  const [showLoader, setShowLoader] = useState(false);
+
+  // Handle API request to mark exercise as complete
+  useEffect(() => {
+    if (complete) {
+      markExerciseAsComplete(
+        workoutPlan.currentSelectedWeek,
+        workoutPlan.currentSelectedWorkout,
+        selectedExercise.id,
+        workoutPlan.jwt
+      );
+    }
+  }, [complete])
 
 
   /**This is the state that opens the setting model for the ImageCarousel */
@@ -147,9 +163,13 @@ export default function ExerciseScreen({ navigation, route }) {
         </ScrollView>
       </SafeAreaView>
       <View style={styles.exerciseTabBar}>
-        <ExerciseBtnPrimary title='Complete' onPress={() => {setShowExerciseHighestWeightInput(true)}} />
+        <ExerciseBtnPrimary title='Complete' onPress={() => { setShowExerciseHighestWeightInput(true) }} />
       </View>
-      <ExerciseHighestWeightInput show={showExerciseHighestWeightInput} setShow={setShowExerciseHighestWeightInput} />
+      <ExerciseHighestWeightInput
+        show={showExerciseHighestWeightInput}
+        setShow={setShowExerciseHighestWeightInput}
+        setComplete={setComplete}
+      />
       <ImageCarouselSettingsModal openModel={openImageSettings} setOpenModel={setOpenImageSetting} />
     </>
   );

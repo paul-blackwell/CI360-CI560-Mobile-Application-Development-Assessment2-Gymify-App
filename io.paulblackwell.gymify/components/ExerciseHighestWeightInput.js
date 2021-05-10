@@ -9,7 +9,7 @@ let colors = standardColors;
 
 const windowHeight = Dimensions.get('window').height;
 
-const ExerciseHighestWeightInput = ({ show, setShow }) => {
+const ExerciseHighestWeightInput = ({ show, setShow, setComplete }) => {
 
 
     const [highestWeight, setHighestWeight] = useState(null);
@@ -37,6 +37,13 @@ const ExerciseHighestWeightInput = ({ show, setShow }) => {
             });
             return;
         }
+
+        /**
+         * If highestWeight is not null or is over 0 update the
+         * Exercise on the API by updating the setComplete in the 
+         * parent component
+         */
+         setComplete(true)
     }
 
 
@@ -49,6 +56,7 @@ const ExerciseHighestWeightInput = ({ show, setShow }) => {
         >
             <View style={styles.modalBackground}></View>
             <View style={styles.modalContentContainer}>
+            <Text style={styles.modelInputLabel}>Highest weight (kg)</Text>
                 <View style={styles.modelInputContainer}>
                     <TextInput
                         style={styles.modelInput}
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
     },
     modalContentContainer: {
         backgroundColor: colors.white[100],
-        padding: 12,
+        padding: 16,
         zIndex: 100,
     },
     modelBackBtn: {
@@ -101,6 +109,10 @@ const styles = StyleSheet.create({
         borderColor: colors.gray[200],
         borderWidth: 1,
         borderRadius: 4,
+    },
+    modelInputLabel: {
+        color: colors.gray[300],
+        marginBottom: 8
     },
     modelToast: {
         justifyContent: 'center',
