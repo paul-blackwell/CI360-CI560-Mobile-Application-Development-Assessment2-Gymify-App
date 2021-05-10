@@ -1,19 +1,39 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { WorkoutsContext } from '../context/workouts.context';
 import SettingsModal from '../components/SettingsModal';
 import Loader from '../components/Loader';
+import resetExercises from '../requests/resetExercises';
 
 import { standardColors } from '../styles/colors';
+import { useEffect } from 'react/cjs/react.development';
 
 let colors = standardColors;
 
 export default function SettingsScreen({ navigation }) {
 
+  // Get workouts context with will be an array with all of the workouts
+  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
+
   const [openModel, setOpenModel] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
+  const [makeRequest, setMakeRequest] = useState(false);
+
+  // Just for testing
+  const [test, setTest] = useState([]);
+
+  useEffect(() => {
+    if (makeRequest) {
+      resetExercises(workoutPlan.post, workoutPlan.jwt, setShowLoader, setTest);
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log(test)
+  }, [test])
 
   return (
     <>
@@ -33,7 +53,11 @@ export default function SettingsScreen({ navigation }) {
           </>
         }
       </SafeAreaView>
-      <SettingsModal openModel={openModel} setOpenModel={setOpenModel} />
+      <SettingsModal
+        openModel={openModel}
+        setOpenModel={setOpenModel}
+        setMakeRequest={setMakeRequest}
+      />
     </>
   );
 }
