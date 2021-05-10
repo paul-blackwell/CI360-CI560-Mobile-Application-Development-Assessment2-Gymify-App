@@ -66,7 +66,7 @@ export default function TabBarStack() {
         name="Settings"
         component={SettingsStack}
         options={{
-          tabBarLabel: 'Activity',
+          tabBarLabel: 'Settings',
           tabBarIcon: ({ focused, color, size }) => {
             return (
               <TabBarIcon icon='settings' color={color} />
