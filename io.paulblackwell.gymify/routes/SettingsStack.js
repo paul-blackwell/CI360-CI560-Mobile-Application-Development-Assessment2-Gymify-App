@@ -1,16 +1,16 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Header from '../components/Header';
-import ActivityScreen from '../screens/ActivityScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const Stack = createStackNavigator();
 
-export default function HomeStack() {
+export default function SettingsStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="ActivityScreen"
-                component={ActivityScreen}
+                name="SettingsScreen"
+                component={SettingsScreen}
                 options={({ navigation, route }) => ({
                     headerTitle: props => <Header navigation={navigation} />,
                 })}

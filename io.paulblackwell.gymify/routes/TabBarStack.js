@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import WorkoutStack from '../routes/WorkoutStack';
 import HomeStack from '../routes/HomeStack'; 
-import ActivityStack from '../routes/ActivityStack';
+import SettingsStack from '../routes/SettingsStack';
 
 
 import {standardColors} from '../styles/colors';
@@ -63,13 +63,13 @@ export default function TabBarStack() {
         }}
       />
       <Tab.Screen
-        name="ActivityStack"
-        component={ActivityStack}
+        name="Settings"
+        component={SettingsStack}
         options={{
           tabBarLabel: 'Activity',
           tabBarIcon: ({ focused, color, size }) => {
             return (
-              <TabBarIcon icon='activity' color={color} />
+              <TabBarIcon icon='settings' color={color} />
             )
           }
         }}

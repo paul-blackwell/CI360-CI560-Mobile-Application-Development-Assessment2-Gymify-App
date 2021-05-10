@@ -5,13 +5,13 @@ import {standardColors} from '../styles/colors';
 
 let colors = standardColors;
 
-export default function ActivityScreen({ navigation }) {
+export default function SettingsScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
       <View style={styles.main}>
-        <Text >Activity Screen</Text>
+        <Text >SettingsScreen.</Text>
       </View>
     </SafeAreaView>
   );
