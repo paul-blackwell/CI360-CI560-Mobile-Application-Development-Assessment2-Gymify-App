@@ -27,13 +27,14 @@ export default function SettingsScreen({ navigation }) {
 
   useEffect(() => {
     if (makeRequest) {
+     
+      // Note make request for each week not all of them at once will you are doing here 
+
       resetExercises(workoutPlan.post, workoutPlan.jwt, setShowLoader, setTest);
     }
   }, [])
 
-  useEffect(() => {
-    console.log(test)
-  }, [test])
+ 
 
   return (
     <>

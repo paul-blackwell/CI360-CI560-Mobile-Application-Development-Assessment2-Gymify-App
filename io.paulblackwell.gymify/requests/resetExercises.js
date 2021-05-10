@@ -1,17 +1,18 @@
 import axios from 'axios';
 
-const resetExercises = async (weeks, jwt, setShowLoader, setTest) => {
+const resetExercises = async (week, jwt, setShowLoader) => {
 
-    weeks.forEach(week => {
-        week.workouts.forEach(workout => {
-            workout.warmups.forEach(warmup => {
-                warmup.completed = false;
-            });
-            workout.exercises.forEach(exercise => {
-                exercise.completed = false;
-            });
-        })
-    });
+
+
+    week.workouts.forEach(workout => {
+        workout.warmups.forEach(warmup => {
+            warmup.completed = false;
+        });
+        workout.exercises.forEach(exercise => {
+            exercise.completed = false;
+        });
+    })
+
 
     const test = [];
 
