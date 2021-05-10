@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getWeeks = async (setLoading, dispatch) => {
+const getWeeksFromExerciseScreen = async (setLoading, dispatch, setNavigateToWorkoutScreen) => {
 
     // Set loading state to true
     setLoading(true)
@@ -15,7 +15,7 @@ const getWeeks = async (setLoading, dispatch) => {
         .then(response => {
             // Pass response data to dispatch in reducer
             dispatch({ type: 'FETCH_UPDATED_DATA_FROM_API', payload: response.data });
-                setLoading(false)
+            setNavigateToWorkoutScreen(true)
         })
         .catch(error => {
             dispatch({ type: 'FETCH_API_ERROR' })
@@ -24,4 +24,4 @@ const getWeeks = async (setLoading, dispatch) => {
 
 }
 
-export default getWeeks;
+export default getWeeksFromExerciseScreen;

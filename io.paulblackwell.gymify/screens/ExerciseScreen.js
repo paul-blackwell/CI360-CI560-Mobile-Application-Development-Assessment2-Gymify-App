@@ -8,7 +8,9 @@ import Timer from '../components/Timer';
 import ExerciseIcon from '../components/smallerComponents/ExerciseIcon';
 import ImageCarouselSettingsModal from '../components/ImageCarouselSettingsModal';
 import ExerciseHighestWeightInput from '../components/ExerciseHighestWeightInput';
+import Loader from '../components/Loader';
 import markExerciseAsComplete from '../requests/markExerciseAsComplete';
+import getWeeksFromExerciseScreen from '../requests/getWeeksFromExerciseScreen';
 
 
 let colors = standardColors;
@@ -54,6 +56,15 @@ export default function ExerciseScreen({ navigation, route }) {
     setComplete(true);
   }
 
+
+  /**
+   * We will need to make state for the maxWeight this
+   * is because the updated maxWeight will come from the ExerciseHighestWeightInput 
+   * child component. 
+   */
+  const [maxWeight, setMaxWeight] = useState(0)
+
+
   // Loader state
   const [showLoader, setShowLoader] = useState(false);
 
@@ -63,11 +74,46 @@ export default function ExerciseScreen({ navigation, route }) {
       markExerciseAsComplete(
         workoutPlan.currentSelectedWeek,
         workoutPlan.currentSelectedWorkout,
-        selectedExercise.id,
-        workoutPlan.jwt
+        selectedExercise,
+        maxWeight,
+        workoutPlan.jwt,
+        setUpdateContext
       );
+      setShowLoader(true);
     }
   }, [complete])
+
+
+  /**
+   * This will update the context if an exercise is deleted,
+   * it does this by making a request to the API then if the request is
+   * successful it will update the context and hide the loader
+   */
+  const [updateContext, setUpdateContext] = useState(false)
+  const [navigateToWorkoutScreen, setNavigateToWorkoutScreen] = useState(false)
+  useEffect(() => {
+    if (updateContext) {
+      getWeeksFromExerciseScreen(setShowLoader, dispatch, setNavigateToWorkoutScreen);
+    }
+  }, [updateContext])
+
+
+
+  /**
+   * After both API requests have been successful markExerciseAsComplete
+   * and getWeeksFromExerciseScreen navigate back to the WorkoutScreen
+   */
+  useEffect(() => {
+    if (navigateToWorkoutScreen) {
+      dispatch({ type: 'SHOW_TAB_BAR', payload: true})
+      navigation.navigate('WorkoutStack', {
+        screen: 'WorkoutScreen',
+        params: { workoutId: workoutPlan.currentSelectedWorkout.id, weekTitle: workoutPlan.currentSelectedWeek.title }
+      });
+    }
+  }, [navigateToWorkoutScreen])
+
+
 
 
   /**This is the state that opens the setting model for the ImageCarousel */
@@ -137,6 +183,20 @@ export default function ExerciseScreen({ navigation, route }) {
     );
   }
 
+  /** If content is being updated on the API showLoader will be set to true
+   * this means that we need to just render the loading component
+   */
+  if (showLoader) {
+    return (
+      <>
+        <SafeAreaView style={styles.container}>
+          <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+          <Loader loading={true} />
+        </SafeAreaView>
+      </>
+    );
+  }
+
 
   return (
     <>
@@ -169,6 +229,7 @@ export default function ExerciseScreen({ navigation, route }) {
         show={showExerciseHighestWeightInput}
         setShow={setShowExerciseHighestWeightInput}
         setComplete={setComplete}
+        setMaxWeight={setMaxWeight}
       />
       <ImageCarouselSettingsModal openModel={openImageSettings} setOpenModel={setOpenImageSetting} />
     </>

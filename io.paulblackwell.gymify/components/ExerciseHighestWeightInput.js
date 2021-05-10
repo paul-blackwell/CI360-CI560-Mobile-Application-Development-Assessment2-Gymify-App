@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Modal, Dimensions, TextInput, } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
 
@@ -7,9 +7,7 @@ import Toast from 'react-native-toast-message';
 import { standardColors } from '../styles/colors';
 let colors = standardColors;
 
-const windowHeight = Dimensions.get('window').height;
-
-const ExerciseHighestWeightInput = ({ show, setShow, setComplete }) => {
+const ExerciseHighestWeightInput = ({ show, setShow, setComplete, setMaxWeight }) => {
 
 
     const [highestWeight, setHighestWeight] = useState(null);
@@ -39,11 +37,20 @@ const ExerciseHighestWeightInput = ({ show, setShow, setComplete }) => {
         }
 
         /**
+         * Update setMaxWeight state in the parent component
+         * as the API request in that component will need it
+         */
+        setMaxWeight(highestWeight);
+
+        /**
          * If highestWeight is not null or is over 0 update the
          * Exercise on the API by updating the setComplete in the 
          * parent component
          */
-         setComplete(true)
+        setComplete(true);
+
+        // Close model
+        setShow(false)
     }
 
 
@@ -56,7 +63,7 @@ const ExerciseHighestWeightInput = ({ show, setShow, setComplete }) => {
         >
             <View style={styles.modalBackground}></View>
             <View style={styles.modalContentContainer}>
-            <Text style={styles.modelInputLabel}>Highest weight (kg)</Text>
+                <Text style={styles.modelInputLabel}>Highest weight (kg)</Text>
                 <View style={styles.modelInputContainer}>
                     <TextInput
                         style={styles.modelInput}
