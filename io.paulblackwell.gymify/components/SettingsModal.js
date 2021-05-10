@@ -15,6 +15,8 @@ const windowHeight = Dimensions.get('window').height;
 
 export default SettingsModal = ({ openModel, setOpenModel }) => {
 
+
+
     return (
         <CustomModal
             title='Reset exercises'
@@ -25,7 +27,7 @@ export default SettingsModal = ({ openModel, setOpenModel }) => {
                 <Text style={styles.modelText}>This will reset all your exercises to be marked as not completed, it will not reset any of your highest weight scores. Are you sure you what to do this?</Text>
             </View>
             <View>
-                <ModelBtnPrimary title='Delete this exercise'  onPress={() => {
+                <ModelBtnPrimary title='Reset my exercises'  onPress={() => {
                     setOpenModel(false)
                 }} />
                 <ModelBtnSecondary title='Go back' onPress={() => {
