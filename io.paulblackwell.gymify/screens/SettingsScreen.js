@@ -21,7 +21,7 @@ export default function SettingsScreen({ navigation }) {
 
   const [openModel, setOpenModel] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  //const [showToast, setShowToast] = useState(false);
 
   const [makeRequest, setMakeRequest] = useState(false);
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function SettingsScreen({ navigation }) {
     if (updateContext) {
       getWeeks(setShowLoader, dispatch);
       setUpdateContext(false)
-      setShowToast(true)
+      //setShowToast(true)
     }
   }, [updateContext])
 
@@ -55,17 +55,17 @@ export default function SettingsScreen({ navigation }) {
    * If the context has been updated this will handle showing a toast to the user 
    * letting them know the exercises have been successfully updated.
    */
-  useEffect(() => {
-    if (!showLoader && showToast) {
-      Toast.show({
-        text1: 'Exercises have been reset',
-        type: 'success',
-        height: 200,
-        position: 'bottom',
-      });
-      setShowToast(false); // reset toast state
-    }
-  }, [showLoader, showToast])
+  // useEffect(() => {
+  //   if (!showLoader && showToast) {
+  //     Toast.show({
+  //       text1: 'Exercises have been reset',
+  //       type: 'success',
+  //       height: 200,
+  //       position: 'bottom',
+  //     });
+  //     setShowToast(false); // reset toast state
+  //   }
+  // }, [showLoader, showToast])
 
 
   // This just the toastConfig as we need to make it custom to the app 
