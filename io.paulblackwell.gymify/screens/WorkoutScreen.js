@@ -25,7 +25,7 @@ let colors = standardColors;
 export default function WorkoutScreen({ route, navigation }) {
 
 
-  
+
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan, dispatch } = useContext(WorkoutsContext);
 
@@ -150,7 +150,10 @@ export default function WorkoutScreen({ route, navigation }) {
             />
           </ScrollView>
           <TouchableOpacity style={styles.newExerciseBtn} onPress={() => {
-            console.log('Add new exercise')
+            dispatch({ type: 'SHOW_TAB_BAR', payload: false })
+            navigation.navigate('WorkoutStack', {
+              screen: 'NewExerciseScreen',
+            });
           }}>
             <AntDesign name="plus" size={24} color={colors.white[100]} />
           </TouchableOpacity>
