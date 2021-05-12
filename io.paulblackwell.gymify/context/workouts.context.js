@@ -64,6 +64,7 @@ export const WorkoutsProvider = (props) => {
                     setJwtExists(true);
                 })
                 .catch(error => {
+                    console.log('It is I, that is erroring')
                     console.log(error)
                 });
         }
