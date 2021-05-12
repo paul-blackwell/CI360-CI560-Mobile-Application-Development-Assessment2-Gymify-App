@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, StatusBar, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView, TextInput, Switch } from 'react-native';
+
+
 import NewExerciseBtnPrimary from '../components/smallerComponents/NewExerciseBtnPrimary';
+import AddImageIcon from '../components/smallerComponents/AddImageIcon';
 
 import { standardColors } from '../styles/colors';
 let colors = standardColors;
@@ -8,11 +11,14 @@ let colors = standardColors;
 export default function NewExerciseScreen({ navigation }) {
 
   const [exerciseName, setExerciseName] = useState('');
-  const [addTimer, setAddTimer] = useState(false);
   const [addTime, setAddTime] = useState(0);
   const [numberOfSets, setNumberOfSets] = useState(0);
   const [numberOfReps, setNumberOfReps] = useState(0);
   const [description, setDescription] = useState('');
+
+
+  const [addTimer, setAddTimer] = useState(false);
+  const toggleSwitch = () => setAddTimer(previousState => !previousState);
 
   //const [addTimer, setAddTimer] = useState(false);
 
@@ -35,9 +41,25 @@ export default function NewExerciseScreen({ navigation }) {
               style={styles.input}
               onChangeText={setExerciseName}
               value={exerciseName}
-              placeholder=""
             />
           </View>
+        </View>
+        <View style={styles.inputSection}>
+          <Text style={styles.inputLabel}>Upload images</Text>
+          <View style={styles.addImageInput}>
+            <AddImageIcon color={colors.gray[200]} />
+          </View>
+        </View>
+        <View style={styles.inputSection}>
+          <Text style={styles.inputLabel}>Add timer</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={addTimer ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={addTimer}
+          />
         </View>
       </SafeAreaView>
       <View style={styles.newExerciseTabBar}>
@@ -85,5 +107,21 @@ const styles = StyleSheet.create({
     borderColor: colors.gray[200],
     borderWidth: 1,
     borderRadius: 4,
+  },
+  addImageInput: {
+    height: 96,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderStyle: 'dashed',
+    borderColor: colors.gray[200],
+    borderWidth: 1,
+  },
+  switch: {
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start'
+    alignSelf: 'flex-start',
+    borderColor: colors.gray[200],
+    borderWidth: 1,
   }
 });
