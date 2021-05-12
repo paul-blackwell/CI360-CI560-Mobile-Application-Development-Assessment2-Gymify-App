@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, TextInput, Switch, ScrollView, Dimensions } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-
+import { WorkoutsContext } from '../context/workouts.context';
 import NewExerciseBtnPrimary from '../components/smallerComponents/NewExerciseBtnPrimary';
 import AddImageIcon from '../components/smallerComponents/AddImageIcon';
+import postNewExercise from '../requests/postNewExercise';
 
 import { standardColors } from '../styles/colors';
 let colors = standardColors;
@@ -13,12 +14,28 @@ const windowHeight = Dimensions.get('window').height;
 
 export default function NewExerciseScreen({ navigation }) {
 
+  // Get workouts context with will be an array with all of the workouts
+  const { workoutPlan, dispatch } = useContext(WorkoutsContext);
+
   // The state for all the TextInputs
   const [exerciseName, setExerciseName] = useState('');
   const [exerciseTime, setExerciseTime] = useState(null);
   const [numberOfSets, setNumberOfSets] = useState(null);
   const [numberOfReps, setNumberOfReps] = useState(null);
   const [description, setDescription] = useState('');
+
+  const [isWarmup, setIsWarmup] = useState(true);
+  const [isExercise, setIsExercise] = useState(false)
+
+  const toggleSwitchWarmUp = () => {
+    setIsWarmup(previousState => !previousState);
+    setIsExercise(false)
+  }
+
+  const toggleSwitchExercise = () => {
+    setIsExercise(previousState => !previousState);
+    setIsWarmup(false)
+  }
 
 
   const [addTimer, setAddTimer] = useState(false);
@@ -36,6 +53,7 @@ export default function NewExerciseScreen({ navigation }) {
     info: () => { },
     any_custom_type: () => { }
   };
+
 
   const [showToast, setShowToast] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -79,6 +97,22 @@ export default function NewExerciseScreen({ navigation }) {
     }
   }
 
+
+  // This will handle making our post to the API
+  const [makePostRequest, setMakePostRequest] = useState(false);
+  useEffect(() => {
+    if(makePostRequest) {
+      const newExerciseObj = {
+        
+      }
+
+
+      setMakePostRequest(false);
+    }
+  }, [makePostRequest])
+
+
+
   /**
    * This will handle the submit, error if the the main inputs
    * have no data or are incorrect. If the data is correct
@@ -89,7 +123,11 @@ export default function NewExerciseScreen({ navigation }) {
     if (error) {
       setErrorMessage(error);
       setShowToast(true);
+      return;
     }
+
+    // If no errors
+    setMakePostRequest(true);
   }
 
 
@@ -114,6 +152,28 @@ export default function NewExerciseScreen({ navigation }) {
               <View style={styles.addImageInput}>
                 <AddImageIcon color={colors.gray[200]} />
               </View>
+            </View>
+            <View style={styles.inputSection}>
+              <Text style={styles.inputLabel}>Add as warmup</Text>
+              <Switch
+                style={styles.switch}
+                trackColor={{ false: colors.gray[200], true: colors.purple[200] }}
+                thumbColor={isWarmup ? colors.white[100] : colors.white[100]}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitchWarmUp}
+                value={isWarmup}
+              />
+            </View>
+            <View style={styles.inputSection}>
+              <Text style={styles.inputLabel}>Add as exercise</Text>
+              <Switch
+                style={styles.switch}
+                trackColor={{ false: colors.gray[200], true: colors.purple[200] }}
+                thumbColor={isExercise ? colors.white[100] : colors.white[100]}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitchExercise}
+                value={isExercise}
+              />
             </View>
             <View style={styles.inputSection}>
               <Text style={styles.inputLabel}>Add timer</Text>

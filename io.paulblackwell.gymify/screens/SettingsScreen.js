@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import Toast from 'react-native-toast-message';
+//import Toast from 'react-native-toast-message';
 import { WorkoutsContext } from '../context/workouts.context';
 import SettingsModal from '../components/SettingsModal';
 import Loader from '../components/Loader';
