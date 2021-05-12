@@ -13,9 +13,9 @@ const windowHeight = Dimensions.get('window').height;
 export default function NewExerciseScreen({ navigation }) {
 
   const [exerciseName, setExerciseName] = useState('');
-  const [exerciseTime, setExerciseTime] = useState(0);
-  const [numberOfSets, setNumberOfSets] = useState(0);
-  const [numberOfReps, setNumberOfReps] = useState(0);
+  const [exerciseTime, setExerciseTime] = useState(null);
+  const [numberOfSets, setNumberOfSets] = useState(null);
+  const [numberOfReps, setNumberOfReps] = useState(null);
   const [description, setDescription] = useState('');
 
 
@@ -24,13 +24,44 @@ export default function NewExerciseScreen({ navigation }) {
 
   //const [addTimer, setAddTimer] = useState(false);
 
-  // const [formState, setFormState] = useState({
-  //   exerciseName: '',
-  //   numberOfSets: 0,
-  //   numberOfReps: 0,
-  //   time: 0,
-  //   description: ''
-  // });
+
+  const validateInputs = (exerciseName, exerciseTime, numberOfSets, numberOfReps) => {
+    let errorMessage = 'Missing: ';
+    if(exerciseName === null || exerciseName === '') {
+      console.log('I fired')
+      errorMessage += 'exercise name, ';
+    }
+    if(addTimer && (exerciseTime === null || exerciseTime === 0)) {
+      errorMessage += 'exercise time, ';
+    }
+
+    if(!addTimer && (numberOfSets === null || numberOfSets === 0)) {
+      errorMessage += 'number of sets, ';
+    }
+
+    if(!addTimer && (numberOfReps === null || numberOfReps === 0)) {
+      errorMessage += 'number of repetitions, ';
+    }
+
+    if(errorMessage === 'Missing: ') {
+      return false;
+    } else {
+      return errorMessage;
+    }
+  }
+
+  /**
+   * This will handle the submit, error if the the main inputs
+   * have no data or are incorrect. If the data is correct
+   * it will make an API request to add the new exercise
+   */
+  const handleSubmit = () => {
+    const error = validateInputs(exerciseName, exerciseTime, numberOfSets, numberOfReps);
+    if(!error) {
+      console.log(error)
+    }
+  }
+
 
   return (
     <>
@@ -121,7 +152,7 @@ export default function NewExerciseScreen({ navigation }) {
         </ScrollView>
       </SafeAreaView>
       <View style={styles.newExerciseTabBar}>
-        <NewExerciseBtnPrimary title='Save' onPress={() => console.log('Save')} />
+        <NewExerciseBtnPrimary title='Save' onPress={handleSubmit} />
       </View>
     </>
   );
