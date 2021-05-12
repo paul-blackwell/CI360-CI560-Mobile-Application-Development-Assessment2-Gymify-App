@@ -102,7 +102,7 @@ export default function SettingsScreen({ navigation }) {
               <Feather style={styles.btnIcon} name="refresh-ccw" size={24} color={colors.gray[400]} />
               <Text style={styles.btnText}>Reset all completed exercises</Text>
             </TouchableOpacity>
-            <Toast config={toastConfig} ref={(ref) => Toast.setRef(ref)} />
+            {/* <Toast config={toastConfig} ref={(ref) => Toast.setRef(ref)} /> */}
           </>
         }
       </SafeAreaView>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, StatusBar, SafeAreaView, TextInput, Switch, ScrollView, Dimensions } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 
 import NewExerciseBtnPrimary from '../components/smallerComponents/NewExerciseBtnPrimary';
@@ -12,6 +13,7 @@ const windowHeight = Dimensions.get('window').height;
 
 export default function NewExerciseScreen({ navigation }) {
 
+  // The state for all the TextInputs
   const [exerciseName, setExerciseName] = useState('');
   const [exerciseTime, setExerciseTime] = useState(null);
   const [numberOfSets, setNumberOfSets] = useState(null);
@@ -22,28 +24,55 @@ export default function NewExerciseScreen({ navigation }) {
   const [addTimer, setAddTimer] = useState(false);
   const toggleSwitch = () => setAddTimer(previousState => !previousState);
 
-  //const [addTimer, setAddTimer] = useState(false);
+
+  // This just the toastConfig as we need to make it custom to the app 
+  const toastConfig = {
+    success: ({ text1, props, ...rest }) => (
+      <View style={styles.toast}>
+        <Text style={styles.toastText}>{text1}</Text>
+      </View>
+    ),
+    error: () => { },
+    info: () => { },
+    any_custom_type: () => { }
+  };
+
+  const [showToast, setShowToast] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  useEffect(() => {
+    if (showToast) {
+      Toast.show({
+        text1: errorMessage,
+        type: 'success',
+        height: 200,
+        visibilityTime: 3000,
+      });
+      setShowToast(false); // reset toast state
+    }
+  }, [showToast, errorMessage])
+
+
+
 
 
   const validateInputs = (exerciseName, exerciseTime, numberOfSets, numberOfReps) => {
     let errorMessage = 'Missing: ';
-    if(exerciseName === null || exerciseName === '') {
-      console.log('I fired')
+    if (exerciseName === null || exerciseName === '') {
       errorMessage += 'exercise name, ';
     }
-    if(addTimer && (exerciseTime === null || exerciseTime === 0)) {
+    if (addTimer && (exerciseTime === null || exerciseTime === 0)) {
       errorMessage += 'exercise time, ';
     }
 
-    if(!addTimer && (numberOfSets === null || numberOfSets === 0)) {
+    if (!addTimer && (numberOfSets === null || numberOfSets === 0)) {
       errorMessage += 'number of sets, ';
     }
 
-    if(!addTimer && (numberOfReps === null || numberOfReps === 0)) {
+    if (!addTimer && (numberOfReps === null || numberOfReps === 0)) {
       errorMessage += 'number of repetitions, ';
     }
 
-    if(errorMessage === 'Missing: ') {
+    if (errorMessage === 'Missing: ') {
       return false;
     } else {
       return errorMessage;
@@ -57,8 +86,9 @@ export default function NewExerciseScreen({ navigation }) {
    */
   const handleSubmit = () => {
     const error = validateInputs(exerciseName, exerciseTime, numberOfSets, numberOfReps);
-    if(!error) {
-      console.log(error)
+    if (error) {
+      setErrorMessage(error);
+      setShowToast(true);
     }
   }
 
@@ -150,6 +180,7 @@ export default function NewExerciseScreen({ navigation }) {
             </View>
           </View>
         </ScrollView>
+        <Toast config={toastConfig} ref={(ref) => Toast.setRef(ref)} />
       </SafeAreaView>
       <View style={styles.newExerciseTabBar}>
         <NewExerciseBtnPrimary title='Save' onPress={handleSubmit} />
@@ -219,5 +250,23 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     borderColor: colors.gray[200],
     borderWidth: 1,
+  },
+  toastText: {
+    color: colors.gray[300],
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.white[100],
+    borderRadius: 100,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    padding: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   }
 });
