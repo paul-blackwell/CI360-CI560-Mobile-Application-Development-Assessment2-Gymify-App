@@ -43,6 +43,7 @@ const postNewExercise = async (week, workout, isWarmup, newExerciseObj, jwt, set
         )
     }
 
+    console.log(updatedWarmups)
 
 
     // workout.warmups.forEach(warmup => {

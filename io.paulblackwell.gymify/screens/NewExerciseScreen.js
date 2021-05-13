@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 import { WorkoutsContext } from '../context/workouts.context';
 import NewExerciseBtnPrimary from '../components/smallerComponents/NewExerciseBtnPrimary';
 import AddImageIcon from '../components/smallerComponents/AddImageIcon';
+import Loader from '../components/Loader';
 import postNewExercise from '../requests/postNewExercise';
 
 import { standardColors } from '../styles/colors';
@@ -25,7 +26,12 @@ export default function NewExerciseScreen({ navigation }) {
   const [description, setDescription] = useState('');
 
   const [isWarmup, setIsWarmup] = useState(true);
-  const [isExercise, setIsExercise] = useState(false)
+  const [isExercise, setIsExercise] = useState(false);
+
+
+  const [showLoader, setShowLoader] = useState(false);
+  const [updateContext, setUpdateContext] = useState(false);
+
 
   const toggleSwitchWarmUp = () => {
     setIsWarmup(previousState => !previousState);
@@ -97,15 +103,32 @@ export default function NewExerciseScreen({ navigation }) {
     }
   }
 
+  
+
 
   // This will handle making our post to the API
   const [makePostRequest, setMakePostRequest] = useState(false);
   useEffect(() => {
-    if(makePostRequest) {
+    if (makePostRequest) {
       const newExerciseObj = {
-        
+        title: exerciseName,
+        description: description,
+        time: exerciseTime === null ? 0 : exerciseTime,
+        sets: numberOfSets === null ? 0 : numberOfSets,
+        reps: numberOfReps === null ? 0 : numberOfReps
       }
 
+
+      // Make API request
+      postNewExercise(
+        workoutPlan.currentSelectedWeek,
+        workoutPlan.currentSelectedWorkout,
+        isWarmup,
+        newExerciseObj,
+        workoutPlan.jwt,
+        setShowLoader,
+        setUpdateContext
+      )
 
       setMakePostRequest(false);
     }
@@ -129,6 +152,19 @@ export default function NewExerciseScreen({ navigation }) {
     // If no errors
     setMakePostRequest(true);
   }
+
+
+
+  // If app is waiting on the API just show the loader
+  if (showLoader) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor={colors.purple[200]} />
+        <Loader loading={showLoader} />
+      </SafeAreaView>
+    )
+  }
+
 
 
   return (
