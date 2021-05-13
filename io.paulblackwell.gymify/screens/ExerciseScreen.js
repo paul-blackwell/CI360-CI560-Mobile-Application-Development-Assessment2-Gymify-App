@@ -210,11 +210,11 @@ export default function ExerciseScreen({ navigation, route }) {
           </Text>
           <View style={styles.setsAndReps}>
             <View style={styles.setsAndRepsInfo}>
-              <ExerciseIcon />
+              <ExerciseIcon icon={'sets'} />
               <Text style={styles.setsAndRepsInfoText}>{selectedExercise.sets} x sets</Text>
             </View>
             <View style={styles.setsAndRepsInfo}>
-              <ExerciseIcon />
+              <ExerciseIcon  icon={'reps'}/>
               <Text style={styles.setsAndRepsInfoText}>{selectedExercise.reps} x repetitions</Text>
             </View>
           </View>

@@ -118,6 +118,8 @@ export default function NewExerciseScreen({ navigation }) {
         reps: numberOfReps === null ? 0 : numberOfReps
       }
 
+  
+
 
       // Make API request
       postNewExercise(
