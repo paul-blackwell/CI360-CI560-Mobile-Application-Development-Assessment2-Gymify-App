@@ -6,7 +6,10 @@ import { WorkoutsContext } from '../context/workouts.context';
 import NewExerciseBtnPrimary from '../components/smallerComponents/NewExerciseBtnPrimary';
 import AddImageIcon from '../components/smallerComponents/AddImageIcon';
 import Loader from '../components/Loader';
+
+
 import postNewExercise from '../requests/postNewExercise';
+import getWeeksFromNewExerciseScreen from '../requests/getWeeksFromNewExerciseScreen';
 
 import { standardColors } from '../styles/colors';
 let colors = standardColors;
@@ -31,16 +34,17 @@ export default function NewExerciseScreen({ navigation }) {
 
   const [showLoader, setShowLoader] = useState(false);
   const [updateContext, setUpdateContext] = useState(false);
+  const [navigateToWorkoutScreen, setNavigateToWorkoutScreen] = useState(false);
 
 
   const toggleSwitchWarmUp = () => {
     setIsWarmup(previousState => !previousState);
-    setIsExercise(false)
+    setIsExercise(previousState => !previousState);
   }
 
   const toggleSwitchExercise = () => {
+    setIsWarmup(previousState => !previousState);
     setIsExercise(previousState => !previousState);
-    setIsWarmup(false)
   }
 
 
@@ -103,7 +107,7 @@ export default function NewExerciseScreen({ navigation }) {
     }
   }
 
-  
+
 
 
   // This will handle making our post to the API
@@ -113,12 +117,10 @@ export default function NewExerciseScreen({ navigation }) {
       const newExerciseObj = {
         title: exerciseName,
         description: description,
-        time: exerciseTime === null ? 0 : exerciseTime,
-        sets: numberOfSets === null ? 0 : numberOfSets,
-        reps: numberOfReps === null ? 0 : numberOfReps
+        time: exerciseTime === null ? 0 : parseInt(exerciseTime),
+        sets: numberOfSets === null ? 0 : parseInt(numberOfSets),
+        reps: numberOfReps === null ? 0 : parseInt(numberOfReps)
       }
-
-  
 
 
       // Make API request
@@ -135,6 +137,36 @@ export default function NewExerciseScreen({ navigation }) {
       setMakePostRequest(false);
     }
   }, [makePostRequest])
+
+
+  /**
+ * This will update the context if an exercise has been added,
+ * it does this by making a request to the API then if the request is
+ * successful it will update the context and hide the loader
+ */
+  useEffect(() => {
+    if (updateContext) {
+      getWeeksFromNewExerciseScreen(setShowLoader, dispatch, setNavigateToWorkoutScreen);
+      setUpdateContext(false)
+    }
+  }, [updateContext]);
+
+  
+  /**
+   * After both API requests have been successful postNewExercise
+   * and getWeeksFromNewExerciseScreenFromExerciseScreen navigate back to the WorkoutScreen
+   */
+   useEffect(() => {
+    if (navigateToWorkoutScreen) {
+      dispatch({ type: 'SHOW_TAB_BAR', payload: true})
+      navigation.navigate('WorkoutStack', {
+        screen: 'WorkoutScreen',
+        params: { workoutId: workoutPlan.currentSelectedWorkout.id, weekTitle: workoutPlan.currentSelectedWeek.title }
+      });
+    }
+  }, [navigateToWorkoutScreen])
+
+
 
 
 

@@ -112,7 +112,7 @@ const postNewExercise = async (week, workout, isWarmup, newExerciseObj, jwt, set
                         console.log(error)
                     });
             } else {
-                axios.post(`https://gymify-strapi-api.herokuapp.com/warmups`, {
+                axios.post(`https://gymify-strapi-api.herokuapp.com/exercises`, {
                     id: uuid(),
                     _id: uuid(),
                     title: newExerciseObj.title,
