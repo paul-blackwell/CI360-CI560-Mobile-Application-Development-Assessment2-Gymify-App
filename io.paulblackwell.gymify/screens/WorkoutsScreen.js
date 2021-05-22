@@ -34,6 +34,14 @@ export default function WorkoutsScreen({ route, navigation }) {
 
 
   /**
+   * Sort the workouts based or the last title character i.e "Workout 1" =>  "1",
+   * this stops the workouts loading in the wrong order if they are updated
+   */
+  selectedWeek.workouts.sort((a, b) => parseFloat(a.title.slice(-1)) - parseFloat(b.title.slice(-1)))
+  
+  
+
+  /**
    * If the user navigated to this screen from the bottom tab menu for the first
    * time and have not previously been on the Home screen, get Workouts 
    * from the context (first week) update the context for the current selected week,
