@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_800ExtraBold'
   },
   workoutsListContainer: {
-    marginTop: 16
+    marginTop: 16,
+    paddingBottom: 62
   }
 });
 
