@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "io.paulblackwell.gymify"
     },
     "web": {
       "favicon": "./assets/favicon.png"

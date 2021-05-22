@@ -10,6 +10,8 @@ let colors = standardColors;
 export default function WorkoutsScreen({ route, navigation }) {
 
 
+
+
   // Get workouts context with will be an array with all of the workouts
   const { workoutPlan, dispatch } = useContext(WorkoutsContext);
 

@@ -62,6 +62,8 @@ export default function WorkoutScreen({ route, navigation }) {
 
 
 
+
+
   /**
    * This will handle showing wether to show the loading component
    * or not 
