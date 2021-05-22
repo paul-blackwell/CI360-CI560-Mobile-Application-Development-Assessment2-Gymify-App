@@ -30,7 +30,10 @@ export default ImageCarousel = ({ images, setOpenModel}) => {
         return (
             <View>
                 <CarouselSettingsIcon onPress={handelIconPress} />
-                <View style={[styles.imageCarouselContainer], { marginHorizontal: 48 }}>
+                {/* <View style={[styles.imageCarouselContainer], { marginHorizontal: 48 }}>
+                    <CarouselImage uri={null} />
+                </View> */}
+                <View style={[styles.imageCarouselContainer, { padding: 32 }]}>
                     <CarouselImage uri={null} />
                 </View>
             </View>
