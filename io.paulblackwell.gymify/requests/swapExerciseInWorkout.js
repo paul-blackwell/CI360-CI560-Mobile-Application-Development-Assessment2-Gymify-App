@@ -62,6 +62,9 @@ const swapExerciseInWorkout = async (week, workout, exerciseID, jwt, setLoader, 
     }
 
 
+    
+
+
 
     // Remove workout from the week as will will be updating it anyway
     const updatedWorkouts = week.workouts.filter(item => item.id !== workoutID);

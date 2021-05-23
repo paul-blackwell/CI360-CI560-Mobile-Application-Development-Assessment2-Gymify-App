@@ -2,6 +2,10 @@ import axios from 'axios';
 
 const getWeeksFromExerciseScreen = async (setLoading, dispatch, setNavigateToWorkoutScreen) => {
 
+
+
+    console.log('getWeeksFromExerciseScreen fired')
+
     // Set loading state to true
     setLoading(true)
 

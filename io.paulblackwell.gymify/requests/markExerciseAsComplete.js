@@ -6,44 +6,41 @@ const markExerciseAsComplete = async (week, workout, exercise, maxWeight, jwt, s
 
     const exerciseId = exercise.id;
 
-    /**
-     * This will check if the exercise that is going to be updated
-     * is from the warmups or Exercises, then it will remove the old
-     * Exercise and replace it the exercise that has its axWeight and 
-     * completed items updated
-     */
-    let updatedWarmups = workout.warmups;
-    let updatedExercises = workout.exercises;
-    if (workout.warmups.filter(warmup => warmup.id === exercise.id).length > 0) {
-        updatedWarmups = workout.warmups.filter(warmups => warmups.id !== exerciseId);
-        updatedWarmups.push({
-            ...exercise,
-            completed: true,
-            maxWeight: maxWeight
-        });
-    } else if (workout.exercises.filter(exercise => exercise.id === exercise.id).length > 0) {
-        updatedExercises = workout.exercises.filter(exercise => exercise.id !== exerciseId)
-        updatedExercises.push({
-            ...exercise,
-            completed: true,
-            maxWeight: maxWeight
-        });
-    }
 
-    
-     // Remove workout from the week as will will be updating it anyway
-     const updatedWorkouts = week.workouts.filter(item => item.id !== workout.id);
+
+    workout.warmups.forEach(warmup => {
+        if(warmup.id === exerciseId) {
+            warmup.maxWeight = 0;
+            warmup.completed = true
+        }
+    });
+
+
+    workout.exercises.forEach(exercise => {
+        if(exercise.id === exerciseId) {
+            exercise.maxWeight = maxWeight;
+            exercise.completed = true
+        }
+    });
 
 
 
-     // Add a new workout with the updatedExercises and  updatedWarmups to it
-     updatedWorkouts.push(
-         {
-             ...workout,
-             exercises: updatedExercises,
-             warmups: updatedWarmups
-         }
-     );
+
+    // // Remove workout from the week as will will be updating it anyway
+    const updatedWorkouts = week.workouts.filter(item => item.id !== workout.id);
+
+
+
+    // Add a new workout with the updatedExercises and  updatedWarmups to it
+    updatedWorkouts.push(
+        {
+            ...workout,
+            //exercises: updatedExercises,
+            //warmups: updatedWarmups
+            exercises:  workout.exercises,
+            warmups: workout.warmups
+        }
+    );
 
 
     // Send a request to the API and update the workouts for that week
@@ -56,7 +53,7 @@ const markExerciseAsComplete = async (week, workout, exercise, maxWeight, jwt, s
             }
         })
         .then(response => {
-           
+
             /**
              * setUpdateContent to true this will make an API request in the parent
              *  component and update the context
