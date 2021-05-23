@@ -4,8 +4,6 @@ const getWeeksFromExerciseScreen = async (setLoading, dispatch, setNavigateToWor
 
 
 
-    console.log('getWeeksFromExerciseScreen fired')
-
     // Set loading state to true
     setLoading(true)
 

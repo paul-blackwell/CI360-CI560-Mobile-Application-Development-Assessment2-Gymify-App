@@ -3,25 +3,6 @@ import uuid from '../utils/uuid';
 
 
 
-/**
- * @param {int} week is the current week that is selected 
- * 
- * @param {int} workout is the current workout that is selected 
- * 
- * @param {int} exerciseID is the id for the exercise we want to replace
- * 
- * @param {string} jwt This is the JSON web joken that the API will need to use
- * to a authenticate
- * 
- * @param {function} setLoader will be used to set the loader to show after the api request
- * is successful 
- * 
- * @param {function} setUpdateContext will force the parent component to update the context 
- * 
- * @param {function} replacementExercise is the exercise the will be used to replace the old 
- * exercise 
- * 
- */
 
 const swapExerciseInWorkout = async (week, workout, exerciseID, jwt, setLoader, setUpdateContext, replacementExercise) => {
 
@@ -35,34 +16,32 @@ const swapExerciseInWorkout = async (week, workout, exerciseID, jwt, setLoader, 
     setLoader(false)
 
 
+    workout.warmups.forEach(warmup => {
+        if (warmup.id === exerciseID) {
+            warmup.id = uuid();
+            warmup.title = replacementExercise.title;
+            warmup.description = replacementExercise.description;
+            warmup.sets = replacementExercise.sets;
+            warmup.reps = replacementExercise.reps;
+            warmup.time = replacementExercise.time;
+            warmup.maxWeight = replacementExercise.maxWeight;
+            warmup.completed = false;
+        }
+    });
 
-    /**
-     * This will check if the exercise that is going to be replaced
-     * is from the warmups or Exercises, then it will remove the old
-     * Exercise and replace it with the replacement exercise
-     */
-    let updatedWarmups = workout.warmups;
-    let updatedExercises = workout.exercises;
-    if (workout.warmups.filter(warmup => warmup.id === exerciseID).length > 0) {
-        updatedWarmups = workout.warmups.filter(warmups => warmups.id !== exerciseID);
-        updatedWarmups.push({
-            ...replacementExercise,
-            id: uuid(),
-            _id: uuid(),
-            completed: false
-        });
-    } else if (workout.exercises.filter(exercise => exercise.id === exerciseID).length > 0) {
-        updatedExercises = workout.exercises.filter(exercise => exercise.id !== exerciseID)
-        updatedExercises.push({
-            ...replacementExercise,
-            id: uuid(),
-            _id: uuid(),
-            completed: false
-        });
-    }
+    workout.exercises.forEach(exercise => {
+        if (exercise.id === exerciseID) {
+            exercise.id = uuid();
+            exercise.title = replacementExercise.title;
+            exercise.description = replacementExercise.description;
+            exercise.sets = replacementExercise.sets;
+            exercise.reps = replacementExercise.reps;
+            exercise.time = replacementExercise.time;
+            exercise.maxWeight = replacementExercise.maxWeight;
+            exercise.completed = false;
+        }
+    });
 
-
-    
 
 
 
@@ -74,8 +53,8 @@ const swapExerciseInWorkout = async (week, workout, exerciseID, jwt, setLoader, 
     updatedWorkouts.push(
         {
             ...workout,
-            exercises: updatedExercises,
-            warmups: updatedWarmups
+            warmups: workout.exercises,
+            exercises: workout.warmups,
         }
     );
 
