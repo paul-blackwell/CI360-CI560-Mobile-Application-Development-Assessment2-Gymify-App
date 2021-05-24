@@ -34,13 +34,13 @@ const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setLoad
 
     workout.warmups.forEach(warmup => {
         if (warmup.id === exerciseID) {
-            workout.warmups.splice(warmup, 1);
+            workout.warmups.splice(workout.warmups.indexOf(warmup), 1);
         }
     });
 
     workout.exercises.forEach(exercise => {
         if (exercise.id === exerciseID) {
-            workout.exercises.splice(exercise, 1);
+            workout.warmups.splice(workout.warmups.indexOf(warmup), 1);
         }
     });
 
@@ -55,8 +55,8 @@ const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setLoad
     updatedWorkouts.push(
         {
             ...workout,
-            warmups: workout.exercises,
-            exercises: workout.warmups
+            warmups: workout.warmups,
+            exercises: workout.exercises
         }
     );
 
