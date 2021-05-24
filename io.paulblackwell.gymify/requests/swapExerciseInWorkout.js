@@ -26,6 +26,7 @@ const swapExerciseInWorkout = async (week, workout, exerciseID, jwt, setLoader, 
             warmup.time = replacementExercise.time;
             warmup.maxWeight = replacementExercise.maxWeight;
             warmup.completed = false;
+            warmup.images = replacementExercise.images
         }
     });
 
@@ -39,6 +40,7 @@ const swapExerciseInWorkout = async (week, workout, exerciseID, jwt, setLoader, 
             exercise.time = replacementExercise.time;
             exercise.maxWeight = replacementExercise.maxWeight;
             exercise.completed = false;
+            exercise.images = replacementExercise.images
         }
     });
 
@@ -53,8 +55,8 @@ const swapExerciseInWorkout = async (week, workout, exerciseID, jwt, setLoader, 
     updatedWorkouts.push(
         {
             ...workout,
-            warmups: workout.exercises,
-            exercises: workout.warmups,
+            warmups: workout.warmups,
+            exercises: workout.exercises,
         }
     );
 

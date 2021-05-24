@@ -146,6 +146,7 @@ export default function WorkoutScreen({ route, navigation }) {
               <Text style={styles.titleText}>Training</Text>
             </View>
             <FlatList
+              style={{ paddingBottom: 96 }}
               data={selectedWorkout.exercises}
               renderItem={renderItem}
               keyExtractor={item => item.id}

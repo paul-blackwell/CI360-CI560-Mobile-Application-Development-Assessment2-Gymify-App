@@ -40,7 +40,7 @@ const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setLoad
 
     workout.exercises.forEach(exercise => {
         if (exercise.id === exerciseID) {
-            workout.warmups.splice(workout.warmups.indexOf(warmup), 1);
+            workout.exercises.splice(workout.exercises.indexOf(exercise), 1);
         }
     });
 
