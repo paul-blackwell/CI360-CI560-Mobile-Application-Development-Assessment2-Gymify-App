@@ -23,23 +23,27 @@ const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setLoad
     const weekID = week.id;
     const workoutID = workout.id;
 
-      /**
-        * This will update the loader in the parent
-        * component to show the loader
-       */
-      setLoader(false)
-
-
     /**
-     * This will push all the exercise to the updatedExercises array that are not
-     * equal to the exerciseID (currently selected exercise) was we only what
-     * to remove currently selected exercise.
-     * 
-     * Note: Because deleteExerciseFromWorkout will also be used on warmup,
-     * well will also do this work the warmups (updatedWarmups)
+      * This will update the loader in the parent
+      * component to show the loader
      */
-    const updatedExercises = workout.exercises.filter(exercise => exercise.id !== exerciseID);
-    const updatedWarmups = workout.warmups.filter(warmup => warmup.id !== exerciseID);
+    setLoader(false)
+
+
+
+
+    workout.warmups.forEach(warmup => {
+        if (warmup.id === exerciseID) {
+            workout.warmups.splice(warmup, 1);
+        }
+    });
+
+    workout.exercises.forEach(exercise => {
+        if (exercise.id === exerciseID) {
+            workout.exercises.splice(exercise, 1);
+        }
+    });
+
 
 
 
@@ -51,8 +55,8 @@ const deleteExerciseFromWorkout = async (week, workout, exerciseID, jwt, setLoad
     updatedWorkouts.push(
         {
             ...workout,
-            exercises: updatedExercises,
-            warmups: updatedWarmups
+            warmups: workout.exercises,
+            exercises: workout.warmups
         }
     );
 
